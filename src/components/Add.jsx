@@ -5,11 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Alert,
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
+import {strings} from '../utils/Strings';
+import {useNavigation} from '@react-navigation/native';
 
-const Add = () => {
+const Add = ({navigation, route},props) => {
+  const id = route?.params?.id
+  console.log('iddd', id);
+  const {onSubmit}=props
+  const navigation = useNavigation();
   const [details, setDetails] = useState({
     firstName: '',
     lastName: '',
@@ -17,55 +24,59 @@ const Add = () => {
     parentPhone: '',
     parent2Phone: '',
   });
-  const {addChild} = useContextData();
+
+ 
 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={details}
-        onSubmit={values => {
-          addChild(values);
+        onSubmit={(values, actions) => {
+          // addChild(values);
+          onSubmit()
+          actions.resetForm();
+          // ChildAddedPopUp();
         }}>
         {props => (
           <View>
             <TextInput
               style={styles.input}
-              placeholder="שם פרטי"
+              placeholder={strings.firstName}
               onChangeText={props.handleChange('firstName')}
               value={props.values.firstName}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="שם משפחה"
+              placeholder={strings.lastName}
               onChangeText={props.handleChange('lastName')}
               value={props.values.lastName}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="כתובת"
+              placeholder={strings.address}
               onChangeText={props.handleChange('address')}
               value={props.values.address}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="טלפון הורה 1"
+              placeholder={strings.phoneParent1}
               onChangeText={props.handleChange('parentPhone')}
               value={props.values.parentPhone}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="טלפון הורה 2"
+              placeholder={strings.phoneParent2}
               onChangeText={props.handleChange('parent2Phone')}
               value={props.values.parent2Phone}
             />
             <TouchableOpacity
               style={styles.button}
               onPress={props.handleSubmit}>
-              <Text style={styles.name}>הוספת ילד</Text>
+              <Text style={styles.name}>{strings.addChild}</Text>
             </TouchableOpacity>
           </View>
         )}

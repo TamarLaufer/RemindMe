@@ -1,19 +1,13 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 
-const Logo = () => {
+const Logo = props => {
   return (
-    <Image style={styles.image} source={require('../utils/remindMe1.png')} />
+    <Image
+      style={props.style}
+      source={require('../assets/images/remindMe1.png')}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: 230,
-    height: 100,
-    marginLeft: 5,
-    marginBottom: 15,
-  },
-});
 
 export default Logo;

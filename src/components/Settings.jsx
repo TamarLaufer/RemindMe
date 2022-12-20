@@ -1,70 +1,134 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import ScreensModal from './ScreensModal';
 
 const Settings = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [formValues, setFormValues] = useState();
+  const btnDataArr = [
+    {
+      text: 'הוספת כיתה',
+      onPress: () => {
+        // navigation.navigate('Add');
+        setShowModal(true);
+      },
+    },
+    {
+      text: 'הוספת כיתה',
+      onPress: () => {
+        navigation.navigate('Add');
+        setShowModal(true);
+      },
+    },
+    {
+      text: 'הוספת כיתה',
+      onPress: () => {
+        navigation.navigate('Add');
+        setShowModal(true);
+      },
+    },
+    {
+      text: 'הוספת כיתה',
+      onPress: () => {
+        navigation.navigate('Add');
+        setShowModal(true);
+      },
+    },
+    {
+      text: 'הוספת כיתה',
+      onPress: () => {
+        navigation.navigate('Add');
+        setShowModal(true);
+      },
+    },
+  ];
+  const renderClassBtn = (buttonArr = []) => {
+    return buttonArr.map((btn, index) => {
+      return (
+        <TouchableOpacity
+          key={index}
+          style={styles.button}
+          onPress={() => {
+            btn.onPress();
+          }}>
+          <Text style={styles.name}>{btn.text}</Text>
+        </TouchableOpacity>
+      );
+    });
+  };
   const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('Add');
-        }}>
-        <Text style={styles.name}>הוספת כיתה</Text>
-      </TouchableOpacity>
+    <View>
+      <View style={styles.container}>
+        {renderClassBtn(btnDataArr)}
+        {/* <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate('Add');
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}></Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          // navigation.navigate('');
-        }}>
-        <Text style={styles.name}>הסרת כיתה</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            // navigation.navigate('');
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}>הסרת כיתה</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        // onPress={() => {
-        //   navigation.navigate('');
-        // }}
-      >
-        <Text style={styles.name}>עדכון פרטי כיתה</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            // navigation.navigate('');
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}>עדכון פרטי כיתה</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('Add');
-        }}>
-        <Text style={styles.name}>הוספת ילד</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}>הוספת ילד</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('RemoveChild');
-        }}>
-        <Text style={styles.name}>הסרת ילד</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('UpdateChild');
-        }}>
-        <Text style={styles.name}>עדכון פרטי ילד</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            navigation.navigate('RemoveChild');
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}>הסרת ילד</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => {
+            // navigation.navigate('');
+            setShowModal(true);
+          }}>
+          <Text style={styles.name}>עדכון פרטי ילד</Text>
+        </TouchableOpacity> */}
+      </View>
+      {showModal && <ScreensModal />}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: -1,
     flexWrap: 'wrap',
     maxHeight: 400,
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 200,
+    marginTop: 100,
   },
   button: {
     width: 400,

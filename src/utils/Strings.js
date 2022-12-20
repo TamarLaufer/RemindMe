@@ -1,0 +1,17 @@
+export const strings = {
+  addChild: 'הוספת ילד',
+  editChild: 'עריכת ילד',
+  childAddedSeccesfully: 'הילד נוסף בהצלחה',
+  childEditedSeccesfully: 'הילד עודכן בהצלחה',
+  ok: 'אישור',
+  cancel: 'ביטול',
+  firstName: 'שם פרטי',
+  lastName: 'שם משפחה',
+  address: 'כתובת',
+  phoneParent1: 'טלפון הורה 1',
+  phoneParent2: 'טלפון הורה 2',
+  childrenGroups: 'כל הקבוצות',
+  settings: 'הגדרות',
+  logout: 'התנתק',
+  chooseChildToRemove: 'בחר ילד להסרה מהרשימה',
+};

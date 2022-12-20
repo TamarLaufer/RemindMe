@@ -1,9 +1,31 @@
-import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, FlatList} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  View,
+  Alert,
+} from 'react-native';
 import {useContextData} from '../Context/ContextData';
+import {strings} from '../utils/Strings';
 
 const RemoveChild = () => {
   const {childrenList, removeChild} = useContextData();
+
+  const ChildAddedPopUp = () =>
+    Alert.alert(strings.chooseChildToRemove, ' ', [
+      {
+        text: strings.ok,
+        onPress: () => {
+          console.log('ok pressed');
+        },
+      },
+    ]);
+
+  useEffect(() => {
+    ChildAddedPopUp();
+  }, []);
 
   const renderChildren = ({item}) => (
     <ChildrenRenderd
@@ -13,41 +35,38 @@ const RemoveChild = () => {
     />
   );
 
-  function ChildrenRenderd({firstName, lastName, id}) {
-    return (
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          removeChild(id);
-        }}>
-        <Text style={styles.name}>
-          {firstName} {lastName}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
+  const ChildrenRenderd = ({firstName, lastName, id}) => (
+    <TouchableOpacity
+      key={id}
+      style={styles.button}
+      onPress={() => {
+        removeChild(id);
+      }}>
+      <Text style={styles.name}>
+        {firstName} {lastName}
+      </Text>
+    </TouchableOpacity>
+  );
+
   return (
     // {/* Need to render the right age-group */}
-    <FlatList
-      numColumns={5}
-      key={5}
-      data={childrenList}
-      renderItem={renderChildren}
-    />
+    <View style={styles.container}>
+      <FlatList
+        numColumns={5}
+        key={5}
+        data={childrenList}
+        renderItem={renderChildren}
+      />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
   container: {
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
+    marginTop: 50,
   },
   button: {
     width: 225,
@@ -59,7 +78,7 @@ const styles = StyleSheet.create({
     margin: 7,
   },
   name: {
-    fontSize: 43,
+    fontSize: 35,
     textAlign: 'center',
     color: '#EAEAEA',
   },

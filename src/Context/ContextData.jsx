@@ -51,8 +51,11 @@ export const DataProvider = ({children}) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
     })
-      .then(data => {
-        console.log('the post performed', data);
+      .then(data => data.json())
+      .then(resJson => {
+        console.log('the post performed', resJson);
+        const newList = [...childrenList, resJson];
+        setChildrenList(newList);
       })
       .catch(err => {
         console.log(err, 'the post failed');
@@ -63,8 +66,11 @@ export const DataProvider = ({children}) => {
     fetch(`http://10.100.102.12:3000/child/delete-child/${id}`, {
       method: 'DELETE',
     })
-      .then(res => {
-        console.log(res.json());
+      .then(res => res.json())
+      .then(resJson => {
+        console.log('resJson', resJson);
+        const newList = childrenList.filter(child => child._id !== id);
+        setChildrenList(newList);
       })
       .catch(err => {
         console.log(err);
@@ -106,13 +112,13 @@ export const DataProvider = ({children}) => {
     <ContextData.Provider
       value={{
         childrenList,
+        setChildrenList,
         groupsList,
         pagesData,
         addChild,
         removeChild,
         updateChild,
-        // pageName,
-        // setPageName,
+        getChildById,
       }}>
       {children}
     </ContextData.Provider>
