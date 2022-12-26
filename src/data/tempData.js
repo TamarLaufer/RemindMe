@@ -33,59 +33,59 @@ export const childrenData = [
 
 export const groups = [
   {
-    id: 1,
-    name: 'תינוקות',
+    _id: 1,
+    groupName: 'תינוקות',
   },
   {
-    id: 2,
-    name: 'בוגרים',
+    _id: 2,
+    groupName: 'בוגרים',
   },
   {
-    id: 3,
-    name: 'כיתה 3',
+    _id: 3,
+    groupName: 'כיתה 3',
   },
   {
-    id: 4,
-    name: 'כיתה 4',
+    _id: 4,
+    groupName: 'כיתה 4',
   },
   {
-    id: 5,
-    name: 'כיתה 5',
+    _id: 5,
+    groupName: 'כיתה 5',
   },
   {
-    id: 6,
-    name: 'כיתה 6',
+    _id: 6,
+    groupName: 'כיתה 6',
   },
   {
-    id: 7,
-    name: 'כיתה 7',
+    _id: 7,
+    groupName: 'כיתה 7',
   },
   {
-    id: 8,
-    name: 'כיתה 8',
+    _id: 8,
+    groupName: 'כיתה 8',
   },
   {
-    id: 9,
-    name: 'כיתה 9',
+    _id: 9,
+    groupName: 'כיתה 9',
   },
   {
-    id: 10,
-    name: 'כיתה 10',
+    _id: 10,
+    groupName: 'כיתה 10',
   },
   {
-    id: 11,
-    name: 'כיתה 11',
+    _id: 11,
+    groupName: 'כיתה 11',
   },
   {
-    id: 12,
-    name: 'כיתה 12',
+    _id: 12,
+    groupName: 'כיתה 12',
   },
   {
-    id: 13,
-    name: 'כיתה 13',
+    _id: 13,
+    groupName: 'כיתה 13',
   },
   {
-    id: 14,
-    name: 'כיתה 14',
+    _id: 14,
+    groupName: 'כיתה 14',
   },
 ];

@@ -9,22 +9,13 @@ import {
 } from 'react-native';
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
+import {styles} from '../styles/style';
 
 const RemoveChild = () => {
-  const {childrenList, removeChild} = useContextData();
-
-  const ChildAddedPopUp = () =>
-    Alert.alert(strings.chooseChildToRemove, ' ', [
-      {
-        text: strings.ok,
-        onPress: () => {
-          console.log('ok pressed');
-        },
-      },
-    ]);
+  const {childrenList, removeChild, popUp} = useContextData();
 
   useEffect(() => {
-    ChildAddedPopUp();
+    popUp(strings.chooseChildToRemove);
   }, []);
 
   const renderChildren = ({item}) => (
@@ -38,11 +29,11 @@ const RemoveChild = () => {
   const ChildrenRenderd = ({firstName, lastName, id}) => (
     <TouchableOpacity
       key={id}
-      style={styles.button}
+      style={styles.activeButton}
       onPress={() => {
         removeChild(id);
       }}>
-      <Text style={styles.name}>
+      <Text style={styles.childName}>
         {firstName} {lastName}
       </Text>
     </TouchableOpacity>
@@ -52,36 +43,14 @@ const RemoveChild = () => {
     // {/* Need to render the right age-group */}
     <View style={styles.container}>
       <FlatList
-        numColumns={5}
-        key={5}
+        numColumns={4}
+        key={4}
         data={childrenList}
         renderItem={renderChildren}
+        keyExtractor={item => item._id}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 50,
-  },
-  button: {
-    width: 225,
-    height: 95,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#83A3C2',
-    margin: 7,
-  },
-  name: {
-    fontSize: 35,
-    textAlign: 'center',
-    color: '#EAEAEA',
-  },
-});
 
 export default RemoveChild;

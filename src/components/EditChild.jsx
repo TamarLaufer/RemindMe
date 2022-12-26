@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TextInput,
   View,
@@ -8,13 +8,14 @@ import {
   Alert,
 } from 'react-native';
 import {Formik} from 'formik';
-import {screenNames, strings, formikVlues} from '../utils/Strings';
 import {useContextData} from '../Context/ContextData';
-import {useNavigation, useNavigationParam} from '@react-navigation/native';
-import {styles} from '../styles/style';
+import {formikVlues, screenNames, strings} from '../utils/Strings';
+import {useNavigation} from '@react-navigation/native';
 
-const Add = ({route}, props) => {
-  const {addChild, showModal, setShowModal, popUp} = useContextData();
+const EditChild = ({route}) => {
+  const {updateChild, child, showModal, setShowModal} = useContextData();
+  const navigation = useNavigation();
+  const childParams = child;
   const [details, setDetails] = useState({
     firstName: '',
     lastName: '',
@@ -22,17 +23,25 @@ const Add = ({route}, props) => {
     parentPhone: '',
     parent2Phone: '',
   });
+  const [childVlues, setChildValues] = useState(null);
+  const [toRefresh, setToRefresh] = useState(false);
+
+  useEffect(() => {
+    console.log(childParams._id);
+    setChildValues(childParams);
+  }, []);
 
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={details}
+        initialValues={childVlues || details}
         onSubmit={(values, actions) => {
-          addChild(values);
-          actions.resetForm();
-          popUp(strings.childAddedSeccesfully);
+          updateChild(childParams._id, values);
+          // actions.resetForm();
+          setToRefresh(!toRefresh);
           setShowModal(!showModal);
-        }}>
+        }}
+        enableReinitialize>
         {props => (
           <View>
             <TextInput
@@ -70,9 +79,9 @@ const Add = ({route}, props) => {
               value={props.values.parent2Phone}
             />
             <TouchableOpacity
-              style={styles.bigButtonFormik}
+              style={styles.button}
               onPress={props.handleSubmit}>
-              <Text style={styles.bigName}>{strings.addChild}</Text>
+              <Text style={styles.name}>{strings.editChild}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -81,4 +90,37 @@ const Add = ({route}, props) => {
   );
 };
 
-export default Add;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  button: {
+    width: 1000,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    backgroundColor: '#83A3C2',
+    margin: 3,
+    cursor: 'pointer',
+  },
+  name: {
+    fontSize: 43,
+    textAlign: 'center',
+    color: '#EAEAEA',
+  },
+  input: {
+    width: 1000,
+    height: 70,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: 10,
+    borderRadius: 6,
+    fontSize: 26,
+    margin: 7,
+  },
+});
+export default EditChild;

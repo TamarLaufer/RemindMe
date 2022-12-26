@@ -14,7 +14,7 @@ import {
 } from 'react-native-paper';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Logo from './Logo';
-import {strings} from '../utils/Strings';
+import {strings, screenNames} from '../utils/Strings';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 
 const DrawerContent = props => {
@@ -38,7 +38,7 @@ const DrawerContent = props => {
             <DrawerItem
               label={strings.childrenGroups}
               onPress={() => {
-                navigation.navigate('Groups');
+                navigation.navigate(screenNames.groups);
                 navigation.dispatch(DrawerActions.closeDrawer());
                 setActive(screens.GROUPS);
               }}
@@ -50,8 +50,8 @@ const DrawerContent = props => {
             <DrawerItem
               label={strings.settings}
               onPress={() => {
-                navigation.navigate('Settings');
-                setActive(screens.GROUPS);
+                navigation.navigate(screenNames.settings);
+                setActive(screens.SETTINGS);
               }}
               style={
                 active === screens.SETTINGS && {backgroundColor: '#EFEFEF'}
@@ -59,19 +59,6 @@ const DrawerContent = props => {
               labelStyle={styles.labelStyle}
             />
           </Drawer.Section>
-          {/* <Drawer.Section title="Preferences">
-            <TouchableRipple
-              onPress={() => {
-                toggleTheme();
-              }}>
-              <View style={styles.preference}>
-                <Text>Dark Theme</Text>
-                <View pointerEvents="none">
-                  <Switch value={paperTheme.dark} />
-                </View>
-              </View>
-            </TouchableRipple>
-          </Drawer.Section> */}
         </View>
       </DrawerContentScrollView>
     </View>
@@ -118,11 +105,6 @@ const styles = StyleSheet.create({
   },
   drawerSection: {
     marginTop: 15,
-  },
-  bottomDrawerSection: {
-    marginBottom: 15,
-    borderTopColor: '#f4f4f4',
-    borderTopWidth: 1,
   },
   preference: {
     flexDirection: 'row',

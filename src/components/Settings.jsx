@@ -1,149 +1,104 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Modal,
+  ImageBackground,
+  FlatList,
+} from 'react-native';
+import {useContextData} from '../Context/ContextData';
+import {strings} from '../utils/Strings';
 import ScreensModal from './ScreensModal';
+import {styles} from '../styles/style';
 
 const Settings = () => {
-  const [showModal, setShowModal] = useState(false);
+  const {
+    switchScreens,
+    showModal,
+    setShowModal,
+    setCurrentScreen,
+    currentScreen,
+    image,
+  } = useContextData();
   const [formValues, setFormValues] = useState();
   const btnDataArr = [
     {
-      text: 'הוספת כיתה',
+      text: strings.addChild,
       onPress: () => {
-        // navigation.navigate('Add');
         setShowModal(true);
+        setCurrentScreen(switchScreens.ADD_CHILD); //'Add' Component
       },
     },
     {
-      text: 'הוספת כיתה',
+      text: strings.addGroup,
       onPress: () => {
-        navigation.navigate('Add');
         setShowModal(true);
+        setCurrentScreen(switchScreens.ADD_GROUP); //'AddGroup' Component
       },
     },
     {
-      text: 'הוספת כיתה',
+      text: strings.editChild,
       onPress: () => {
-        navigation.navigate('Add');
         setShowModal(true);
+        setCurrentScreen(switchScreens.EDIT_CHILD_LIST); //'ChildrenListForEdit' Component
       },
     },
     {
-      text: 'הוספת כיתה',
+      text: strings.editGroup,
       onPress: () => {
-        navigation.navigate('Add');
         setShowModal(true);
+        setCurrentScreen(switchScreens.EDIT_GROUP); //'EditGroup' Component
       },
     },
     {
-      text: 'הוספת כיתה',
+      text: strings.removeChild,
       onPress: () => {
-        navigation.navigate('Add');
         setShowModal(true);
+        console.log('text: strings.removeChild');
+        setCurrentScreen(switchScreens.REMOVE_CHILD); //'RemoveChild' Component
+      },
+    },
+    {
+      text: strings.removeGroup,
+      onPress: () => {
+        setShowModal(true);
+        setCurrentScreen(switchScreens.REMOVE_GROUP); //'RemoveGroup' Component
       },
     },
   ];
-  const renderClassBtn = (buttonArr = []) => {
-    return buttonArr.map((btn, index) => {
-      return (
-        <TouchableOpacity
-          key={index}
-          style={styles.button}
-          onPress={() => {
-            btn.onPress();
-          }}>
-          <Text style={styles.name}>{btn.text}</Text>
-        </TouchableOpacity>
-      );
-    });
-  };
-  const navigation = useNavigation();
+
+  const OneGroupButton = ({text, onPress, id}) => (
+    <TouchableOpacity
+      key={id}
+      style={styles.bigButton}
+      onPress={() => {
+        onPress();
+      }}>
+      <Text style={styles.bigName}>{text}</Text>
+    </TouchableOpacity>
+  );
+
+  const renderGroupBtn = ({item}) => (
+    <OneGroupButton text={item.text} onPress={item.onPress} id={item._id} />
+  );
+
   return (
-    <View>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.container}>
-        {renderClassBtn(btnDataArr)}
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('Add');
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}></Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            // navigation.navigate('');
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}>הסרת כיתה</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            // navigation.navigate('');
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}>עדכון פרטי כיתה</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}>הוספת ילד</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            navigation.navigate('RemoveChild');
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}>הסרת ילד</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            // navigation.navigate('');
-            setShowModal(true);
-          }}>
-          <Text style={styles.name}>עדכון פרטי ילד</Text>
-        </TouchableOpacity> */}
+        <FlatList
+          numColumns={2}
+          key={2}
+          data={btnDataArr}
+          renderItem={renderGroupBtn}
+        />
+        {showModal && <ScreensModal />}
       </View>
-      {showModal && <ScreensModal />}
-    </View>
+    </ImageBackground>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: -1,
-    flexWrap: 'wrap',
-    maxHeight: 400,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 200,
-    marginTop: 100,
-  },
-  button: {
-    width: 400,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#83A3C2',
-    margin: 10,
-  },
-  name: {
-    fontSize: 43,
-    textAlign: 'center',
-    color: '#EAEAEA',
-  },
-});
 
 export default Settings;

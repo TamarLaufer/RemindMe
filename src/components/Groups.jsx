@@ -8,60 +8,44 @@ import {
   Button,
   TouchableOpacity,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import {useContextData} from '../Context/ContextData';
+import {strings, screenNames} from '../utils/Strings';
+import {styles} from '../styles/style';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groupsList} = useContextData();
+  const {groupsList, image} = useContextData();
 
   const OneButton = ({name, id}) => (
     <TouchableOpacity
-      style={styles.button}
+      key={id}
+      style={styles.bigButton}
       onPress={() => {
-        navigation.navigate('AllChildrenList');
+        navigation.navigate(screenNames.allChildrenList);
       }}>
-      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.bigName}>{name}</Text>
     </TouchableOpacity>
   );
 
-  const renderGroup = ({item}) => <OneButton name={item.name} id={item._id} />;
+  const renderGroup = ({item}) => (
+    <OneButton name={item.groupName} id={item._id} />
+  );
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        numColumns={groupsList.length >= 6 ? 2 : 1}
-        key={2}
-        data={groupsList}
-        renderItem={renderGroup}
-        keyExtractor={group => group.id}
-        scrollToItem={{animated: true, viewPosition: 0.5}}
-      />
-    </View>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <View style={styles.container}>
+        <FlatList
+          numColumns={2}
+          data={groupsList}
+          renderItem={renderGroup}
+          keyExtractor={item => item._id}
+          scrollToItem={{animated: true, viewPosition: 0.5}}
+        />
+      </View>
+    </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  button: {
-    width: 400,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#83A3C2',
-    margin: 7,
-  },
-  name: {
-    fontSize: 43,
-    textAlign: 'center',
-    color: '#EAEAEA',
-  },
-});
 
 export default Groups;

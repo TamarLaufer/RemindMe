@@ -5,68 +5,47 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Alert,
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
+import {strings} from '../utils/Strings';
 
-const UpdateChild = () => {
-  const {updateChild} = useContextData();
-
+const EditGroup = () => {
+  const {addGroup} = useContextData();
   const [details, setDetails] = useState({
-    firstName: '',
-    lastName: '',
-    address: '',
-    parentPhone: '',
-    parent2Phone: '',
+    groupName: '',
+    assistentName: '',
   });
 
   return (
     <View style={styles.container}>
       <Formik
         initialValues={details}
-        onSubmit={values => {
-          updateChild(values);
+        onSubmit={(values, actions) => {
+          // addGroup(values);
+          actions.resetForm();
+          // ChildAddedPopUp();
         }}>
         {props => (
           <View>
             <TextInput
               style={styles.input}
-              placeholder="שם פרטי"
-              onChangeText={props.handleChange('firstName')}
-              value={props.values.firstName}
+              placeholder={strings.groupName}
+              onChangeText={props.handleChange(strings.groupName)}
+              value={props.values.groupName}
             />
 
             <TextInput
               style={styles.input}
-              placeholder="שם משפחה"
-              onChangeText={props.handleChange('lastName')}
-              value={props.values.lastName}
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="כתובת"
-              onChangeText={props.handleChange('address')}
-              value={props.values.address}
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="טלפון הורה 1"
-              onChangeText={props.handleChange('parentPhone')}
-              value={props.values.parentPhone}
-            />
-
-            <TextInput
-              style={styles.input}
-              placeholder="טלפון הורה 2"
-              onChangeText={props.handleChange('parent2Phone')}
-              value={props.values.parent2Phone}
+              placeholder={strings.assistentName}
+              onChangeText={props.handleChange(strings.assistentName)}
+              value={props.values.assistentName}
             />
             <TouchableOpacity
               style={styles.button}
               onPress={props.handleSubmit}>
-              <Text style={styles.name}>עדכון פרטים</Text>
+              <Text style={styles.name}>{strings.editGroup}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -108,5 +87,4 @@ const styles = StyleSheet.create({
     margin: 7,
   },
 });
-
-export default UpdateChild;
+export default EditGroup;
