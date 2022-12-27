@@ -53,6 +53,8 @@ export const DataProvider = ({children}) => {
       },
     ]);
 
+    // צריך קובץ url 
+    // לקחת את כל הכתובות משם ולא לכתוב את זה hardcoded
   const getAllChildren = () => {
     fetch('http://10.100.102.12:3000/child')
       .then(response => response.json())
@@ -182,6 +184,8 @@ export const DataProvider = ({children}) => {
       });
   };
 
+  //לא שמים את זה פה אלא במסך שבו את רוצה לעשות את הקריאה
+  // הפונקציה תפעל ישר על ההתחלה
   useEffect(() => {
     getAllChildren();
     getAllGroups();
