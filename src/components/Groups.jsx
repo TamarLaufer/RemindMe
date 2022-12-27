@@ -19,7 +19,7 @@ import {navigationRef} from './RootNavigation';
 const Groups = () => {
   const navigation = useNavigation();
   const {groupsList, image} = useContextData();
-
+  console.log('groupsList', groupsList);
   const OneButton = ({name, id}) => (
     <TouchableOpacity
       key={id}
