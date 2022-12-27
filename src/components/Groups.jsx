@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, DrawerActions} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   Image,
@@ -13,6 +13,8 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings, screenNames} from '../utils/Strings';
 import {styles} from '../styles/style';
+import {navigationRef} from './RootNavigation';
+// import {DrawerActions} from 'react-navigation-drawer';
 
 const Groups = () => {
   const navigation = useNavigation();

@@ -22,8 +22,8 @@ export const styles = StyleSheet.create({
     paddingLeft: 200,
   },
   bigButton: {
-    width: 400,
-    height: 100,
+    width: 340,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bigName: {
-    fontSize: 43,
+    fontSize: 38,
     textAlign: 'center',
     color: '#EAEAEA',
   },
@@ -188,5 +188,19 @@ export const styles = StyleSheet.create({
   modalText: {
     marginBottom: 5,
     textAlign: 'center',
+  },
+  logoSize: {
+    width: 230,
+    height: 100,
+    marginLeft: 5,
+    marginBottom: 15,
+  },
+  headerStyle: {
+    backgroundColor: '#F4F4F2',
+    height: 130,
+    shadowColor: '#000',
+    shadowOffset: {width: 2, height: 5},
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
 });

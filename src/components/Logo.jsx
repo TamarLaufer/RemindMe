@@ -1,11 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
+import {styles} from '../styles/style';
 
-const Logo = props => {
+const Logo = () => {
   return (
     <Image
-      style={props.style}
-      source={require('../assets/images/remindMe1.png')}
+      style={styles.logoSize}
+      source={require('../images/remindMe1.png')}
     />
   );
 };

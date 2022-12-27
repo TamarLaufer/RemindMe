@@ -171,7 +171,7 @@ export const DataProvider = ({children}) => {
     fetch(`http://10.100.102.12:3000/group/delete-group/${id}`, {
       method: 'DELETE',
     })
-      .then(res => res.json())
+      .then(data => data.json())
       .then(resJson => {
         console.log('resJson', resJson);
         const newList = groupsList.filter(group => group._id !== id);

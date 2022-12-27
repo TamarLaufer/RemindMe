@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -12,25 +12,25 @@ import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const RemoveGroup = () => {
-  const {groupList, removeGroup, popUp} = useContextData();
+  const {groupsList, removeGroup, popUp} = useContextData();
 
   useEffect(() => {
     popUp(strings.chooseGroupToRemove);
   }, []);
 
-  const renderGroupForRemove = ({item}) => (
-    <GroupRenderd groupName={item.groupName} id={item._id} />
-  );
-
   const GroupRenderd = ({groupName, id}) => (
     <TouchableOpacity
       key={id}
       style={styles.bigButton}
-      onPress={id => {
+      onPress={() => {
         removeGroup(id);
       }}>
       <Text style={styles.bigName}>{groupName}</Text>
     </TouchableOpacity>
+  );
+
+  const renderGroupForRemove = ({item}) => (
+    <GroupRenderd groupName={item.groupName} id={item._id} />
   );
 
   return (
@@ -38,7 +38,7 @@ const RemoveGroup = () => {
       <FlatList
         numColumns={2}
         key={2}
-        data={groupList}
+        data={groupsList}
         renderItem={renderGroupForRemove}
         keyExtractor={item => item._id}
       />

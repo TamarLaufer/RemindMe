@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   },
   drawerContent: {
     flex: 1,
+    direction: 'rtl',
   },
   userInfoSection: {
     paddingLeft: 20,

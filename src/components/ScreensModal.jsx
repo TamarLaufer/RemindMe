@@ -25,10 +25,6 @@ const ScreensModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
 
-  const screenDisplay = () => {
-    return currentScreen;
-  };
-
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -45,7 +41,7 @@ const ScreensModal = () => {
             props.setShowModal(false);
           }}></TouchableOpacity> */}
         <View style={styles.centeredView}>
-          <View style={styles.modalView}>{screenDisplay()}</View>
+          <View style={styles.modalView}>{currentScreen}</View>
         </View>
         <Pressable
           style={[styles.modalButton, styles.buttonOpen]}
