@@ -17,16 +17,18 @@ export const strings = {
   childrenGroups: 'כל הקבוצות',
   settings: 'הגדרות',
   logout: 'התנתק',
-  chooseChildToRemove: 'בחר ילד מהרשימה להסרה',
-  chooseChildToEdit: 'בחר ילד מהרשימה לעריכה',
-  chooseChild: 'לחץ על ילד לסימון הגעתו לגן',
-  chooseGroupToRemove: 'בחר קבוצה מהרשימה להסרה',
+  chooseChildToRemove: 'בחר ילד להסרה',
+  chooseChildToEdit: 'בחר ילד לעריכה',
+  chooseChild: 'בחר ילד לסימון הגעתו לגן',
+  chooseGroupToRemove: 'בחר קבוצה להסרה',
   allChildrenList: 'רשימת כל הילדים',
-  groupName: 'שם הקבוצה: ',
-  assistentName: 'שם הסייעת: ',
+  groupName: 'שם הקבוצה:',
+  assistantName: 'שם הסייעת:',
   windowNotClosed: 'החלון טרם נסגר',
   noGroupToShow: 'אין קבוצות',
   noChildrenToShow: 'אין ילדים בקבוצה',
+  sureYouWantToRemove: 'האם ברצונך למחוק?',
+  chooseGroupToEdit: 'בחר קבוצה לעריכה',
 };
 
 export const screenNames = {
@@ -42,12 +44,15 @@ export const screenNames = {
   childrenListForEdit: 'CHILDREN_LIST_FOR_EDIT',
   editGroup: 'EDIT_GROUP',
   removeGroup: 'REMOVE_GROUP',
+  groupListForEdit: 'GROUP_LIST_FOR_EDIT',
 };
 
-export const formikVlues = {
+export const formikValues = {
   firstName: 'firstName',
   lastName: 'lastName',
   address: 'address',
   parentPhone: 'parentPhone',
   parent2Phone: 'parent2Phone',
+  groupName: 'groupName',
+  assistantName: 'assistantName',
 };

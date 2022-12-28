@@ -13,10 +13,7 @@ import {styles} from '../styles/style';
 
 const RemoveGroup = () => {
   const {groupsList, removeGroup, popUp} = useContextData();
-
-  useEffect(() => {
-    popUp(strings.chooseGroupToRemove);
-  }, []);
+  const [toDelete, setToDelete] = useState(false);
 
   const GroupRenderd = ({groupName, id}) => (
     <TouchableOpacity
@@ -35,6 +32,7 @@ const RemoveGroup = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
       <FlatList
         numColumns={2}
         key={2}

@@ -46,10 +46,9 @@ export const styles = StyleSheet.create({
     marginBottom: 13,
   },
   header: {
-    fontSize: 30,
-    color: '#222222',
-    paddingBottom: 15,
-    backgroundColor: '#',
+    fontSize: 23,
+    color: '#3F4E4F',
+    paddingBottom: 12,
   },
   image: {
     flex: 1,
@@ -81,8 +80,8 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   activeButton: {
-    width: 225,
-    height: 95,
+    width: 222,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -96,8 +95,8 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   notActiveButton: {
-    width: 225,
-    height: 95,
+    width: 222,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -110,7 +109,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   childName: {
-    fontSize: 35,
+    fontSize: 30,
     textAlign: 'center',
     color: '#EAEAEA',
   },
@@ -194,6 +193,14 @@ export const styles = StyleSheet.create({
     height: 100,
     marginLeft: 5,
     marginBottom: 15,
+  },
+  headerStyle: {
+    backgroundColor: '#F4F4F2',
+    height: 130,
+    shadowColor: '#000',
+    shadowOffset: {width: 2, height: 5},
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   headerStyle: {
     backgroundColor: '#F4F4F2',

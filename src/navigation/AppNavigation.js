@@ -15,6 +15,8 @@ import RemoveGroup from '../components/RemoveGroup';
 import Settings from '../components/Settings';
 import {screenNames} from '../utils/Strings';
 import AddGroup from '../../src/components/AddGroup';
+import {styles} from '../styles/style';
+import GroupListForEdit from '../components/GroupListForEdit';
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = props => {
@@ -62,6 +64,11 @@ const AppNavigation = props => {
       component: ChildrenListForEdit,
       options: {headerTitle: false},
     },
+    {
+      name: screenNames.groupListForEdit,
+      component: GroupListForEdit,
+      options: {headerTitle: false},
+    },
   ];
 
   const renderScreens = (allScreens = []) => {
@@ -79,6 +86,7 @@ const AppNavigation = props => {
     initialRouteName: screenNames.groups,
     drawerContent: props => <DrawerContent {...props} />,
     screenOptions: {
+      headerTitle: '',
       drawerType: 'front',
       headerRight: () => <Header />,
       drawerPosition: 'right',
@@ -99,13 +107,3 @@ const AppNavigation = props => {
 };
 export default AppNavigation;
 
-const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: '#F4F4F2',
-    height: 130,
-    shadowColor: '#000',
-    shadowOffset: {width: 2, height: 5},
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-  },
-});

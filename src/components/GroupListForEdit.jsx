@@ -14,50 +14,46 @@ import {useContextData} from '../Context/ContextData';
 import {strings, screenNames} from '../utils/Strings';
 import {styles} from '../styles/style';
 
-const ChildrenListForEdit = () => {
+const GroupListForEdit = () => {
   const navigation = useNavigation();
   const {
-    childrenList,
+    groupsList,
     popUp,
-    updateChosenChild,
     setCurrentScreen,
     switchScreens,
-    image,
-    getAllChildren,
+    updateChosenGroup,
+    getAllGroups,
   } = useContextData();
 
   useEffect(() => {
-    getAllChildren();
+    getAllGroups();
   }, []);
 
-  const OneButton = ({child}) => (
+  const OneButtonForEdit = ({group}) => (
     <TouchableOpacity
-      key={child._id}
-      style={styles.activeButton}
+      key={group._id}
+      style={styles.bigButton}
       onPress={() => {
-        updateChosenChild(child);
-        setCurrentScreen(switchScreens.EDIT_CHILD);
+        updateChosenGroup(group);
+        setCurrentScreen(switchScreens.EDIT_GROUP);
       }}>
-      <Text style={styles.childName}>
-        {child.firstName} {child.lastName}
-      </Text>
+      <Text style={styles.bigName}>{group.groupName}</Text>
     </TouchableOpacity>
   );
 
-  const renderChild = ({item}) => <OneButton child={item} />;
+  const renderGroupForEdit = ({item}) => <OneButtonForEdit group={item} />;
 
   return (
     <View style={styles.modalContainer}>
-      <Text style={styles.header}>{strings.chooseChildToEdit}</Text>
+      <Text style={styles.header}>{strings.chooseGroupToEdit}</Text>
       <FlatList
-        numColumns={4}
-        key={4}
-        data={childrenList}
-        renderItem={renderChild}
-        keyExtractor={item => item._id}
+        numColumns={2}
+        key={2}
+        data={groupsList}
+        renderItem={renderGroupForEdit}
       />
     </View>
   );
 };
 
-export default ChildrenListForEdit;
+export default GroupListForEdit;

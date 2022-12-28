@@ -50,7 +50,7 @@ const Settings = () => {
       text: strings.editGroup,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.EDIT_GROUP); //'EditGroup' Component
+        setCurrentScreen(switchScreens.EDIT_GROUP_LIST); //'EditGroup' Component
       },
     },
     {

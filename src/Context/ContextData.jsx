@@ -7,11 +7,13 @@ import {useNavigation} from '@react-navigation/native';
 import {screenNames, strings} from '../utils/Strings';
 // import EditChild from '../components/EditChild';
 import ChildrenListForEdit from '../components/ChildrenListForEdit';
+import GroupListForEdit from '../components/GroupListForEdit';
 import Add from '../components/Add';
 import EditGroup from '../components/EditGroup';
 import RemoveGroup from '../components/RemoveGroup';
 import EditChild from '../components/EditChild';
 import {Alert} from 'react-native';
+import {URLS} from '../Api/urls';
 
 const ContextData = React.createContext();
 
@@ -22,6 +24,7 @@ export function useContextData() {
 export const DataProvider = ({children}) => {
   const [childrenList, setChildrenList] = useState([]);
   const [child, setChild] = useState([]);
+  const [group, setGroup] = useState([]);
   const [groupsList, setGroupsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
@@ -36,6 +39,7 @@ export const DataProvider = ({children}) => {
     EDIT_CHILD: <EditChild />,
     REMOVE_CHILD: <RemoveChild />,
     ADD_GROUP: <AddGroup />,
+    EDIT_GROUP_LIST: <GroupListForEdit />,
     EDIT_GROUP: <EditGroup />,
     REMOVE_GROUP: <RemoveGroup />,
   };
@@ -43,6 +47,11 @@ export const DataProvider = ({children}) => {
   const updateChosenChild = childData => {
     setChild(childData);
   };
+
+  const updateChosenGroup = groupData => {
+    setGroup(groupData);
+  };
+
   const popUp = textToDisplay =>
     Alert.alert(textToDisplay, ' ', [
       {
@@ -53,10 +62,8 @@ export const DataProvider = ({children}) => {
       },
     ]);
 
-    // צריך קובץ url 
-    // לקחת את כל הכתובות משם ולא לכתוב את זה hardcoded
   const getAllChildren = () => {
-    fetch('http://10.100.102.12:3000/child')
+    fetch(URLS.getAllChildren())
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
@@ -68,7 +75,7 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllChildrenByGroup = groupId => {
-    fetch(`http://10.100.102.12:3000/child?groupId=${groupId}`)
+    fetch(URLS.getAllChildrenByGroup(groupId))
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
@@ -81,7 +88,7 @@ export const DataProvider = ({children}) => {
 
   const addChild = values => {
     console.log(values);
-    fetch('http://10.100.102.12:3000/child/add-child', {
+    fetch(URLS.addChild(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
@@ -98,7 +105,7 @@ export const DataProvider = ({children}) => {
   };
 
   const removeChild = id => {
-    fetch(`http://10.100.102.12:3000/child/delete-child/${id}`, {
+    fetch(URLS.removeChild(id), {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -113,7 +120,7 @@ export const DataProvider = ({children}) => {
   };
 
   const getChildById = id => {
-    fetch(`http://10.100.102.12:3000/child/${id}`)
+    fetch(URLS.getChildById(id))
       .then(response => response.json())
       .then(data => setChild(data))
       .catch(err => {
@@ -122,7 +129,7 @@ export const DataProvider = ({children}) => {
   };
 
   const updateChild = (id, values) => {
-    fetch(`http://10.100.102.12:3000/child/update-child/${id}`, {
+    fetch(URLS.updateChild(id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
@@ -140,7 +147,7 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllGroups = () => {
-    fetch('http://10.100.102.12:3000/group')
+    fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {
         console.log('getAllGroups', data);
@@ -153,7 +160,7 @@ export const DataProvider = ({children}) => {
 
   const addGroup = values => {
     console.log(values);
-    fetch('http://10.100.102.12:3000/group/add-group', {
+    fetch(URLS.addGroup(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(values),
@@ -169,8 +176,26 @@ export const DataProvider = ({children}) => {
       });
   };
 
+  const updateGroup = (id, values) => {
+    fetch(URLS.updateGroup(id), {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(values),
+    })
+      .then(data => data.json())
+      .then(resJson => {
+        console.log('resJson', resJson);
+        const listWithoutGroup = groupsList.filter(group => group._id !== id);
+        const newList = [...listWithoutGroup, resJson];
+        setGroupsList(newList);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const removeGroup = id => {
-    fetch(`http://10.100.102.12:3000/group/delete-group/${id}`, {
+    fetch(URLS.removeGroup(id), {
       method: 'DELETE',
     })
       .then(data => data.json())
@@ -184,22 +209,18 @@ export const DataProvider = ({children}) => {
       });
   };
 
-  //לא שמים את זה פה אלא במסך שבו את רוצה לעשות את הקריאה
-  // הפונקציה תפעל ישר על ההתחלה
-  useEffect(() => {
-    getAllChildren();
-    getAllGroups();
-  }, []);
-
   return (
     <ContextData.Provider
       value={{
+        getAllChildren,
+        getAllGroups,
         childrenList,
         setChildrenList,
         groupsList,
         addChild,
         removeChild,
         updateChild,
+        updateGroup,
         getChildById,
         addGroup,
         switchScreens,
@@ -209,10 +230,11 @@ export const DataProvider = ({children}) => {
         setShowModal,
         popUp,
         updateChosenChild,
-        child,
         setCurrentScreen,
         currentScreen,
         image,
+        updateChosenGroup,
+        group,
       }}>
       {children}
     </ContextData.Provider>

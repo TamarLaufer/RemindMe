@@ -13,7 +13,12 @@ import {screenNames} from '../utils/Strings';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groupsList, image} = useContextData();
+  const {groupsList, image, getAllGroups} = useContextData();
+
+  useEffect(() => {
+    getAllGroups();
+  }, []);
+
   const OneButton = ({name, id}) => (
     <TouchableOpacity
       key={id}
