@@ -12,10 +12,11 @@ import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const RemoveGroup = () => {
-  const {groupsList, removeGroup, popUp} = useContextData();
+  const {groupsList, removeGroup, getAllGroups, popUp} = useContextData();
+  const [toDelete, setToDelete] = useState(false);
 
   useEffect(() => {
-    popUp(strings.chooseGroupToRemove);
+    getAllGroups();
   }, []);
 
   const GroupRenderd = ({groupName, id}) => (
@@ -35,6 +36,7 @@ const RemoveGroup = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
       <FlatList
         numColumns={2}
         key={2}

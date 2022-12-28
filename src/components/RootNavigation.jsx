@@ -1,10 +1,23 @@
-import {createNavigationContainerRef} from '@react-navigation/native';
+import {
+  createNavigationContainerRef,
+  DrawerActions,
+} from '@react-navigation/native';
 
 export const navigationRef = createNavigationContainerRef();
 
-export function navigate(name, params) {
+export const openDrawer = () => {
   if (navigationRef.isReady()) {
-    navigationRef.current.navigate(name, params);
-    // navigationRef.current?.navigate(name);
+    navigationRef.dispatch(DrawerActions.openDrawer());
   }
-}
+};
+
+export const navigate = (name, params) => {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
+};
+export const goToInit = initialRoute => {
+  if (initialRoute) {
+    navigate(initialRoute);
+  }
+};

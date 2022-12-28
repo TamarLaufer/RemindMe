@@ -9,13 +9,12 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
-import {formikVlues, screenNames, strings} from '../utils/Strings';
+import {formikValues, screenNames, strings} from '../utils/Strings';
 import {useNavigation} from '@react-navigation/native';
 
 const EditChild = ({route}) => {
   const {updateChild, child, showModal, setShowModal} = useContextData();
   const navigation = useNavigation();
-  const childParams = child;
   const [details, setDetails] = useState({
     firstName: '',
     lastName: '',
@@ -23,8 +22,8 @@ const EditChild = ({route}) => {
     parentPhone: '',
     parent2Phone: '',
   });
-  const [childVlues, setChildValues] = useState(null);
-  const [toRefresh, setToRefresh] = useState(false);
+  const [childValues, setChildValues] = useState(null);
+  const childParams = child;
 
   useEffect(() => {
     console.log(childParams._id);
@@ -34,11 +33,10 @@ const EditChild = ({route}) => {
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={childVlues || details}
+        initialValues={childValues || details}
         onSubmit={(values, actions) => {
           updateChild(childParams._id, values);
           // actions.resetForm();
-          setToRefresh(!toRefresh);
           setShowModal(!showModal);
         }}
         enableReinitialize>
@@ -47,35 +45,35 @@ const EditChild = ({route}) => {
             <TextInput
               style={styles.input}
               placeholder={strings.firstName}
-              onChangeText={props.handleChange(formikVlues.firstName)}
+              onChangeText={props.handleChange(formikValues.firstName)}
               value={props.values.firstName}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.lastName}
-              onChangeText={props.handleChange(formikVlues.lastName)}
+              onChangeText={props.handleChange(formikValues.lastName)}
               value={props.values.lastName}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.address}
-              onChangeText={props.handleChange(formikVlues.address)}
+              onChangeText={props.handleChange(formikValues.address)}
               value={props.values.address}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.parentPhone}
-              onChangeText={props.handleChange(formikVlues.parentPhone)}
+              onChangeText={props.handleChange(formikValues.parentPhone)}
               value={props.values.parentPhone}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.parent2Phone}
-              onChangeText={props.handleChange(formikVlues.parent2Phone)}
+              onChangeText={props.handleChange(formikValues.parent2Phone)}
               value={props.values.parent2Phone}
             />
             <TouchableOpacity

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TextInput,
   View,
@@ -9,43 +9,51 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
-import {strings} from '../utils/Strings';
+import {formikValues, strings} from '../utils/Strings';
+import {styles} from '../styles/style';
 
 const EditGroup = () => {
-  const {addGroup} = useContextData();
+  const {updateGroup, group, showModal, setShowModal} = useContextData();
+  const [groupValues, setGroupValues] = useState(null);
   const [details, setDetails] = useState({
     groupName: '',
-    assistentName: '',
+    assistantName: '',
   });
+  const groupParams = group;
+
+  useEffect(() => {
+    setGroupValues(groupParams);
+  }, []);
 
   return (
     <View style={styles.container}>
       <Formik
-        initialValues={details}
+        initialValues={groupValues || details}
         onSubmit={(values, actions) => {
-          // addGroup(values);
-          actions.resetForm();
-          // ChildAddedPopUp();
-        }}>
+          updateGroup(groupParams._id, values);
+          // actions.resetForm();
+          setShowModal(!showModal);
+        }}
+        enableReinitialize>
         {props => (
           <View>
             <TextInput
               style={styles.input}
               placeholder={strings.groupName}
-              onChangeText={props.handleChange(strings.groupName)}
+              onChangeText={props.handleChange(formikValues.groupName)}
               value={props.values.groupName}
             />
 
             <TextInput
               style={styles.input}
-              placeholder={strings.assistentName}
-              onChangeText={props.handleChange(strings.assistentName)}
-              value={props.values.assistentName}
+              placeholder={strings.assistantName}
+              onChangeText={props.handleChange(formikValues.assistantName)}
+              value={props.values.assistantName}
             />
             <TouchableOpacity
-              style={styles.button}
+              style={styles.bigButtonFormik}
               onPress={props.handleSubmit}>
-              <Text style={styles.name}>{strings.editGroup}</Text>
+              <Text style={styles.bigName}>{strings.editGroup}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -54,37 +62,4 @@ const EditGroup = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  button: {
-    width: 1000,
-    height: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    backgroundColor: '#83A3C2',
-    margin: 3,
-    cursor: 'pointer',
-  },
-  name: {
-    fontSize: 43,
-    textAlign: 'center',
-    color: '#EAEAEA',
-  },
-  input: {
-    width: 1000,
-    height: 70,
-    borderWidth: 1,
-    borderColor: 'black',
-    padding: 10,
-    borderRadius: 6,
-    fontSize: 26,
-    margin: 7,
-  },
-});
 export default EditGroup;

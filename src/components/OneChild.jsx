@@ -4,8 +4,6 @@ import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {styles} from '../styles/style';
 
 const OneChild = ({firstName, lastName, id}) => {
-  // const navigation = useNavigation();
-
   const [arrived, setArrived] = useState(false);
 
   const isArrived = () => {

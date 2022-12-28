@@ -1,24 +1,23 @@
-import {useNavigation, DrawerActions} from '@react-navigation/native';
-import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TouchableOpacity,
   FlatList,
   ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {useContextData} from '../Context/ContextData';
-import {strings, screenNames} from '../utils/Strings';
 import {styles} from '../styles/style';
-import {navigationRef} from './RootNavigation';
-// import {DrawerActions} from 'react-navigation-drawer';
+import {screenNames} from '../utils/Strings';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groupsList, image} = useContextData();
+  const {groupsList, image, getAllGroups} = useContextData();
+
+  useEffect(() => {
+    getAllGroups();
+  }, []);
 
   const OneButton = ({name, id}) => (
     <TouchableOpacity

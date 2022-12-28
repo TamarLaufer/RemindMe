@@ -14,9 +14,9 @@ import {styles} from '../styles/style';
 const RemoveChild = () => {
   const {childrenList, removeChild, popUp} = useContextData();
 
-  useEffect(() => {
-    popUp(strings.chooseChildToRemove);
-  }, []);
+    useEffect(() => {
+      getAllChildren();
+    }, []);
 
   const renderChildren = ({item}) => (
     <ChildrenRenderd
@@ -40,8 +40,8 @@ const RemoveChild = () => {
   );
 
   return (
-    // {/* Need to render the right age-group */}
     <View style={styles.container}>
+      <Text style={styles.header}>{strings.chooseChildToRemove}</Text>
       <FlatList
         numColumns={4}
         key={4}
