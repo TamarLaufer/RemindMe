@@ -14,6 +14,10 @@ import {styles} from '../styles/style';
 const RemoveChild = () => {
   const {childrenList, removeChild, popUp} = useContextData();
 
+    useEffect(() => {
+      getAllChildren();
+    }, []);
+
   const renderChildren = ({item}) => (
     <ChildrenRenderd
       firstName={item.firstName}

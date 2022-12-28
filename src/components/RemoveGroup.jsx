@@ -12,8 +12,12 @@ import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const RemoveGroup = () => {
-  const {groupsList, removeGroup, popUp} = useContextData();
+  const {groupsList, removeGroup, getAllGroups, popUp} = useContextData();
   const [toDelete, setToDelete] = useState(false);
+
+  useEffect(() => {
+    getAllGroups();
+  }, []);
 
   const GroupRenderd = ({groupName, id}) => (
     <TouchableOpacity
