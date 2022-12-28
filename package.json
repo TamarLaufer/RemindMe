@@ -19,6 +19,7 @@
     "axios": "^1.2.1",
     "feather-icons": "^4.29.0",
     "formik": "^2.2.9",
+    "lottie-react-native": "^5.1.4",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-element-dropdown": "^2.5.1",

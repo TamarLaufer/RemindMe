@@ -28,6 +28,7 @@ export const DataProvider = ({children}) => {
   const [groupsList, setGroupsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
+  const [loader, setLoader] = useState(false);
 
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
@@ -62,8 +63,9 @@ export const DataProvider = ({children}) => {
       },
     ]);
 
-  const getAllChildren = () => {
-    fetch(URLS.getAllChildren())
+  const getAllChildren = async () => {
+    setLoader(true);
+    await fetch(URLS.getAllChildren())
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
@@ -72,6 +74,7 @@ export const DataProvider = ({children}) => {
       .catch(err => {
         console.log('getAllChildrenError', err);
       });
+    setLoader(false);
   };
 
   const getAllChildrenByGroup = groupId => {
@@ -235,6 +238,7 @@ export const DataProvider = ({children}) => {
         image,
         updateChosenGroup,
         group,
+        loader,
       }}>
       {children}
     </ContextData.Provider>

@@ -150,6 +150,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  centeredViewLoader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
   modalView: {
     width: 1240,
     height: 650,

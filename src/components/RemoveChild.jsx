@@ -12,7 +12,7 @@ import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const RemoveChild = () => {
-  const {childrenList, removeChild, popUp} = useContextData();
+  const {childrenList, removeChild, getAllChildren, popUp} = useContextData();
 
     useEffect(() => {
       getAllChildren();
