@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     marginTop: 15,
+    marginBottom: 15,
   },
   modalContainer: {
     flex: 1,
@@ -158,11 +159,10 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     width: 1240,
-    height: 650,
-    margin: 20,
+    height: 660,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 20,
+    padding: 5,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -185,7 +185,7 @@ export const styles = StyleSheet.create({
     // backgroundColor: '#F194FF',
   },
   textStyle: {
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 25,
@@ -198,7 +198,7 @@ export const styles = StyleSheet.create({
     width: 230,
     height: 100,
     marginLeft: 5,
-    marginBottom: 15,
+    // marginBottom: 15,
   },
   headerStyle: {
     backgroundColor: '#F4F4F2',
@@ -215,5 +215,40 @@ export const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 2,
+  },
+  dropdown: {
+    marginTop: 10,
+    width: 1000,
+    height: 75,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 26,
+    paddingHorizontal: 8,
+    marginLeft: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 26,
+    borderColor: 'black',
+    borderWidth: 1,
+  },
+  placeholderStyle: {
+    fontSize: 26,
+  },
+  selectedTextStyle: {
+    fontSize: 26,
+  },
+  iconStyle: {
+    width: 40,
+    height: 40,
+  },
+  inputSearchStyle: {
+    width: 1000,
+    height: 75,
+    fontSize: 26,
   },
 });

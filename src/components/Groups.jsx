@@ -13,7 +13,7 @@ import {screenNames} from '../utils/Strings';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groupsList, image, getAllGroups} = useContextData();
+  const {classes, image, getAllGroups} = useContextData();
 
   useEffect(() => {
     getAllGroups();
@@ -39,7 +39,7 @@ const Groups = () => {
       <View style={styles.container}>
         <FlatList
           numColumns={2}
-          data={groupsList}
+          data={classes}
           renderItem={renderGroup}
           keyExtractor={item => item._id}
           scrollToItem={{animated: true, viewPosition: 0.5}}

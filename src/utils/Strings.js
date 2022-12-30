@@ -29,6 +29,7 @@ export const strings = {
   noChildrenToShow: 'אין ילדים בקבוצה',
   sureYouWantToRemove: 'האם ברצונך למחוק?',
   chooseGroupToEdit: 'בחר קבוצה לעריכה',
+  chooseGroup: 'בחר קבוצה',
 };
 
 export const screenNames = {

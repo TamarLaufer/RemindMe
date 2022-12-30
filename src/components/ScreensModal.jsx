@@ -12,6 +12,7 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings, screenNames} from '../utils/Strings';
 import {styles} from '../styles/style';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const ScreensModal = () => {
   const {
@@ -26,30 +27,30 @@ const ScreensModal = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => {
-          Alert.alert(strings.windowNotClosed);
-          setModalVisible(!showModal);
-        }}>
-        {/* <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            props.setShowModal(false);
-          }}></TouchableOpacity> */}
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>{currentScreen}</View>
-        </View>
-        <Pressable
-          style={[styles.modalButton, styles.buttonOpen]}
-          onPress={() => setShowModal(false)}>
-          <Text style={styles.textStyle}>X</Text>
-        </Pressable>
-      </Modal>
-    </View>
+    <KeyboardAwareScrollView
+      keyboardShouldPersistTaps={'always'}
+      style={{flex: 1}}
+      showsVerticalScrollIndicator={false}>
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={showModal}
+          onRequestClose={() => {
+            Alert.alert(strings.windowNotClosed);
+            setModalVisible(!showModal);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>{currentScreen}</View>
+          </View>
+          <Pressable
+            style={[styles.modalButton, styles.buttonOpen]}
+            onPress={() => setShowModal(false)}>
+            <Text style={styles.textStyle}>X</Text>
+          </Pressable>
+        </Modal>
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 

@@ -26,10 +26,14 @@ export const DataProvider = ({children}) => {
   const [child, setChild] = useState([]);
   const [group, setGroup] = useState([]);
   const [groupsList, setGroupsList] = useState([]);
+  const [classes, setAllClasses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
 
+  const updateClasses = (classList = []) => {
+    setAllClasses(classList);
+  };
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
   };
@@ -58,7 +62,7 @@ export const DataProvider = ({children}) => {
       {
         text: strings.ok,
         onPress: () => {
-          console.log('ok pressed');
+          // console.log('ok pressed');
         },
       },
     ]);
@@ -69,10 +73,10 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
-        console.log('result', data);
+        // console.log('result', data);
       })
       .catch(err => {
-        console.log('getAllChildrenError', err);
+        // console.log('getAllChildrenError', err);
       });
     setLoader(false);
   };
@@ -82,10 +86,10 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
-        console.log('result', data);
+        // console.log('result', data);
       })
       .catch(err => {
-        console.log('getAllChildrenError', err);
+        // console.log('getAllChildrenError', err);
       });
   };
 
@@ -98,12 +102,12 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        console.log('the post performed', resJson);
+        // console.log('the post performed', resJson);
         const newList = [...childrenList, resJson];
         setChildrenList(newList);
       })
       .catch(err => {
-        console.log(err, 'the post failed');
+        // console.log(err, 'the post failed');
       });
   };
 
@@ -113,12 +117,12 @@ export const DataProvider = ({children}) => {
     })
       .then(res => res.json())
       .then(resJson => {
-        console.log('resJson', resJson);
+        // console.log('resJson', resJson);
         const newList = childrenList.filter(child => child._id !== id);
         setChildrenList(newList);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -127,7 +131,7 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => setChild(data))
       .catch(err => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -139,30 +143,31 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        console.log('the update performed', resJson);
+        // console.log('the update performed', resJson);
         const listWithoutId = childrenList.filter(child => child._id !== id);
         const newList = [...listWithoutId, resJson];
         setChildrenList(newList);
       })
       .catch(err => {
-        console.log(err, 'the update failed');
+        // console.log(err, 'the update failed');
       });
   };
 
-  const getAllGroups = () => {
-    fetch(URLS.getAllGroups())
+  const getAllGroups = async () => {
+    await fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {
-        console.log('getAllGroups', data);
-        setGroupsList(data);
+        // console.log('getAllGroups', data);
+        // setGroupsList(data);
+        updateClasses(data);
       })
       .catch(err => {
-        console.log('getAllGroupsError', err);
+        // console.log('getAllGroupsError', err);
       });
   };
 
   const addGroup = values => {
-    console.log(values);
+    // console.log(values);
     fetch(URLS.addGroup(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -170,12 +175,13 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        console.log('the post performed', resJson);
+        // console.log('the post performed', resJson);
         const newList = [...groupsList, resJson];
-        setGroupsList(newList);
+        // setGroupsList(newList);
+        updateClasses(newList);
       })
       .catch(err => {
-        console.log(err, 'the post failed');
+        // console.log(err, 'the post failed');
       });
   };
 
@@ -187,10 +193,11 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        console.log('resJson', resJson);
+        // console.log('resJson', resJson);
         const listWithoutGroup = groupsList.filter(group => group._id !== id);
         const newList = [...listWithoutGroup, resJson];
-        setGroupsList(newList);
+        // setGroupsList(newList);
+        updateClasses(newList);
       })
       .catch(err => {
         console.log(err);
@@ -203,9 +210,10 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        console.log('resJson', resJson);
+        // console.log('resJson', resJson);
         const newList = groupsList.filter(group => group._id !== id);
-        setGroupsList(newList);
+        // setGroupsList(newList);
+        updateClasses(data);
       })
       .catch(err => {
         console.log(err);
@@ -239,6 +247,8 @@ export const DataProvider = ({children}) => {
         updateChosenGroup,
         group,
         loader,
+        classes,
+        updateClasses,
       }}>
       {children}
     </ContextData.Provider>
