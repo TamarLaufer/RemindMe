@@ -11,8 +11,9 @@ import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
+
 const RemoveGroup = () => {
-  const {groupsList, removeGroup, getAllGroups, popUp} = useContextData();
+  const {removeGroup, getAllGroups, popUp, groups} = useContextData();
   const [toDelete, setToDelete] = useState(false);
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const RemoveGroup = () => {
       <FlatList
         numColumns={2}
         key={2}
-        data={groupsList}
+        data={groups}
         renderItem={renderGroupForRemove}
         keyExtractor={item => item._id}
       />

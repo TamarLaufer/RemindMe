@@ -27,30 +27,23 @@ const ScreensModal = () => {
   const navigation = useNavigation();
 
   return (
-    <KeyboardAwareScrollView
-      keyboardShouldPersistTaps={'always'}
-      style={{flex: 1}}
-      showsVerticalScrollIndicator={false}>
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={showModal}
-          onRequestClose={() => {
-            Alert.alert(strings.windowNotClosed);
-            setModalVisible(!showModal);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>{currentScreen}</View>
-          </View>
-          <Pressable
-            style={[styles.modalButton, styles.buttonOpen]}
-            onPress={() => setShowModal(false)}>
-            <Text style={styles.textStyle}>X</Text>
-          </Pressable>
-        </Modal>
-      </View>
-    </KeyboardAwareScrollView>
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={showModal}
+      onRequestClose={() => {
+        Alert.alert(strings.windowNotClosed);
+        setModalVisible(!showModal);
+      }}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.modalView}>
+        {currentScreen}
+      </KeyboardAwareScrollView>
+      <Pressable
+        style={[styles.modalButton, styles.buttonOpen]}
+        onPress={() => setShowModal(false)}>
+        <Text style={styles.textStyle}>X</Text>
+      </Pressable>
+    </Modal>
   );
 };
 

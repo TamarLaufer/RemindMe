@@ -25,14 +25,14 @@ export const DataProvider = ({children}) => {
   const [childrenList, setChildrenList] = useState([]);
   const [child, setChild] = useState([]);
   const [group, setGroup] = useState([]);
-  const [groupsList, setGroupsList] = useState([]);
-  const [classes, setAllClasses] = useState([]);
+  const [groups, setAllGroups] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
+  const [groupByPress, setGroupByPress] = useState([]);
 
-  const updateClasses = (classList = []) => {
-    setAllClasses(classList);
+  const updateGroupsList = (groupList = []) => {
+    setAllGroups(groupList);
   };
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
@@ -76,7 +76,7 @@ export const DataProvider = ({children}) => {
         // console.log('result', data);
       })
       .catch(err => {
-        // console.log('getAllChildrenError', err);
+        console.log('getAllChildrenError', err);
       });
     setLoader(false);
   };
@@ -107,7 +107,7 @@ export const DataProvider = ({children}) => {
         setChildrenList(newList);
       })
       .catch(err => {
-        // console.log(err, 'the post failed');
+        console.log(err, 'the post failed');
       });
   };
 
@@ -122,7 +122,7 @@ export const DataProvider = ({children}) => {
         setChildrenList(newList);
       })
       .catch(err => {
-        // console.log(err);
+        console.log('removeChildError', err);
       });
   };
 
@@ -149,7 +149,7 @@ export const DataProvider = ({children}) => {
         setChildrenList(newList);
       })
       .catch(err => {
-        // console.log(err, 'the update failed');
+        console.log('the update failed', err);
       });
   };
 
@@ -158,8 +158,7 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         // console.log('getAllGroups', data);
-        // setGroupsList(data);
-        updateClasses(data);
+        updateGroupsList(data);
       })
       .catch(err => {
         // console.log('getAllGroupsError', err);
@@ -176,9 +175,8 @@ export const DataProvider = ({children}) => {
       .then(data => data.json())
       .then(resJson => {
         // console.log('the post performed', resJson);
-        const newList = [...groupsList, resJson];
-        // setGroupsList(newList);
-        updateClasses(newList);
+        const newList = [...groups, resJson];
+        updateGroupsList(newList);
       })
       .catch(err => {
         // console.log(err, 'the post failed');
@@ -194,10 +192,9 @@ export const DataProvider = ({children}) => {
       .then(data => data.json())
       .then(resJson => {
         // console.log('resJson', resJson);
-        const listWithoutGroup = groupsList.filter(group => group._id !== id);
+        const listWithoutGroup = groups.filter(group => group._id !== id);
         const newList = [...listWithoutGroup, resJson];
-        // setGroupsList(newList);
-        updateClasses(newList);
+        updateGroupsList(newList);
       })
       .catch(err => {
         console.log(err);
@@ -211,9 +208,8 @@ export const DataProvider = ({children}) => {
       .then(data => data.json())
       .then(resJson => {
         // console.log('resJson', resJson);
-        const newList = groupsList.filter(group => group._id !== id);
-        // setGroupsList(newList);
-        updateClasses(data);
+        const newList = groups.filter(group => group._id !== id);
+        updateGroupsList(newList);
       })
       .catch(err => {
         console.log(err);
@@ -227,7 +223,6 @@ export const DataProvider = ({children}) => {
         getAllGroups,
         childrenList,
         setChildrenList,
-        groupsList,
         addChild,
         removeChild,
         updateChild,
@@ -247,8 +242,9 @@ export const DataProvider = ({children}) => {
         updateChosenGroup,
         group,
         loader,
-        classes,
-        updateClasses,
+        groups,
+        groupByPress,
+        setGroupByPress,
       }}>
       {children}
     </ContextData.Provider>

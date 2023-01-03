@@ -11,9 +11,11 @@ import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
 import {formikValues, screenNames, strings} from '../utils/Strings';
 import {useNavigation} from '@react-navigation/native';
+import {Dropdown} from 'react-native-element-dropdown';
 
 const EditChild = ({route}) => {
-  const {updateChild, child, showModal, setShowModal} = useContextData();
+  const {updateChild, child, showModal, setShowModal, groups} =
+    useContextData();
   const navigation = useNavigation();
   const [details, setDetails] = useState({
     firstName: '',
@@ -21,12 +23,18 @@ const EditChild = ({route}) => {
     address: '',
     parentPhone: '',
     parent2Phone: '',
+    group: '',
+    isArrived: false,
   });
   const [childValues, setChildValues] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
   const childParams = child;
+  const newList = groups?.map(group => ({
+    label: group.groupName,
+    value: group._id,
+  }));
 
   useEffect(() => {
-    console.log(childParams._id);
     setChildValues(childParams);
   }, []);
 
@@ -40,45 +48,65 @@ const EditChild = ({route}) => {
           setShowModal(!showModal);
         }}
         enableReinitialize>
-        {props => (
+        {formikProps => (
           <View>
             <TextInput
               style={styles.input}
               placeholder={strings.firstName}
-              onChangeText={props.handleChange(formikValues.firstName)}
-              value={props.values.firstName}
+              onChangeText={formikProps.handleChange(formikValues.firstName)}
+              value={formikProps.values.firstName}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.lastName}
-              onChangeText={props.handleChange(formikValues.lastName)}
-              value={props.values.lastName}
+              onChangeText={formikProps.handleChange(formikValues.lastName)}
+              value={formikProps.values.lastName}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.address}
-              onChangeText={props.handleChange(formikValues.address)}
-              value={props.values.address}
+              onChangeText={formikProps.handleChange(formikValues.address)}
+              value={formikProps.values.address}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.parentPhone}
-              onChangeText={props.handleChange(formikValues.parentPhone)}
-              value={props.values.parentPhone}
+              onChangeText={formikProps.handleChange(formikValues.parentPhone)}
+              value={formikProps.values.parentPhone}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.parent2Phone}
-              onChangeText={props.handleChange(formikValues.parent2Phone)}
-              value={props.values.parent2Phone}
+              onChangeText={formikProps.handleChange(formikValues.parent2Phone)}
+              value={formikProps.values.parent2Phone}
+            />
+            <Dropdown
+              style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              inputSearchStyle={styles.inputSearchStyle}
+              iconStyle={styles.iconStyle}
+              data={newList}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={!isFocus ? strings.chooseGroup : '...'}
+              value={formikProps.values.group}
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
+              onChange={item => {
+                console.log('item', item);
+                formikProps.setFieldValue('group', item.value);
+                setIsFocus(false);
+              }}
             />
             <TouchableOpacity
               style={styles.button}
-              onPress={props.handleSubmit}>
+              onPress={formikProps.handleSubmit}>
               <Text style={styles.name}>{strings.editChild}</Text>
             </TouchableOpacity>
           </View>

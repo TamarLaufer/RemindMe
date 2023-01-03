@@ -18,6 +18,7 @@ const Add = ({route}, props) => {
   const [details, setDetails] = useState({
     groupName: '',
     assistantName: '',
+    childrenList: [],
   });
 
   return (

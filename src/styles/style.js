@@ -2,6 +2,8 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    height: '100%',
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -128,6 +130,20 @@ export const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: -4},
     shadowRadius: 3,
   },
+  bigButtonFormikNotActive: {
+    width: 1000,
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+    backgroundColor: '#D8D8D8',
+    margin: 11,
+    shadowOpacity: 0.8,
+    elevation: 8,
+    shadowColor: 'black',
+    shadowOffset: {width: 2, height: -4},
+    shadowRadius: 3,
+  },
   input: {
     width: 1000,
     height: 75,
@@ -158,8 +174,8 @@ export const styles = StyleSheet.create({
     zIndex: 1,
   },
   modalView: {
-    width: 1240,
-    height: 660,
+    width: '100%',
+    height: '90%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 5,
@@ -250,5 +266,15 @@ export const styles = StyleSheet.create({
     width: 1000,
     height: 75,
     fontSize: 26,
+  },
+  validation_error: {
+    color: 'red',
+    fontSize: 22,
+    marginRight: 23,
+  },
+  keyboardAwareScrollView: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 });

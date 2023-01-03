@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   ImageBackground,
@@ -13,17 +13,24 @@ import {screenNames} from '../utils/Strings';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {classes, image, getAllGroups} = useContextData();
+  const {groups, image, getAllGroups, childrenList, setGroupByPress} =
+    useContextData();
 
   useEffect(() => {
     getAllGroups();
   }, []);
+
+  const getAllChildrenByGroupId = groupId => {
+    const filteredList = childrenList.filter(child => child.group === groupId);
+    setGroupByPress(filteredList);
+  };
 
   const OneButton = ({name, id}) => (
     <TouchableOpacity
       key={id}
       style={styles.bigButton}
       onPress={() => {
+        getAllChildrenByGroupId();
         navigation.navigate(screenNames.allChildrenList);
       }}>
       <Text style={styles.bigName}>{name}</Text>
@@ -39,7 +46,7 @@ const Groups = () => {
       <View style={styles.container}>
         <FlatList
           numColumns={2}
-          data={classes}
+          data={groups}
           renderItem={renderGroup}
           keyExtractor={item => item._id}
           scrollToItem={{animated: true, viewPosition: 0.5}}

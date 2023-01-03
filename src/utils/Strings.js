@@ -2,9 +2,9 @@ export const strings = {
   addChild: 'הוספת ילד',
   editChild: 'עריכת ילד',
   removeChild: 'הסרת ילד',
-  addGroup: 'הוספת כיתה',
-  editGroup: 'עריכת כיתה',
-  removeGroup: 'הסרת כיתה',
+  addGroup: 'הוספת קבוצה',
+  editGroup: 'עריכת קבוצה',
+  removeGroup: 'הסרת קבוצה',
   childAddedSeccesfully: 'הילד נוסף בהצלחה',
   childEditedSeccesfully: 'הילד עודכן בהצלחה',
   ok: 'אישור',
@@ -30,6 +30,15 @@ export const strings = {
   sureYouWantToRemove: 'האם ברצונך למחוק?',
   chooseGroupToEdit: 'בחר קבוצה לעריכה',
   chooseGroup: 'בחר קבוצה',
+  tooShortName: 'שם פרטי חייב להכיל לפחות 2 תווים',
+  tooShortLastName: 'שם משפחה חייב להכיל לפחות 2 תווים',
+  tooLongName: 'שם פרטי יכול להכיל עד 15 תווים',
+  tooLongLastName: 'שם פרטי יכול להכיל עד 15 תווים',
+  insertFirstName: 'יש להכניס שם פרטי',
+  insertLastName: 'יש להכניס שם משפחה',
+  validationPhone: 'יש להכניס מספר טלפון נייד תקין',
+  phoneMissing: 'יש להכניס מספר טלפון נייד אחד לפחות',
+  groupMissing: 'יש לבחור קבוצה',
 };
 
 export const screenNames = {
@@ -56,4 +65,5 @@ export const formikValues = {
   parent2Phone: 'parent2Phone',
   groupName: 'groupName',
   assistantName: 'assistantName',
+  group: 'group',
 };

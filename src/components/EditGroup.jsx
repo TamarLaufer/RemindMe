@@ -18,6 +18,7 @@ const EditGroup = () => {
   const [details, setDetails] = useState({
     groupName: '',
     assistantName: '',
+    childrenList: [],
   });
   const groupParams = group;
 
@@ -31,28 +32,29 @@ const EditGroup = () => {
         initialValues={groupValues || details}
         onSubmit={(values, actions) => {
           updateGroup(groupParams._id, values);
-          // actions.resetForm();
           setShowModal(!showModal);
         }}
         enableReinitialize>
-        {props => (
+        {formikProps => (
           <View>
             <TextInput
               style={styles.input}
               placeholder={strings.groupName}
-              onChangeText={props.handleChange(formikValues.groupName)}
-              value={props.values.groupName}
+              onChangeText={formikProps.handleChange(formikValues.groupName)}
+              value={formikProps.values.groupName}
             />
 
             <TextInput
               style={styles.input}
               placeholder={strings.assistantName}
-              onChangeText={props.handleChange(formikValues.assistantName)}
-              value={props.values.assistantName}
+              onChangeText={formikProps.handleChange(
+                formikValues.assistantName,
+              )}
+              value={formikProps.values.assistantName}
             />
             <TouchableOpacity
               style={styles.bigButtonFormik}
-              onPress={props.handleSubmit}>
+              onPress={formikProps.handleSubmit}>
               <Text style={styles.bigName}>{strings.editGroup}</Text>
             </TouchableOpacity>
           </View>

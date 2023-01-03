@@ -17,17 +17,13 @@ import {styles} from '../styles/style';
 const GroupListForEdit = () => {
   const navigation = useNavigation();
   const {
-    groupsList,
+    groups,
     popUp,
     setCurrentScreen,
     switchScreens,
     updateChosenGroup,
     getAllGroups,
   } = useContextData();
-
-  useEffect(() => {
-    getAllGroups();
-  }, []);
 
   const OneButtonForEdit = ({group}) => (
     <TouchableOpacity
@@ -49,7 +45,7 @@ const GroupListForEdit = () => {
       <FlatList
         numColumns={2}
         key={2}
-        data={groupsList}
+        data={groups}
         renderItem={renderGroupForEdit}
       />
     </View>
