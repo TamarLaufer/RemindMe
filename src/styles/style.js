@@ -125,7 +125,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
-    backgroundColor: '#D8D8D8',
+    backgroundColor: '#83A3C2',
     margin: 11,
     shadowOpacity: 0.8,
     elevation: 8,
@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bigButtonFormikNotActive: {
-    backgroundColor: '#83A3C2',
+    backgroundColor: '#D8D8D8',
   },
   input: {
     width: sizes.PageWidth * 0.9,

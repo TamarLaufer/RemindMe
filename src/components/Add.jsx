@@ -1,13 +1,14 @@
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Text, TextInput, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import * as Yup from 'yup';
 import {useContextData} from '../Context/ContextData';
 import {styles} from '../styles/style';
 import {formikValues, strings} from '../utils/Strings';
+import SubmitBtn from './btn/SubmitBtn';
 
-const Add = ({route}, props) => {
+const Add = () => {
   const {
     addChild,
     showModal,
@@ -56,13 +57,67 @@ const Add = ({route}, props) => {
     group: Yup.object().required(strings.groupMissing),
   });
 
-  return (
-    <Formik
-      initialValues={isEditMode ? child : initValues}
-      validationSchema={SignupSchema}
-      validateOnBlur={false}
-      // validateOnChange={false}
-      onSubmit={(values, actions) => {
+  const renderInputsAndError = (inputData = [], formikProps) => {
+    return inputData?.map((input, index) => (
+      <>
+        <TextInput
+          key={index}
+          style={input.style}
+          placeholder={input.placeholder}
+          onChangeText={formikProps.handleChange(formikValues[input.value])}
+          value={formikProps.values[input.value]}
+          keyboardType={input.keyboardType}
+        />
+        {
+          <Text style={styles.validation_error}>
+            {formikProps.touched &&
+              formikProps.errors[input.value] &&
+              formikProps.errors[input.value]}
+          </Text>
+        }
+      </>
+    ));
+  };
+
+  const inputDataArray = [
+    {
+      style: styles.input,
+      placeholder: strings.firstName,
+      value: 'firstName',
+      keyboardType: 'default',
+    },
+    {
+      style: styles.input,
+      placeholder: strings.lastName,
+      value: 'lastName',
+      keyboardType: 'default',
+    },
+    {
+      style: styles.input,
+      placeholder: strings.address,
+      value: 'address',
+      keyboardType: 'default',
+    },
+    {
+      style: styles.input,
+      placeholder: strings.parentPhone,
+      value: 'parentPhone',
+      keyboardType: 'phone-pad',
+    },
+    {
+      style: styles.input,
+      placeholder: strings.parent2Phone,
+      value: 'parent2Phone',
+      keyboardType: 'phone-pad',
+    },
+  ];
+
+  const params = {
+    formik: {
+      initialValues: isEditMode ? child : initValues,
+      validationSchema: SignupSchema,
+      validateOnBlur: false,
+      onSubmit: (values, actions) => {
         //EDIT ACTION
         if (isEditMode) {
           console.log('edit action');
@@ -75,95 +130,44 @@ const Add = ({route}, props) => {
           popUp(strings.childAddedSeccesfully);
           setShowModal(!showModal);
         }
-      }}>
+      },
+    },
+    dropDown: formikProps => ({
+      style: [styles.dropdown, isFocus && {borderColor: 'blue'}],
+      placeholderStyle: styles.placeholderStyle,
+      selectedTextStyle: styles.selectedTextStyle,
+      inputSearchStyle: styles.inputSearchStyle,
+      iconStyle: styles.iconStyle,
+      data: newList,
+      maxHeight: 300,
+      labelField: 'label',
+      valueField: 'value',
+      placeholder: !isFocus ? strings.chooseGroup : '...',
+      value: formikProps.values.group,
+      onFocus: () => setIsFocus(true),
+      onChange: item => {
+        console.log('item', item);
+        formikProps.setFieldValue('group', item);
+        setIsFocus(false);
+      },
+    }),
+  };
+  return (
+    <Formik {...params.formik}>
       {formikProps => (
         <View style={styles.addContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder={strings.firstName}
-            onChangeText={formikProps.handleChange(formikValues.firstName)}
-            value={formikProps.values.firstName}
-          />
-          {formikProps.touched && formikProps.errors.firstName && (
-            <Text style={styles.validation_error}>
-              {formikProps.errors.firstName}
-            </Text>
-          )}
-
-          <TextInput
-            style={styles.input}
-            placeholder={strings.lastName}
-            onChangeText={formikProps.handleChange(formikValues.lastName)}
-            value={formikProps.values.lastName}
-          />
-          {formikProps.touched && formikProps.errors.lastName && (
-            <Text style={styles.validation_error}>
-              {formikProps.errors.lastName}
-            </Text>
-          )}
-
-          <TextInput
-            style={styles.input}
-            placeholder={strings.address}
-            onChangeText={formikProps.handleChange(formikValues.address)}
-            value={formikProps.values.address}
-          />
-          {console.log('formikProps', formikProps)}
-
-          <TextInput
-            style={styles.input}
-            placeholder={strings.parentPhone}
-            onChangeText={formikProps.handleChange(formikValues.parentPhone)}
-            value={formikProps.values.parentPhone}
-            keyboardType="phone-pad"
-          />
-          {formikProps.touched && formikProps.errors.parentPhone && (
-            <Text style={styles.validation_error}>
-              {formikProps.errors.parentPhone}
-            </Text>
-          )}
-
-          <TextInput
-            style={styles.input}
-            placeholder={strings.parent2Phone}
-            onChangeText={formikProps.handleChange(formikValues.parent2Phone)}
-            value={formikProps.values.parent2Phone}
-            keyboardType="phone-pad"
-          />
-          <Dropdown
-            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
-            placeholderStyle={styles.placeholderStyle}
-            selectedTextStyle={styles.selectedTextStyle}
-            inputSearchStyle={styles.inputSearchStyle}
-            iconStyle={styles.iconStyle}
-            data={newList}
-            maxHeight={300}
-            labelField="label"
-            valueField="value"
-            placeholder={!isFocus ? strings.chooseGroup : '...'}
-            value={formikProps.values.group}
-            onFocus={() => setIsFocus(true)}
-            onChange={item => {
-              console.log('item', item);
-              formikProps.setFieldValue('group', item);
-              setIsFocus(false);
-            }}
-          />
-          {formikProps.touched && formikProps.errors.group && (
-            <Text style={styles.validation_error}>
-              {formikProps.errors.group}
-            </Text>
-          )}
-
-          <TouchableOpacity
-            style={[
-              styles.bigButtonFormik,
-              formikProps.isValid && styles.bigButtonFormikNotActive,
-            ]}
+          {renderInputsAndError(inputDataArray, formikProps)}
+          <Dropdown {...params.dropDown(formikProps)} />
+          <Text style={styles.validation_error}>
+            {formikProps.touched &&
+              formikProps.errors.group &&
+              formikProps.errors.group}
+          </Text>
+          <SubmitBtn
+            title={strings.addChild}
             onPress={formikProps.handleSubmit}
-            disabled={!formikProps.isValid}>
-            <Text style={styles.bigName}>{strings.addChild}</Text>
-          </TouchableOpacity>
+            disabled={!formikProps.isValid}
+          />
         </View>
       )}
     </Formik>
