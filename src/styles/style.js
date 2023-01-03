@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import sizes from '../utils/sizes';
 
 export const styles = StyleSheet.create({
   container: {
@@ -25,7 +26,7 @@ export const styles = StyleSheet.create({
     paddingLeft: 200,
   },
   bigButton: {
-    width: 340,
+    width: sizes.PageWidth * 0.4,
     height: 90,
     justifyContent: 'center',
     alignItems: 'center',
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bigName: {
-    fontSize: 38,
+    fontSize: 32,
     textAlign: 'center',
     color: '#EAEAEA',
   },
@@ -55,7 +56,9 @@ export const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'space-around',
+    alignItems: 'center',
+    // justifyContent: 'center',
   },
   shadowProp: {
     shadowColor: 'black',
@@ -117,21 +120,7 @@ export const styles = StyleSheet.create({
     color: '#EAEAEA',
   },
   bigButtonFormik: {
-    width: 1000,
-    height: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    backgroundColor: '#83A3C2',
-    margin: 11,
-    shadowOpacity: 0.8,
-    elevation: 8,
-    shadowColor: 'black',
-    shadowOffset: {width: 2, height: -4},
-    shadowRadius: 3,
-  },
-  bigButtonFormikNotActive: {
-    width: 1000,
+    width: sizes.PageWidth * 0.9,
     height: 70,
     justifyContent: 'center',
     alignItems: 'center',
@@ -144,13 +133,16 @@ export const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: -4},
     shadowRadius: 3,
   },
+  bigButtonFormikNotActive: {
+    backgroundColor: '#83A3C2',
+  },
   input: {
-    width: 1000,
+    width: sizes.PageWidth * 0.9,
     height: 75,
     borderWidth: 1,
     borderColor: 'black',
     padding: 10,
-    paddingRight: 20,
+    // paddingRight: 20,
     borderRadius: 26,
     fontSize: 26,
     margin: 7,
@@ -174,12 +166,12 @@ export const styles = StyleSheet.create({
     zIndex: 1,
   },
   modalView: {
-    width: '100%',
-    height: '90%',
+    width: sizes.PageWidth,
+    // height: '90%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 5,
-    alignItems: 'center',
+    // alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -191,6 +183,8 @@ export const styles = StyleSheet.create({
   },
   modalButton: {
     borderRadius: 20,
+    width: 40,
+    alignSelf: 'center',
     padding: 10,
     fontSize: 45,
   },
@@ -234,7 +228,7 @@ export const styles = StyleSheet.create({
   },
   dropdown: {
     marginTop: 10,
-    width: 1000,
+    width: sizes.PageWidth * 0.9,
     height: 75,
     borderColor: 'black',
     borderWidth: 1,
@@ -276,5 +270,10 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  addContainer: {
+    flex: 1,
+    paddingBottom: 15,
+    alignItems: 'center',
   },
 });

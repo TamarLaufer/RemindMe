@@ -17,6 +17,7 @@ const Groups = () => {
     useContextData();
 
   useEffect(() => {
+    console.log('getAllGroups');
     getAllGroups();
   }, []);
 

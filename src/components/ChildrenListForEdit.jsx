@@ -20,7 +20,7 @@ const ChildrenListForEdit = () => {
     childrenList,
     popUp,
     updateChosenChild,
-    setCurrentScreen,
+    updateCurrentScreen,
     switchScreens,
     image,
     getAllChildren,
@@ -36,7 +36,8 @@ const ChildrenListForEdit = () => {
       style={styles.activeButton}
       onPress={() => {
         updateChosenChild(child);
-        setCurrentScreen(switchScreens.EDIT_CHILD);
+        // setCurrentScreen(switchScreens.EDIT_CHILD);
+        updateCurrentScreen(switchScreens.ADD_CHILD, true);
       }}>
       <Text style={styles.childName}>
         {child.firstName} {child.lastName}

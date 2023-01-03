@@ -19,7 +19,7 @@ const Settings = () => {
     switchScreens,
     showModal,
     setShowModal,
-    setCurrentScreen,
+    updateCurrentScreen,
     currentScreen,
     image,
   } = useContextData();
@@ -29,28 +29,28 @@ const Settings = () => {
       text: strings.addChild,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.ADD_CHILD); //'Add' Component
+        updateCurrentScreen(switchScreens.ADD_CHILD); //'Add' Component
       },
     },
     {
       text: strings.addGroup,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.ADD_GROUP); //'AddGroup' Component
+        updateCurrentScreen(switchScreens.ADD_GROUP); //'AddGroup' Component
       },
     },
     {
       text: strings.editChild,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.EDIT_CHILD_LIST); //'ChildrenListForEdit' Component
+        updateCurrentScreen(switchScreens.EDIT_CHILD_LIST); //'ChildrenListForEdit' Component
       },
     },
     {
       text: strings.editGroup,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.EDIT_GROUP_LIST); //'EditGroup' Component
+        updateCurrentScreen(switchScreens.EDIT_GROUP_LIST); //'EditGroup' Component
       },
     },
     {
@@ -58,14 +58,14 @@ const Settings = () => {
       onPress: () => {
         setShowModal(true);
         console.log('text: strings.removeChild');
-        setCurrentScreen(switchScreens.REMOVE_CHILD); //'RemoveChild' Component
+        updateCurrentScreen(switchScreens.REMOVE_CHILD); //'RemoveChild' Component
       },
     },
     {
       text: strings.removeGroup,
       onPress: () => {
         setShowModal(true);
-        setCurrentScreen(switchScreens.REMOVE_GROUP); //'RemoveGroup' Component
+        updateCurrentScreen(switchScreens.REMOVE_GROUP); //'RemoveGroup' Component
       },
     },
   ];
@@ -87,18 +87,15 @@ const Settings = () => {
 
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View style={styles.container}>
-        <FlatList
-          numColumns={2}
-          key={2}
-          data={btnDataArr}
-          renderItem={renderGroupBtn}
-        />
-        {showModal && <ScreensModal />}
-      </View>
+      <FlatList
+        numColumns={2}
+        key={2}
+        data={btnDataArr}
+        renderItem={renderGroupBtn}
+      />
+      {showModal && <ScreensModal />}
     </ImageBackground>
   );
 };
-
 
 export default Settings;

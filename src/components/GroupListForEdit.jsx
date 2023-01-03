@@ -19,7 +19,7 @@ const GroupListForEdit = () => {
   const {
     groups,
     popUp,
-    setCurrentScreen,
+    updateCurrentScreen,
     switchScreens,
     updateChosenGroup,
     getAllGroups,
@@ -31,7 +31,7 @@ const GroupListForEdit = () => {
       style={styles.bigButton}
       onPress={() => {
         updateChosenGroup(group);
-        setCurrentScreen(switchScreens.EDIT_GROUP);
+        updateCurrentScreen(switchScreens.EDIT_GROUP);
       }}>
       <Text style={styles.bigName}>{group.groupName}</Text>
     </TouchableOpacity>

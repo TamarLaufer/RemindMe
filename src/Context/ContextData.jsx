@@ -25,6 +25,7 @@ export const DataProvider = ({children}) => {
   const [childrenList, setChildrenList] = useState([]);
   const [child, setChild] = useState([]);
   const [group, setGroup] = useState([]);
+  const [isEditMode, setIsEditMode] = useState(false);
   const [groups, setAllGroups] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
@@ -33,6 +34,11 @@ export const DataProvider = ({children}) => {
 
   const updateGroupsList = (groupList = []) => {
     setAllGroups(groupList);
+  };
+
+  const updateCurrentScreen = (screen, isEditFlag) => {
+    setCurrentScreen(screen);
+    setIsEditMode(isEditFlag === true);
   };
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
@@ -79,6 +85,8 @@ export const DataProvider = ({children}) => {
         console.log('getAllChildrenError', err);
       });
     setLoader(false);
+    
+    setChildrenList(kids)
   };
 
   const getAllChildrenByGroup = groupId => {
@@ -154,14 +162,15 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllGroups = async () => {
+    console.log('getAllGroups 2');
     await fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {
-        // console.log('getAllGroups', data);
+        console.log('getAllGroups', data);
         updateGroupsList(data);
       })
       .catch(err => {
-        // console.log('getAllGroupsError', err);
+        console.log('getAllGroupsError', err);
       });
   };
 
@@ -237,6 +246,7 @@ export const DataProvider = ({children}) => {
         popUp,
         updateChosenChild,
         setCurrentScreen,
+        updateCurrentScreen,
         currentScreen,
         image,
         updateChosenGroup,
@@ -244,6 +254,7 @@ export const DataProvider = ({children}) => {
         loader,
         groups,
         groupByPress,
+        isEditMode,
         setGroupByPress,
       }}>
       {children}

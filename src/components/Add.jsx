@@ -1,21 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
-import {Field, Formik} from 'formik';
-import {screenNames, strings, formikValues} from '../utils/Strings';
-import {useContextData} from '../Context/ContextData';
-import {useNavigation, useNavigationParam} from '@react-navigation/native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {styles} from '../styles/style';
+import {Formik} from 'formik';
+import React, {useState} from 'react';
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import * as Yup from 'yup';
+import {useContextData} from '../Context/ContextData';
+import {styles} from '../styles/style';
+import {formikValues, strings} from '../utils/Strings';
 
 const Add = ({route}, props) => {
   const {
@@ -23,20 +13,23 @@ const Add = ({route}, props) => {
     showModal,
     setShowModal,
     popUp,
+    child,
     getAllGroups,
-    groupList,
+    isEditMode,
     groups,
   } = useContextData();
-
-  const [details, setDetails] = useState({
+  const initValues = {
     firstName: '',
     lastName: '',
     address: '',
     parentPhone: '',
     parent2Phone: '',
-    group: '',
+    group: {
+      label: '',
+      value: '',
+    },
     isArrived: false,
-  });
+  };
   const [isFocus, setIsFocus] = useState(false);
 
   const newList = groups?.map(group => ({
@@ -60,28 +53,36 @@ const Add = ({route}, props) => {
         strings.validationPhone,
       )
       .required(strings.phoneMissing),
-    group: Yup.string().required(strings.groupMissing),
+    group: Yup.object().required(strings.groupMissing),
   });
 
   return (
     <Formik
-      initialValues={details}
+      initialValues={isEditMode ? child : initValues}
       validationSchema={SignupSchema}
+      validateOnBlur={false}
+      // validateOnChange={false}
       onSubmit={(values, actions) => {
-        console.log('values', values);
-        addChild(values);
-        actions.resetForm();
-        popUp(strings.childAddedSeccesfully);
-        setShowModal(!showModal);
+        //EDIT ACTION
+        if (isEditMode) {
+          console.log('edit action');
+        }
+        //ADD ACTION
+        else {
+          console.log('values', values);
+          addChild(values);
+          actions.resetForm();
+          popUp(strings.childAddedSeccesfully);
+          setShowModal(!showModal);
+        }
       }}>
       {formikProps => (
-        <View style={{flex: 1}}>
+        <View style={styles.addContainer}>
           <TextInput
             style={styles.input}
             placeholder={strings.firstName}
             onChangeText={formikProps.handleChange(formikValues.firstName)}
             value={formikProps.values.firstName}
-            onBlur={() => formikProps.setFieldTouched(formikValues.firstName)}
           />
           {formikProps.touched && formikProps.errors.firstName && (
             <Text style={styles.validation_error}>
@@ -94,7 +95,6 @@ const Add = ({route}, props) => {
             placeholder={strings.lastName}
             onChangeText={formikProps.handleChange(formikValues.lastName)}
             value={formikProps.values.lastName}
-            onBlur={() => formikProps.setFieldTouched(formikValues.lastName)}
           />
           {formikProps.touched && formikProps.errors.lastName && (
             <Text style={styles.validation_error}>
@@ -108,6 +108,7 @@ const Add = ({route}, props) => {
             onChangeText={formikProps.handleChange(formikValues.address)}
             value={formikProps.values.address}
           />
+          {console.log('formikProps', formikProps)}
 
           <TextInput
             style={styles.input}
@@ -115,7 +116,6 @@ const Add = ({route}, props) => {
             onChangeText={formikProps.handleChange(formikValues.parentPhone)}
             value={formikProps.values.parentPhone}
             keyboardType="phone-pad"
-            onBlur={() => formikProps.setFieldTouched(formikValues.parentPhone)}
           />
           {formikProps.touched && formikProps.errors.parentPhone && (
             <Text style={styles.validation_error}>
@@ -143,10 +143,9 @@ const Add = ({route}, props) => {
             placeholder={!isFocus ? strings.chooseGroup : '...'}
             value={formikProps.values.group}
             onFocus={() => setIsFocus(true)}
-            onBlur={() => formikProps.setFieldTouched(formikValues.group)}
             onChange={item => {
               console.log('item', item);
-              formikProps.setFieldValue('group', item.value);
+              formikProps.setFieldValue('group', item);
               setIsFocus(false);
             }}
           />
@@ -157,11 +156,10 @@ const Add = ({route}, props) => {
           )}
 
           <TouchableOpacity
-            style={
-              formikProps.isValid
-                ? styles.bigButtonFormik
-                : styles.bigButtonFormikNotActive
-            }
+            style={[
+              styles.bigButtonFormik,
+              formikProps.isValid && styles.bigButtonFormikNotActive,
+            ]}
             onPress={formikProps.handleSubmit}
             disabled={!formikProps.isValid}>
             <Text style={styles.bigName}>{strings.addChild}</Text>
