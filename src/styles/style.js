@@ -1,21 +1,22 @@
 import {StyleSheet} from 'react-native';
 import sizes from '../utils/sizes';
+import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 
 export const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    width: sizes.PageWidth,
+    height: sizes.PageHieght,
     flex: 1,
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 15,
-    marginBottom: 15,
   },
   modalContainer: {
     flex: 1,
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    width: '90%',
+    height: '90%',
   },
   settingsContainer: {
     flex: 1,
@@ -25,14 +26,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 200,
   },
+  containerButtons: {
+    marginTop: '2%',
+  },
   bigButton: {
     width: sizes.PageWidth * 0.4,
-    height: 90,
+    height: sizes.PageHieght * 0.12,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30,
+    borderRadius: 15,
     backgroundColor: '#83A3C2',
-    margin: 11,
+    margin: '1%',
     shadowOpacity: 0.8,
     elevation: 8,
     shadowColor: 'black',
@@ -40,25 +44,24 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   bigName: {
-    fontSize: 32,
+    fontSize: RFValue(30, sizes.PageWidth),
     textAlign: 'center',
     color: '#EAEAEA',
   },
   heading: {
-    fontSize: 18,
+    fontSize: RFValue(12, sizes.PageHieght),
     fontWeight: '600',
     marginBottom: 13,
   },
   header: {
-    fontSize: 23,
+    fontSize: RFValue(12, sizes.PageHieght),
     color: '#3F4E4F',
-    paddingBottom: 12,
+    paddingBottom: 10,
   },
   image: {
     flex: 1,
-    // justifyContent: 'space-around',
+    justifyContent: 'center',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   shadowProp: {
     shadowColor: 'black',
@@ -86,13 +89,13 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   activeButton: {
-    width: 222,
-    height: 90,
+    width: sizes.PageWidth * 0.2,
+    height: sizes.PageHieght * 0.22,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 30,
+    borderRadius: 12,
     backgroundColor: '#83A3C2',
-    margin: 10,
+    margin: '1%',
     padding: 1,
     shadowOpacity: 0.8,
     elevation: 8,
@@ -101,8 +104,8 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   notActiveButton: {
-    width: 222,
-    height: 90,
+    width: sizes.PageWidth * 0.2,
+    height: sizes.PageHieght * 0.09,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -115,13 +118,13 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   childName: {
-    fontSize: 30,
+    fontSize: RFValue(13, sizes.PageHieght),
     textAlign: 'center',
     color: '#EAEAEA',
   },
   bigButtonFormik: {
     width: sizes.PageWidth * 0.9,
-    height: 70,
+    height: sizes.PageHieght * 0.1,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -144,7 +147,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     // paddingRight: 20,
     borderRadius: 26,
-    fontSize: 26,
+    fontSize: RFValue(24, sizes.PageHieght),
     margin: 7,
     shadowColor: '#000',
     shadowOffset: {
@@ -154,11 +157,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   centeredViewLoader: {
     flex: 1,
     justifyContent: 'center',
@@ -167,11 +166,10 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     width: sizes.PageWidth,
-    // height: '90%',
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 5,
-    // alignItems: 'center',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -183,10 +181,12 @@ export const styles = StyleSheet.create({
   },
   modalButton: {
     borderRadius: 20,
-    width: 40,
-    alignSelf: 'center',
+    width: sizes.PageWidth * 0.2,
+    height: sizes.PageHieght * 0.09,
+    // alignSelf: '',
     padding: 10,
-    fontSize: 45,
+    // backgroundColor: 'pink',
+    fontSize: RFValue(30, sizes.PageHieght),
   },
   buttonClose: {
     backgroundColor: '#2196F3',
@@ -198,33 +198,31 @@ export const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize: 25,
+    fontSize: RFValue(24, sizes.PageHieght),
   },
   modalText: {
     marginBottom: 5,
     textAlign: 'center',
   },
   logoSize: {
-    width: 230,
-    height: 100,
-    marginLeft: 5,
-    // marginBottom: 15,
+    maxWidth: sizes.PageWidth * 0.2,
+    maxHeight: sizes.PageHieght * 0.2,
+    marginLeft: '10%',
+    marginBottom: '7%',
+  },
+  logoSizeContent: {
+    width: sizes.PageWidth * 0.15,
+    height: sizes.PageHieght * 0.15,
+    marginLeft: '1%',
+    marginBottom: '0.2%',
   },
   headerStyle: {
     backgroundColor: '#F4F4F2',
-    height: 130,
     shadowColor: '#000',
     shadowOffset: {width: 2, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 2,
-  },
-  headerStyle: {
-    backgroundColor: '#F4F4F2',
-    height: 130,
-    shadowColor: '#000',
-    shadowOffset: {width: 2, height: 5},
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    height: sizes.PageHieght * 0.15,
   },
   dropdown: {
     marginTop: 10,
@@ -242,15 +240,15 @@ export const styles = StyleSheet.create({
   label: {
     zIndex: 999,
     paddingHorizontal: 8,
-    fontSize: 26,
+    fontSize: RFValue(24, sizes.PageHieght),
     borderColor: 'black',
     borderWidth: 1,
   },
   placeholderStyle: {
-    fontSize: 26,
+    fontSize: RFValue(20, sizes.PageHieght),
   },
   selectedTextStyle: {
-    fontSize: 26,
+    fontSize: RFValue(20, sizes.PageHieght),
   },
   iconStyle: {
     width: 40,
@@ -259,11 +257,11 @@ export const styles = StyleSheet.create({
   inputSearchStyle: {
     width: 1000,
     height: 75,
-    fontSize: 26,
+    fontSize: RFValue(22, sizes.PageHieght),
   },
   validation_error: {
     color: 'red',
-    fontSize: 22,
+    fontSize: RFValue(12, sizes.PageHieght),
     marginRight: 23,
   },
   keyboardAwareScrollView: {

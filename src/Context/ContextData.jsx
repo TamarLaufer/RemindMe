@@ -85,8 +85,6 @@ export const DataProvider = ({children}) => {
         console.log('getAllChildrenError', err);
       });
     setLoader(false);
-    
-    setChildrenList(kids)
   };
 
   const getAllChildrenByGroup = groupId => {
@@ -162,7 +160,6 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllGroups = async () => {
-    console.log('getAllGroups 2');
     await fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {

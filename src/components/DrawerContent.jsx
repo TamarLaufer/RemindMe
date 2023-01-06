@@ -16,6 +16,8 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Logo from './Logo';
 import {strings, screenNames} from '../utils/Strings';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
+import sizes from '../utils/sizes';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const DrawerContent = props => {
   const screens = {
@@ -28,12 +30,7 @@ const DrawerContent = props => {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
-          <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
-              <Logo style={styles.logoSize} />
-            </View>
-          </View>
-
+          <Logo />
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               label={strings.childrenGroups}
@@ -68,22 +65,14 @@ const DrawerContent = props => {
 export default DrawerContent;
 
 const styles = StyleSheet.create({
-  logoSize: {
-    width: 180,
-    height: 90,
-    marginLeft: 15,
-    marginBottom: 20,
-  },
   drawerContent: {
     flex: 1,
-    direction: 'rtl',
-  },
-  userInfoSection: {
-    paddingLeft: 20,
+    width: '100%',
+    height: sizes.PageHieght * 1,
   },
   title: {
     fontSize: 16,
-    marginTop: 3,
+    marginTop: 1,
     fontWeight: 'bold',
   },
   caption: {
@@ -113,5 +102,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
   },
-  labelStyle: {fontSize: 24, fontFamily: 'Montserrat-Light'},
+  labelStyle: {
+    fontSize: RFValue(12, sizes.PageHieght),
+    fontFamily: 'Montserrat-Light',
+  },
 });

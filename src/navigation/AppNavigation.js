@@ -17,12 +17,12 @@ import {screenNames} from '../utils/Strings';
 import AddGroup from '../../src/components/AddGroup';
 import {styles} from '../styles/style';
 import GroupListForEdit from '../components/GroupListForEdit';
+import sizes from '../utils/sizes';
+
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = props => {
-  const {} = props;
-
-  //   list of all screen
+  // list of all screen
   const screens = [
     {
       name: screenNames.groups,
@@ -90,11 +90,7 @@ const AppNavigation = props => {
       drawerType: 'front',
       headerRight: () => <Header />,
       drawerPosition: 'right',
-      headerLeft: () => (
-        <View style={styles.centeredView}>
-          <Logo style={styles.logoSize} />
-        </View>
-      ),
+      headerLeft: () => <Logo />,
       headerStyle: styles.headerStyle,
     },
   };

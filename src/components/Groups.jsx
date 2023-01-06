@@ -17,7 +17,6 @@ const Groups = () => {
     useContextData();
 
   useEffect(() => {
-    console.log('getAllGroups');
     getAllGroups();
   }, []);
 
@@ -45,13 +44,15 @@ const Groups = () => {
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.container}>
-        <FlatList
-          numColumns={2}
-          data={groups}
-          renderItem={renderGroup}
-          keyExtractor={item => item._id}
-          scrollToItem={{animated: true, viewPosition: 0.5}}
-        />
+        <View style={styles.containerButtons}>
+          <FlatList
+            numColumns={2}
+            data={groups}
+            renderItem={renderGroup}
+            keyExtractor={item => item._id}
+            scrollToItem={{animated: true, viewPosition: 0.5}}
+          />
+        </View>
       </View>
     </ImageBackground>
   );
