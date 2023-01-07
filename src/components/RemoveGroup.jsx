@@ -31,21 +31,17 @@ const RemoveGroup = () => {
     </TouchableOpacity>
   );
 
-  const renderGroupForRemove = ({item}) => (
-    <GroupRenderd groupName={item.groupName} id={item._id} />
-  );
+  const renderGroupForRemove = groups.map((group, index) => {
+    return (
+      <GroupRenderd groupName={group.groupName} id={group._id} key={index} />
+    );
+  });
 
   return (
-    <View style={styles.container}>
+    <>
       <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
-      <FlatList
-        numColumns={2}
-        key={2}
-        data={groups}
-        renderItem={renderGroupForRemove}
-        keyExtractor={item => item._id}
-      />
-    </View>
+      <View style={styles.container}>{renderGroupForRemove}</View>
+    </>
   );
 };
 

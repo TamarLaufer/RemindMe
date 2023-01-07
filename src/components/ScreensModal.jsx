@@ -37,9 +37,9 @@ const ScreensModal = () => {
       }}>
       <KeyboardAwareScrollView contentContainerStyle={styles.modalView}>
         <Pressable
-          style={[styles.modalButton, styles.buttonOpen]}
+          style={styles.modalButton}
           onPress={() => setShowModal(false)}>
-          <Text style={styles.textStyle}>X</Text>
+          <Text style={styles.close}>X</Text>
         </Pressable>
         {currentScreen}
       </KeyboardAwareScrollView>

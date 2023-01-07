@@ -18,13 +18,6 @@ const RemoveChild = () => {
       getAllChildren();
     }, []);
 
-  const renderChildren = ({item}) => (
-    <ChildrenRenderd
-      firstName={item.firstName}
-      lastName={item.lastName}
-      id={item._id}
-    />
-  );
 
   const ChildrenRenderd = ({firstName, lastName, id}) => (
     <TouchableOpacity
@@ -39,17 +32,22 @@ const RemoveChild = () => {
     </TouchableOpacity>
   );
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>{strings.chooseChildToRemove}</Text>
-      <FlatList
-        numColumns={4}
-        key={4}
-        data={childrenList}
-        renderItem={renderChildren}
-        keyExtractor={item => item._id}
+  const renderChildren = childrenList.map((child, index) => {
+    return (
+      <ChildrenRenderd
+        firstName={child.firstName}
+        lastName={child.lastName}
+        id={child._id}
+        key={index}
       />
-    </View>
+    );
+  });
+
+  return (
+    <>
+      <Text style={styles.header}>{strings.chooseChildToRemove}</Text>
+      <View style={styles.container}>{renderChildren}</View>
+    </>
   );
 };
 

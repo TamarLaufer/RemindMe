@@ -37,18 +37,15 @@ const GroupListForEdit = () => {
     </TouchableOpacity>
   );
 
-  const renderGroupForEdit = ({item}) => <OneButtonForEdit group={item} />;
+  const renderGroupForEdit = groups.map((group, index) => {
+    return <OneButtonForEdit group={group} key={index} />;
+  });
 
   return (
-    <View style={styles.modalContainer}>
+    <>
       <Text style={styles.header}>{strings.chooseGroupToEdit}</Text>
-      <FlatList
-        numColumns={2}
-        key={2}
-        data={groups}
-        renderItem={renderGroupForEdit}
-      />
-    </View>
+      <View style={styles.modalContainer}>{renderGroupForEdit}</View>
+    </>
   );
 };
 

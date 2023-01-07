@@ -87,13 +87,15 @@ const Settings = () => {
 
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <FlatList
-        numColumns={2}
-        key={2}
-        data={btnDataArr}
-        renderItem={renderGroupBtn}
-      />
-      {showModal && <ScreensModal />}
+      <View style={styles.containerButtons}>
+        <FlatList
+          numColumns={2}
+          key={2}
+          data={btnDataArr}
+          renderItem={renderGroupBtn}
+        />
+        {showModal && <ScreensModal />}
+      </View>
     </ImageBackground>
   );
 };

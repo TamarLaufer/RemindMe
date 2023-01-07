@@ -28,7 +28,7 @@ const AllChildrenList = ({onPress}) => {
     } else if (sizes.PageWidth > 400 && sizes.PageWidth < 700) {
       return 4;
     } else {
-      return 6;
+      return 5;
     }
   };
 

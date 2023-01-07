@@ -59,12 +59,11 @@ const Add = () => {
 
   const renderInputsAndError = (inputData = [], formikProps) => {
     return inputData?.map((input, index) => (
-      <>
+      <View key={index}>
         <TextInput
-          key={index}
           style={input.style}
           placeholder={input.placeholder}
-          onChangeText={formikProps.handleChange(formikValues[input.value])}
+          onChangeText={formikProps.handleChange(input.value)}
           value={formikProps.values[input.value]}
           keyboardType={input.keyboardType}
         />
@@ -75,7 +74,7 @@ const Add = () => {
               formikProps.errors[input.value]}
           </Text>
         }
-      </>
+      </View>
     ));
   };
 
@@ -83,31 +82,31 @@ const Add = () => {
     {
       style: styles.input,
       placeholder: strings.firstName,
-      value: 'firstName',
+      value: formikValues.firstName,
       keyboardType: 'default',
     },
     {
       style: styles.input,
       placeholder: strings.lastName,
-      value: 'lastName',
+      value: formikValues.lastName,
       keyboardType: 'default',
     },
     {
       style: styles.input,
       placeholder: strings.address,
-      value: 'address',
+      value: formikValues.address,
       keyboardType: 'default',
     },
     {
       style: styles.input,
       placeholder: strings.parentPhone,
-      value: 'parentPhone',
+      value: formikValues.parentPhone,
       keyboardType: 'phone-pad',
     },
     {
       style: styles.input,
       placeholder: strings.parent2Phone,
-      value: 'parent2Phone',
+      value: formikValues.parent2Phone,
       keyboardType: 'phone-pad',
     },
   ];

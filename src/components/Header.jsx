@@ -9,9 +9,9 @@ const Header = () => {
     <TouchableOpacity onPress={openDrawer}>
       <Image
         style={{
-          width: sizes.PageWidth * 0.07,
-          height: sizes.PageHieght * 0.08,
-          marginRight: '9%',
+          width: sizes.PageWidth * 0.06,
+          height: sizes.PageHieght * 0.07,
+          marginRight: '4%',
         }}
         source={imageIndex.menuIcon()}
       />

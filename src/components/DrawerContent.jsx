@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   labelStyle: {
-    fontSize: RFValue(12, sizes.PageHieght),
+    fontSize: RFValue(15, sizes.PageHieght),
     fontFamily: 'Montserrat-Light',
   },
 });

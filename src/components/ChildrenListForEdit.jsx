@@ -36,7 +36,6 @@ const ChildrenListForEdit = () => {
       style={styles.activeButton}
       onPress={() => {
         updateChosenChild(child);
-        // setCurrentScreen(switchScreens.EDIT_CHILD);
         updateCurrentScreen(switchScreens.ADD_CHILD, true);
       }}>
       <Text style={styles.childName}>
@@ -45,19 +44,15 @@ const ChildrenListForEdit = () => {
     </TouchableOpacity>
   );
 
-  const renderChild = ({item}) => <OneButton child={item} />;
+  const renderChild = childrenList.map((child, index) => {
+    return <OneButton child={child} key={index} />;
+  });
 
   return (
-    <View style={styles.modalContainer}>
+    <>
       <Text style={styles.header}>{strings.chooseChildToEdit}</Text>
-      <FlatList
-        numColumns={4}
-        key={4}
-        data={childrenList}
-        renderItem={renderChild}
-        keyExtractor={item => item._id}
-      />
-    </View>
+      <View style={styles.modalContainer}>{renderChild}</View>
+    </>
   );
 };
 

@@ -38,7 +38,7 @@ export const DataProvider = ({children}) => {
 
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);
-    setIsEditMode(isEditFlag === true);
+    setIsEditMode(isEditFlag);
   };
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
@@ -101,10 +101,14 @@ export const DataProvider = ({children}) => {
 
   const addChild = values => {
     console.log(values);
+    const childWithGroupValue = {
+      ...values,
+      group: values.group.value,
+    };
     fetch(URLS.addChild(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values),
+      body: JSON.stringify(childWithGroupValue),
     })
       .then(data => data.json())
       .then(resJson => {
