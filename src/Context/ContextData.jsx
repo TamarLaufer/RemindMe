@@ -31,6 +31,7 @@ export const DataProvider = ({children}) => {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
   const [groupByPress, setGroupByPress] = useState([]);
+  const [listIsEmpty, setListIsEmpty] = useState(true);
 
   const updateGroupsList = (groupList = []) => {
     setAllGroups(groupList);
@@ -40,8 +41,16 @@ export const DataProvider = ({children}) => {
     setCurrentScreen(screen);
     setIsEditMode(isEditFlag);
   };
+
   const image = {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
+  };
+
+  const isGroupListEmpty = () => {
+    console.log(groups.length);
+    if (groups.length > 0) {
+      setListIsEmpty(false);
+    }
   };
 
   const switchScreens = {
@@ -164,6 +173,7 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllGroups = async () => {
+    setLoader(true);
     await fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {
@@ -173,10 +183,11 @@ export const DataProvider = ({children}) => {
       .catch(err => {
         console.log('getAllGroupsError', err);
       });
+    setLoader(false);
+    isGroupListEmpty();
   };
 
   const addGroup = values => {
-    // console.log(values);
     fetch(URLS.addGroup(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -257,6 +268,8 @@ export const DataProvider = ({children}) => {
         groupByPress,
         isEditMode,
         setGroupByPress,
+        isGroupListEmpty,
+        listIsEmpty,
       }}>
       {children}
     </ContextData.Provider>

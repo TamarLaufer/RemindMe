@@ -46,7 +46,7 @@ const RemoveChild = () => {
   return (
     <>
       <Text style={styles.header}>{strings.chooseChildToRemove}</Text>
-      <View style={styles.container}>{renderChildren}</View>
+      <View style={styles.modalContainer}>{renderChildren}</View>
     </>
   );
 };

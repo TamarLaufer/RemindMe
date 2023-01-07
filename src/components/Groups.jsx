@@ -1,23 +1,36 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
+  Button,
   FlatList,
   ImageBackground,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {string} from 'yup';
 import {useContextData} from '../Context/ContextData';
 import {styles} from '../styles/style';
-import {screenNames} from '../utils/Strings';
+import {screenNames, strings} from '../utils/Strings';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groups, image, getAllGroups, childrenList, setGroupByPress} =
-    useContextData();
+  const {
+    groups,
+    image,
+    getAllGroups,
+    childrenList,
+    setGroupByPress,
+    setShowModal,
+    switchScreens,
+    updateCurrentScreen,
+    isGroupListEmpty,
+    listIsEmpty,
+  } = useContextData();
 
   useEffect(() => {
     getAllGroups();
+    isGroupListEmpty();
   }, []);
 
   const getAllChildrenByGroupId = groupId => {
@@ -45,13 +58,25 @@ const Groups = () => {
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <View style={styles.container}>
         <View style={styles.containerButtons}>
-          <FlatList
-            numColumns={2}
-            data={groups}
-            renderItem={renderGroup}
-            keyExtractor={item => item._id}
-            scrollToItem={{animated: true, viewPosition: 0.5}}
-          />
+          {listIsEmpty ? (
+            <FlatList
+              numColumns={2}
+              data={groups}
+              renderItem={renderGroup}
+              keyExtractor={item => item._id}
+              scrollToItem={{animated: true, viewPosition: 0.5}}
+            />
+          ) : (
+            <Button
+              onPress={() => {
+                setShowModal(true);
+                updateCurrentScreen(switchScreens.ADD_GROUP);
+              }}
+              title={strings.addGroup}
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+          )}
         </View>
       </View>
     </ImageBackground>

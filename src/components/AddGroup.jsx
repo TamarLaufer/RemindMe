@@ -12,7 +12,7 @@ import {useContextData} from '../Context/ContextData';
 import {formikValues, strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
-const Add = ({route}, props) => {
+const AddGroup = ({route}, props) => {
   const {onSubmit} = props;
   const {addGroup, showModal, setShowModal} = useContextData();
   const [details, setDetails] = useState({
@@ -57,4 +57,4 @@ const Add = ({route}, props) => {
   );
 };
 
-export default Add;
+export default AddGroup;

@@ -40,7 +40,7 @@ const RemoveGroup = () => {
   return (
     <>
       <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
-      <View style={styles.container}>{renderGroupForRemove}</View>
+      <View style={styles.modalContainer}>{renderGroupForRemove}</View>
     </>
   );
 };

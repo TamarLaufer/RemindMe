@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    width: '90%',
-    height: '90%',
+    width: sizes.PageWidth * 0.9,
+    height: sizes.PageHieght * 0.9,
   },
   settingsContainer: {
     flex: 1,

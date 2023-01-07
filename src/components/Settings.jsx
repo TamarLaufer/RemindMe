@@ -23,7 +23,7 @@ const Settings = () => {
     currentScreen,
     image,
   } = useContextData();
-  const [formValues, setFormValues] = useState();
+
   const btnDataArr = [
     {
       text: strings.addChild,
