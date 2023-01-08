@@ -6,6 +6,7 @@ export const strings = {
   editGroup: 'עריכת קבוצה',
   removeGroup: 'הסרת קבוצה',
   childAddedSeccesfully: 'הילד נוסף בהצלחה',
+  groupAddedSeccesfully: 'הקבוצה נוספה בהצלחה',
   childEditedSeccesfully: 'הילד עודכן בהצלחה',
   ok: 'אישור',
   cancel: 'ביטול',
@@ -39,6 +40,9 @@ export const strings = {
   validationPhone: 'יש להכניס מספר טלפון נייד תקין',
   phoneMissing: 'יש להכניס מספר טלפון נייד אחד לפחות',
   groupMissing: 'יש לבחור קבוצה',
+  noGroups: 'אין קבוצות, לחץ על מנת להוסיף',
+  popUpDeleteGroupWarning:
+    'שימו לב שבעת מחיקת הקבוצה ימחקו כל הילדים המשוייכים אליה. ולדאוג שכל הילדים ישוייכו מבעוד מועד לקבוצה אחרת',
 };
 
 export const screenNames = {

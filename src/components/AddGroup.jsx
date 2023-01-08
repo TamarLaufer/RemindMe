@@ -14,7 +14,7 @@ import {styles} from '../styles/style';
 
 const AddGroup = ({route}, props) => {
   const {onSubmit} = props;
-  const {addGroup, showModal, setShowModal} = useContextData();
+  const {addGroup, showModal, setShowModal, popUp} = useContextData();
   const [details, setDetails] = useState({
     groupName: '',
     assistantName: '',
@@ -29,6 +29,7 @@ const AddGroup = ({route}, props) => {
           addGroup(values);
           actions.resetForm();
           setShowModal(!showModal);
+          popUp(strings.groupAddedSeccesfully);
         }}>
         {props => (
           <View>

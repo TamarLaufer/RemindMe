@@ -17,7 +17,7 @@ const OneChild = ({firstName, lastName, id}) => {
       style={arrived ? styles.notActiveButton : styles.activeButton}
       onPress={() => {
         isChildArrived();
-        updateChild(id, {isArrived: isChildArrived});
+        // updateChild(id, {isArrived: isChildArrived});
       }}>
       <Text style={styles.childName}>
         {firstName} {lastName}

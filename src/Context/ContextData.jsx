@@ -46,13 +46,6 @@ export const DataProvider = ({children}) => {
     uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
   };
 
-  const isGroupListEmpty = () => {
-    console.log(groups.length);
-    if (groups.length > 0) {
-      setListIsEmpty(false);
-    }
-  };
-
   const switchScreens = {
     ADD_CHILD: <Add />,
     EDIT_CHILD_LIST: <ChildrenListForEdit />,
@@ -62,6 +55,11 @@ export const DataProvider = ({children}) => {
     EDIT_GROUP_LIST: <GroupListForEdit />,
     EDIT_GROUP: <EditGroup />,
     REMOVE_GROUP: <RemoveGroup />,
+  };
+
+  const isGroupListEmpty = () => {
+    console.log(groups.length);
+    groups.length > 0 ? setListIsEmpty(false) : setListIsEmpty(true);
   };
 
   const updateChosenChild = childData => {
@@ -154,15 +152,20 @@ export const DataProvider = ({children}) => {
       });
   };
 
+  const updateChildIfArrived = () => {};
+
   const updateChild = (id, values) => {
+    const childWithGroupValue = {
+      ...values,
+      group: values.group.value,
+    };
     fetch(URLS.updateChild(id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(values),
+      body: JSON.stringify(childWithGroupValue),
     })
       .then(data => data.json())
       .then(resJson => {
-        // console.log('the update performed', resJson);
         const listWithoutId = childrenList.filter(child => child._id !== id);
         const newList = [...listWithoutId, resJson];
         setChildrenList(newList);
@@ -200,7 +203,7 @@ export const DataProvider = ({children}) => {
         updateGroupsList(newList);
       })
       .catch(err => {
-        // console.log(err, 'the post failed');
+        console.log(err, 'the post failed');
       });
   };
 

@@ -1,5 +1,5 @@
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import * as Yup from 'yup';
@@ -18,7 +18,9 @@ const Add = () => {
     getAllGroups,
     isEditMode,
     groups,
+    updateChild,
   } = useContextData();
+
   const initValues = {
     firstName: '',
     lastName: '',
@@ -31,6 +33,8 @@ const Add = () => {
     },
     isArrived: false,
   };
+  const [childValues, setChildValues] = useState(null);
+  const childParams = child;
   const [isFocus, setIsFocus] = useState(false);
 
   const newList = groups?.map(group => ({
@@ -56,6 +60,10 @@ const Add = () => {
       .required(strings.phoneMissing),
     group: Yup.object().required(strings.groupMissing),
   });
+
+  useEffect(() => {
+    setChildValues(childParams);
+  }, []);
 
   const renderInputsAndError = (inputData = [], formikProps) => {
     return inputData?.map((input, index) => (
@@ -120,6 +128,9 @@ const Add = () => {
         //EDIT ACTION
         if (isEditMode) {
           console.log('edit action');
+          updateChild(childParams._id, values);
+          actions.resetForm();
+          setShowModal(!showModal);
         }
         //ADD ACTION
         else {
@@ -163,7 +174,7 @@ const Add = () => {
               formikProps.errors.group}
           </Text>
           <SubmitBtn
-            title={strings.addChild}
+            title={isEditMode ? strings.editChild : strings.addChild}
             onPress={formikProps.handleSubmit}
             disabled={!formikProps.isValid}
           />

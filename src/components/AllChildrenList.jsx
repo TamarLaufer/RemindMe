@@ -34,7 +34,6 @@ const AllChildrenList = ({onPress}) => {
 
   useEffect(() => {
     getAllChildren();
-    console.log(numColumns());
   }, []);
 
   const renderChildren = ({item}) => (
@@ -42,7 +41,6 @@ const AllChildrenList = ({onPress}) => {
       firstName={item.firstName}
       lastName={item.lastName}
       id={item._id}
-      onPress={onPress}
     />
   );
 

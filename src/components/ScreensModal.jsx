@@ -22,6 +22,7 @@ const ScreensModal = () => {
     currentScreen,
     setCurrentScreen,
   } = useContextData();
+
   const {addChild, removeChild, editChild, getChildById} = useContextData();
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
