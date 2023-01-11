@@ -70,12 +70,18 @@ export const DataProvider = ({children}) => {
     setGroup(groupData);
   };
 
-  const popUp = textToDisplay =>
+  const popUp = (textToDisplay, setStateOk, setStateCancel) =>
     Alert.alert(textToDisplay, ' ', [
       {
         text: strings.ok,
         onPress: () => {
-          // console.log('ok pressed');
+          setStateOk;
+        },
+      },
+      {
+        text: strings.cancel,
+        onPress: () => {
+          setStateCancel;
         },
       },
     ]);
@@ -248,6 +254,11 @@ export const DataProvider = ({children}) => {
         // console.log('resJson', resJson);
         const newList = groups.filter(group => group._id !== id);
         updateGroupsList(newList);
+        const newChildrenList = childrenList.filter(
+          child => resJson.childrenList.include(child._id) === false,
+        );
+        setChildrenList(newChildrenList);
+        console.log(newChildrenList);
       })
       .catch(err => {
         console.log(err);

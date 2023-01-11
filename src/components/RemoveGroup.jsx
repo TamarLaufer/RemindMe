@@ -25,7 +25,12 @@ const RemoveGroup = () => {
       key={id}
       style={styles.bigButton}
       onPress={() => {
-        removeGroup(id);
+        popUp(
+          strings.popUpDeleteGroupWarning,
+          setToDelete(true),
+          setToDelete(false),
+        );
+        toDelete && removeGroup(id);
       }}>
       <Text style={styles.bigName}>{groupName}</Text>
     </TouchableOpacity>

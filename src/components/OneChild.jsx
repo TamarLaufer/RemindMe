@@ -12,6 +12,7 @@ const OneChild = ({firstName, lastName, id, isArrived}) => {
   const isChildArrived = () => {
     setArrived(!arrived);
   };
+
   return (
     <TouchableOpacity
       key={id}

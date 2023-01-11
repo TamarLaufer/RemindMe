@@ -4,6 +4,8 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import android.os.Bundle;
+import com.react.SmsPackage;
+import com.tkporter.sendsms.SendSMSPackage;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,6 +13,7 @@ public class MainActivity extends ReactActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
   }
+
 
   /**
    * Returns the name of the main component registered from JavaScript. This is
