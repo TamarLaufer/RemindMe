@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.tkporter.sendsms.SendSMSPackage;
 import com.react.SmsPackage;
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -23,6 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
         public boolean getUseDeveloperSupport() {
           return BuildConfig.DEBUG;
         }
+
 
         @Override
         protected List<ReactPackage> getPackages() {
@@ -58,6 +60,9 @@ public class MainApplication extends Application implements ReactApplication {
     ReactFeatureFlags.useTurboModules = BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    // Force the app not to change on device locale change
+    I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+    sharedI18nUtilInstance.allowRTL(getApplicationContext(), false);
   }
 
   /**
@@ -90,4 +95,5 @@ public class MainApplication extends Application implements ReactApplication {
       }
     }
   }
+
 }

@@ -1,12 +1,13 @@
 import {Formik} from 'formik';
 import React, {useState, useEffect} from 'react';
-import {Text, TextInput, View} from 'react-native';
+import {Text, TextInput, View, StyleSheet} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import * as Yup from 'yup';
 import {useContextData} from '../Context/ContextData';
-import {styles} from '../styles/style';
 import {formikValues, strings} from '../utils/Strings';
 import SubmitBtn from './btn/SubmitBtn';
+import sizes from '../utils/sizes';
+import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 
 const Add = () => {
   const {
@@ -182,5 +183,57 @@ const Add = () => {
     </Formik>
   );
 };
+
+const styles = StyleSheet.create({
+  validation_error: {
+    color: 'red',
+    fontSize: RFValue(12, sizes.PageHieght),
+    marginRight: '2%',
+  },
+  addContainer: {
+    flex: 1,
+    paddingBottom: '3%',
+    alignItems: 'center',
+  },
+  placeholderStyle: {
+    fontSize: RFValue(17, sizes.PageHieght),
+  },
+  selectedTextStyle: {
+    fontSize: RFValue(16, sizes.PageHieght),
+  },
+  inputSearchStyle: {
+    width: sizes.PageWidth * 0.03,
+    height: sizes.PageHieght * 0.03,
+    fontSize: RFValue(22, sizes.PageHieght),
+  },
+  iconStyle: {
+    width: sizes.PageWidth * 0.03,
+    height: sizes.PageHieght * 0.03,
+  },
+  input: {
+    width: sizes.PageWidth * 0.8,
+    height: sizes.PageHieght * 0.09,
+    borderWidth: 1,
+    borderColor: 'black',
+    padding: '1%',
+    borderRadius: 26,
+    fontSize: RFValue(20, sizes.PageHieght),
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+  },
+  dropdown: {
+    width: sizes.PageWidth * 0.8,
+    height: sizes.PageHieght * 0.09,
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 26,
+    paddingHorizontal: 8,
+  },
+});
 
 export default Add;

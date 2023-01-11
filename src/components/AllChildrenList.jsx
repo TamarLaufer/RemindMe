@@ -11,9 +11,9 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
 import OneChild from './OneChild';
-import {styles} from '../styles/style';
 import Loader from './Loader';
 import sizes from '../utils/sizes';
+import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 
 const AllChildrenList = ({onPress}) => {
   const {childrenList, loader} = useContextData();
@@ -58,4 +58,24 @@ const AllChildrenList = ({onPress}) => {
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    width: sizes.PageWidth,
+    height: sizes.PageHieght,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  header: {
+    fontSize: RFValue(10, sizes.PageHieght),
+    color: '#3F4E4F',
+    paddingBottom: 10,
+    fontFamily: 'Fredoka-Medium',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default AllChildrenList;

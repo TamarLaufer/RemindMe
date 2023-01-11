@@ -75,20 +75,20 @@ const styles = StyleSheet.create({
     marginTop: 1,
     fontWeight: 'bold',
   },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14,
-  },
-  row: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 15,
-  },
+  // caption: {
+  //   fontSize: 5,
+  //   lineHeight: 5,
+  // },
+  // row: {
+  //   marginTop: 20,
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
+  // section: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   marginRight: 15,
+  // },
   paragraph: {
     fontWeight: 'bold',
     marginRight: 3,
@@ -96,14 +96,14 @@ const styles = StyleSheet.create({
   drawerSection: {
     marginTop: 15,
   },
-  preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
+  // preference: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   paddingVertical: 12,
+  //   paddingHorizontal: 16,
+  // },
   labelStyle: {
-    fontSize: RFValue(15, sizes.PageHieght),
+    fontSize: RFValue(10, sizes.PageHieght),
     fontFamily: 'Montserrat-Light',
   },
 });

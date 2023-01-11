@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     marginBottom: 13,
   },
   header: {
-    fontSize: RFValue(15, sizes.PageHieght),
+    fontSize: RFValue(10, sizes.PageHieght),
     color: '#3F4E4F',
     paddingBottom: 10,
     fontFamily: 'Fredoka-Medium',
@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
   },
   activeButton: {
     width: sizes.PageWidth * 0.15,
-    height: sizes.PageHieght * 0.1,
+    height: sizes.PageHieght * 0.15,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
   },
   notActiveButton: {
     width: sizes.PageWidth * 0.15,
-    height: sizes.PageHieght * 0.1,
+    height: sizes.PageHieght * 0.15,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
@@ -125,13 +125,13 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   childName: {
-    fontSize: RFValue(18, sizes.PageHieght),
+    fontSize: RFValue(9, sizes.PageHieght),
     textAlign: 'center',
     color: '#EAEAEA',
     fontFamily: 'Fredoka-Medium',
   },
   childArrived: {
-    fontSize: RFValue(15, sizes.PageHieght),
+    fontSize: RFValue(8, sizes.PageHieght),
     textAlign: 'center',
     color: '#3F4E4F',
     fontFamily: 'Fredoka-Medium',
@@ -190,26 +190,6 @@ export const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  modalButton: {
-    borderRadius: 20,
-    width: sizes.PageWidth * 0.97,
-    height: sizes.PageHieght * 0.07,
-    padding: 10,
-    fontSize: RFValue(30, sizes.PageHieght),
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  close: {
-    color: 'black',
-    fontWeight: 'bold',
-    textAlign: 'right',
-    fontSize: RFValue(18, sizes.PageHieght),
-  },
-  modalText: {
-    // marginBottom: 5,
-    textAlign: 'center',
-  },
   logoSize: {
     maxWidth: sizes.PageWidth * 0.2,
     maxHeight: sizes.PageHieght * 0.2,
@@ -222,7 +202,7 @@ export const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    height: sizes.PageHieght * 0.15,
+    height: sizes.PageHieght * 0.17,
   },
   dropdown: {
     width: sizes.PageWidth * 0.8,
@@ -247,10 +227,6 @@ export const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: RFValue(16, sizes.PageHieght),
-  },
-  iconStyle: {
-    width: 40,
-    height: 40,
   },
   inputSearchStyle: {
     width: 1000,
