@@ -15,7 +15,6 @@ const Add = () => {
     setShowModal,
     popUp,
     child,
-    getAllGroups,
     isEditMode,
     groups,
     updateChild,

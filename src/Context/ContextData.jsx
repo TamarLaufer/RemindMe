@@ -86,7 +86,6 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
-        // console.log('result', data);
       })
       .catch(err => {
         console.log('getAllChildrenError', err);
@@ -95,14 +94,13 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllChildrenByGroup = groupId => {
-    fetch(URLS.getAllChildrenByGroup(groupId))
+    fetch(URLS.getAllChildrenInGroup(groupId))
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
-        // console.log('result', data);
       })
       .catch(err => {
-        // console.log('getAllChildrenError', err);
+        console.log('getAllChildrenError', err);
       });
   };
 
@@ -134,7 +132,6 @@ export const DataProvider = ({children}) => {
     })
       .then(res => res.json())
       .then(resJson => {
-        // console.log('resJson', resJson);
         const newList = childrenList.filter(child => child._id !== id);
         setChildrenList(newList);
       })
@@ -152,7 +149,23 @@ export const DataProvider = ({children}) => {
       });
   };
 
-  const updateChildIfArrived = () => {};
+  const updateChildIfArrived = (id, isArrived) => {
+    fetch(URLS.updateArrived(id, isArrived), {
+      method: 'PATCH',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({}),
+    })
+      .then(response => {
+        const newList = childrenList.filter(child => child._id !== id);
+        console.log(childrenList);
+        const child = childrenList.find(child => child._id === id);
+        child.isArrived = isArrived;
+        setChildrenList([...newList, child]);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   const updateChild = (id, values) => {
     const childWithGroupValue = {
@@ -166,6 +179,7 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
+        console.log('resJson', resJson);
         const listWithoutId = childrenList.filter(child => child._id !== id);
         const newList = [...listWithoutId, resJson];
         setChildrenList(newList);
@@ -180,7 +194,7 @@ export const DataProvider = ({children}) => {
     await fetch(URLS.getAllGroups())
       .then(response => response.json())
       .then(data => {
-        console.log('getAllGroups', data);
+        // console.log('getAllGroups', data);
         updateGroupsList(data);
       })
       .catch(err => {
@@ -273,6 +287,8 @@ export const DataProvider = ({children}) => {
         setGroupByPress,
         isGroupListEmpty,
         listIsEmpty,
+        getAllChildrenByGroup,
+        updateChildIfArrived,
       }}>
       {children}
     </ContextData.Provider>

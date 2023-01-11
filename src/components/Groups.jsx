@@ -16,34 +16,19 @@ import ScreensModal from './ScreensModal';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {
-    groups,
-    image,
-    getAllGroups,
-    childrenList,
-    setGroupByPress,
-    setShowModal,
-    switchScreens,
-    updateCurrentScreen,
-    listIsEmpty,
-    showModal,
-  } = useContextData();
+  const {groups, image, getAllGroups, showModal, getAllChildrenByGroup} =
+    useContextData();
 
   useEffect(() => {
     getAllGroups();
   }, []);
-
-  // const getAllChildrenByGroupId = groupId => {
-  //   const filteredList = childrenList.filter(child => child.group === groupId);
-  //   setGroupByPress(filteredList);
-  // };
 
   const OneButton = ({name, id}) => (
     <TouchableOpacity
       key={id}
       style={styles.bigButton}
       onPress={() => {
-        // getAllChildrenByGroupId();
+        getAllChildrenByGroup(id);
         navigation.navigate(screenNames.allChildrenList);
       }}>
       <Text style={styles.bigName}>{name}</Text>

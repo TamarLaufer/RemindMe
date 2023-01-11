@@ -71,12 +71,7 @@ const Settings = () => {
   ];
 
   const OneGroupButton = ({text, onPress, id}) => (
-    <TouchableOpacity
-      key={id}
-      style={styles.bigButton}
-      onPress={() => {
-        onPress();
-      }}>
+    <TouchableOpacity key={id} style={styles.bigButton} onPress={onPress}>
       <Text style={styles.bigName}>{text}</Text>
     </TouchableOpacity>
   );

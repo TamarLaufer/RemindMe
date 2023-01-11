@@ -14,23 +14,25 @@ import {styles} from '../styles/style';
 const RemoveChild = () => {
   const {childrenList, removeChild, getAllChildren, popUp} = useContextData();
 
-    useEffect(() => {
-      getAllChildren();
-    }, []);
+  useEffect(() => {
+    getAllChildren();
+  }, []);
 
-
-  const ChildrenRenderd = ({firstName, lastName, id}) => (
-    <TouchableOpacity
-      key={id}
-      style={styles.activeButton}
-      onPress={() => {
-        removeChild(id);
-      }}>
-      <Text style={styles.childName}>
-        {firstName} {lastName}
-      </Text>
-    </TouchableOpacity>
-  );
+  const ChildrenRenderd = ({firstName, lastName, id}) => {
+    return (
+      <TouchableOpacity
+        key={id}
+        style={styles.activeButton}
+        onPress={() => {
+          removeChild(id);
+        }}>
+        <Text style={styles.childName}>
+          {firstName} {lastName}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+    
 
   const renderChildren = childrenList.map((child, index) => {
     return (

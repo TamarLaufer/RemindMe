@@ -1,0 +1,121 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AntDesign.ttf",
+      "sha1": "4e77868439280fb434d4697c7b911271406c81f3"
+    },
+    {
+      "path": "src/assets/fonts/Entypo.ttf",
+      "sha1": "12b5670eb178138f77285d5f2c246d3cc5fa67d6"
+    },
+    {
+      "path": "src/assets/fonts/EvilIcons.ttf",
+      "sha1": "91d377ea3cf47490b256c2ed081704a7dabdae0c"
+    },
+    {
+      "path": "src/assets/fonts/Feather.ttf",
+      "sha1": "e6604258b1ced5efd51360875d782fca65381d47"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome.ttf",
+      "sha1": "13b1eab65a983c7a73bc7997c479d66943f7c6cb"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Brands.ttf",
+      "sha1": "3fa2d67cef22da5c3f3eb5730c6afbd6fecf0372"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Regular.ttf",
+      "sha1": "7d849a3981a716e2ba4a84634bc57d0b8054a6a3"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Solid.ttf",
+      "sha1": "c1b9fae262f42868c075ac865a8ab34920e20a2c"
+    },
+    {
+      "path": "src/assets/fonts/Fontisto.ttf",
+      "sha1": "c090a3ec96a3f1bb9b615c2f3f204ce0dcdcdbc3"
+    },
+    {
+      "path": "src/assets/fonts/Foundation.ttf",
+      "sha1": "4b2bce6c792493a4a5716b6fec2dbefe89492c3f"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-Bold.ttf",
+      "sha1": "fa86a99a2d53612202b44c49af9c7a28482480bb"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-Light.ttf",
+      "sha1": "3d5884d8c7a66e5dd23af456dfe3e5e23b36b3ae"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-Medium.ttf",
+      "sha1": "563c4f6a77bf54cb04a4242e577f43db19128d2a"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-Regular.ttf",
+      "sha1": "520ab11425914a594eaf883a7d5bd40fc985f823"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-SemiBold.ttf",
+      "sha1": "6f3c2527737fcc84e3fdfd4c6437bb52d02072b4"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka-VariableFont_wdth,wght.ttf",
+      "sha1": "edf6e6d443a1a98164af4c118c55d828cef5a57b"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka_Condensed-Bold.ttf",
+      "sha1": "e5b67935276c9256e8b292192154d3fbc05f2499"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka_Condensed-Light.ttf",
+      "sha1": "c5014e7b4393e5045976961bf65205c13600958f"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka_Condensed-Medium.ttf",
+      "sha1": "f1e133176e30d0b6d850765f01d7c12c3880a8e5"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka_Condensed-Regular.ttf",
+      "sha1": "ef320429ec2884bf54fbec3f3c39eb6f81628bf1"
+    },
+    {
+      "path": "src/assets/fonts/Fredoka_Condensed-SemiBold.ttf",
+      "sha1": "e14d8b2a5f4ccbb0cd3d11ee27ccb5acfcec7ff6"
+    },
+    {
+      "path": "src/assets/fonts/Ionicons.ttf",
+      "sha1": "b5281fbfa43129abc3e412dd938cfcf0b77de999"
+    },
+    {
+      "path": "src/assets/fonts/MaterialCommunityIcons.ttf",
+      "sha1": "4c2a838b00dbb5e8bb1b368fce0de534e8eb241c"
+    },
+    {
+      "path": "src/assets/fonts/MaterialIcons.ttf",
+      "sha1": "1943803d652750c8ec60415f1e57401c70e72d25"
+    },
+    {
+      "path": "src/assets/fonts/Octicons.ttf",
+      "sha1": "56acefc0731f35ee23b195b1c8cb5fa94a0db97b"
+    },
+    {
+      "path": "src/assets/fonts/RubikBubbles-Regular.ttf",
+      "sha1": "c2c19e308f9e108e6ecebe2bd4e875b9cade5c9c"
+    },
+    {
+      "path": "src/assets/fonts/RubikSprayPaint-Regular.ttf",
+      "sha1": "e29a554ac9cdde6dddd8e6605edeb819125231ae"
+    },
+    {
+      "path": "src/assets/fonts/SimpleLineIcons.ttf",
+      "sha1": "9ffb81a5a11112e292f2cc323e98486bad597599"
+    },
+    {
+      "path": "src/assets/fonts/Zocial.ttf",
+      "sha1": "6a48a962b06cc3acbdfd61df0d9a34744eea5e8d"
+    }
+  ]
+}

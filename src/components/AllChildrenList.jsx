@@ -16,10 +16,10 @@ import Loader from './Loader';
 import sizes from '../utils/sizes';
 
 const AllChildrenList = ({onPress}) => {
-  const {childrenList, getAllChildren, loader} = useContextData();
+  const {childrenList, loader} = useContextData();
 
   const image = {
-    uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
+    uri: '../src/images/photo1.jpg',
   };
 
   const numColumns = () => {
@@ -32,15 +32,12 @@ const AllChildrenList = ({onPress}) => {
     }
   };
 
-  useEffect(() => {
-    getAllChildren();
-  }, []);
-
   const renderChildren = ({item}) => (
     <OneChild
       firstName={item.firstName}
       lastName={item.lastName}
       id={item._id}
+      isArrived={item.isArrived}
     />
   );
 

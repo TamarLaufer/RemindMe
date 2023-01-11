@@ -43,6 +43,7 @@ export const strings = {
   noGroups: 'אין קבוצות, לחץ על מנת להוסיף',
   popUpDeleteGroupWarning:
     'שימו לב שבעת מחיקת הקבוצה ימחקו כל הילדים המשוייכים אליה. ולדאוג שכל הילדים ישוייכו מבעוד מועד לקבוצה אחרת',
+  arrived: 'הגיע/ה',
 };
 
 export const screenNames = {

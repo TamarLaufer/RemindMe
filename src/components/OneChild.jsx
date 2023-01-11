@@ -3,10 +3,11 @@ import React, {useState} from 'react';
 import {StyleSheet, TouchableOpacity, Text} from 'react-native';
 import {useContextData} from '../Context/ContextData';
 import {styles} from '../styles/style';
+import {strings} from '../utils/Strings';
 
-const OneChild = ({firstName, lastName, id}) => {
-  const [arrived, setArrived] = useState(false);
-  const {updateChild} = useContextData();
+const OneChild = ({firstName, lastName, id, isArrived}) => {
+  const [arrived, setArrived] = useState(isArrived);
+  const {updateChildIfArrived} = useContextData();
 
   const isChildArrived = () => {
     setArrived(!arrived);
@@ -17,11 +18,14 @@ const OneChild = ({firstName, lastName, id}) => {
       style={arrived ? styles.notActiveButton : styles.activeButton}
       onPress={() => {
         isChildArrived();
-        // updateChild(id, {isArrived: isChildArrived});
+        updateChildIfArrived(id, !isArrived);
       }}>
       <Text style={styles.childName}>
         {firstName} {lastName}
       </Text>
+      {arrived ? (
+        <Text style={styles.childArrived}>{strings.arrived}</Text>
+      ) : null}
     </TouchableOpacity>
   );
 };
