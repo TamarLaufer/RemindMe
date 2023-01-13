@@ -30,14 +30,14 @@ const Settings = () => {
       text: strings.addChild,
       onPress: () => {
         setShowModal(true);
-        updateCurrentScreen(switchScreens.ADD_CHILD); //'Add' Component
+        updateCurrentScreen(switchScreens.ADD_CHILD, false); //'Add' Component
       },
     },
     {
       text: strings.addGroup,
       onPress: () => {
         setShowModal(true);
-        updateCurrentScreen(switchScreens.ADD_GROUP); //'AddGroup' Component
+        updateCurrentScreen(switchScreens.ADD_GROUP, false); //'AddGroup' Component
       },
     },
     {
@@ -51,7 +51,7 @@ const Settings = () => {
       text: strings.editGroup,
       onPress: () => {
         setShowModal(true);
-        updateCurrentScreen(switchScreens.EDIT_GROUP_LIST); //'EditGroup' Component
+        updateCurrentScreen(switchScreens.EDIT_GROUP_LIST); //'GroupListForEdit' Component
       },
     },
     {
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   bigName: {
-    fontSize: RFValue(28, sizes.PageWidth),
+    fontSize: RFValue(25, sizes.PageWidth),
     textAlign: 'center',
     color: '#EAEAEA',
     fontFamily: 'Fredoka-Medium',

@@ -33,8 +33,8 @@ const Add = () => {
     },
     isArrived: false,
   };
-  const [childValues, setChildValues] = useState(null);
   const childParams = child;
+
   const [isFocus, setIsFocus] = useState(false);
 
   const newList = groups?.map(group => ({
@@ -51,7 +51,7 @@ const Add = () => {
       .min(2, strings.tooShortLastName)
       .max(15, strings.tooLongLastName)
       .required(strings.insertLastName),
-    address: Yup.string().min(2, 'Too Short!').max(18, 'Too Long!'),
+    address: Yup.string(),
     parentPhone: Yup.string()
       .matches(
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
@@ -60,31 +60,6 @@ const Add = () => {
       .required(strings.phoneMissing),
     group: Yup.object().required(strings.groupMissing),
   });
-
-  useEffect(() => {
-    setChildValues(childParams);
-  }, []);
-
-  const renderInputsAndError = (inputData = [], formikProps) => {
-    return inputData?.map((input, index) => (
-      <View key={index}>
-        <TextInput
-          style={input.style}
-          placeholder={input.placeholder}
-          onChangeText={formikProps.handleChange(input.value)}
-          value={formikProps.values[input.value]}
-          keyboardType={input.keyboardType}
-        />
-        {
-          <Text style={styles.validation_error}>
-            {formikProps.touched &&
-              formikProps.errors[input.value] &&
-              formikProps.errors[input.value]}
-          </Text>
-        }
-      </View>
-    ));
-  };
 
   const inputDataArray = [
     {
@@ -119,31 +94,48 @@ const Add = () => {
     },
   ];
 
+  const renderInputsAndErrors = (inputData = [], formikProps) => {
+    return inputData?.map((input, index) => (
+      <View key={index}>
+        <TextInput
+          style={input.style}
+          placeholder={input.placeholder}
+          onChangeText={formikProps.handleChange(input.value)}
+          value={formikProps.values[input.value]}
+          keyboardType={input.keyboardType}
+        />
+        {
+          <Text style={styles.validation_error}>
+            {formikProps.touched &&
+              formikProps.errors[input.value] &&
+              formikProps.errors[input.value]}
+          </Text>
+        }
+      </View>
+    ));
+  };
+
   const params = {
     formik: {
-      initialValues: isEditMode ? child : initValues,
+      initialValues: isEditMode ? childParams : initValues,
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
-        //EDIT ACTION
         if (isEditMode) {
-          console.log('edit action');
           updateChild(childParams._id, values);
           actions.resetForm();
           setShowModal(!showModal);
-        }
-        //ADD ACTION
-        else {
-          console.log('values', values);
+          popUp(strings.groupUpdatedSeccesfully);
+        } else {
           addChild(values);
           actions.resetForm();
-          popUp(strings.childAddedSeccesfully);
           setShowModal(!showModal);
+          popUp(strings.childAddedSeccesfully);
         }
       },
     },
     dropDown: formikProps => ({
-      style: [styles.dropdown, isFocus && {borderColor: 'blue'}],
+      style: styles.dropdown,
       placeholderStyle: styles.placeholderStyle,
       selectedTextStyle: styles.selectedTextStyle,
       inputSearchStyle: styles.inputSearchStyle,
@@ -162,17 +154,18 @@ const Add = () => {
       },
     }),
   };
+
   return (
     <Formik {...params.formik}>
       {formikProps => (
         <View style={styles.addContainer}>
-          {renderInputsAndError(inputDataArray, formikProps)}
+          {isEditMode ? (
+            <Text style={styles.header}>{strings.editChild}</Text>
+          ) : (
+            <Text style={styles.header}>{strings.addChild}</Text>
+          )}
+          {renderInputsAndErrors(inputDataArray, formikProps)}
           <Dropdown {...params.dropDown(formikProps)} />
-          <Text style={styles.validation_error}>
-            {formikProps.touched &&
-              formikProps.errors.group &&
-              formikProps.errors.group}
-          </Text>
           <SubmitBtn
             title={isEditMode ? strings.editChild : strings.addChild}
             onPress={formikProps.handleSubmit}
@@ -187,37 +180,41 @@ const Add = () => {
 const styles = StyleSheet.create({
   validation_error: {
     color: 'red',
-    fontSize: RFValue(12, sizes.PageHieght),
-    marginRight: '2%',
+    fontSize: RFValue(7, sizes.PageHieght),
+    paddingRight: sizes.PageWidth * 0.01,
   },
   addContainer: {
     flex: 1,
-    paddingBottom: '3%',
+    marginBottom: sizes.PageWidth * 0.04,
     alignItems: 'center',
   },
   placeholderStyle: {
-    fontSize: RFValue(17, sizes.PageHieght),
+    fontSize: RFValue(8, sizes.PageHieght),
+    color: 'black',
   },
   selectedTextStyle: {
-    fontSize: RFValue(16, sizes.PageHieght),
+    fontSize: RFValue(10, sizes.PageHieght),
+    color: 'black',
   },
   inputSearchStyle: {
-    width: sizes.PageWidth * 0.03,
+    width: sizes.PageWidth * 0.01,
     height: sizes.PageHieght * 0.03,
-    fontSize: RFValue(22, sizes.PageHieght),
+    fontSize: RFValue(8, sizes.PageHieght),
+    color: 'black',
   },
   iconStyle: {
-    width: sizes.PageWidth * 0.03,
+    width: sizes.PageWidth * 0.02,
     height: sizes.PageHieght * 0.03,
   },
   input: {
     width: sizes.PageWidth * 0.8,
-    height: sizes.PageHieght * 0.09,
+    height: sizes.PageHieght * 0.12,
     borderWidth: 1,
     borderColor: 'black',
-    padding: '1%',
+    paddingLeft: sizes.PageWidth * 0.02,
+    paddingRight: sizes.PageWidth * 0.02,
     borderRadius: 26,
-    fontSize: RFValue(20, sizes.PageHieght),
+    fontSize: RFValue(9, sizes.PageHieght),
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -225,14 +222,23 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
+    color: 'black',
+    marginTop: sizes.PageWidth * 0.02,
   },
   dropdown: {
     width: sizes.PageWidth * 0.8,
-    height: sizes.PageHieght * 0.09,
+    height: sizes.PageHieght * 0.12,
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 26,
-    paddingHorizontal: 8,
+    paddingHorizontal: sizes.PageWidth * 0.02,
+    color: 'black',
+  },
+  header: {
+    fontSize: RFValue(11, sizes.PageHieght),
+    color: '#3F4E4F',
+    paddingBottom: sizes.PageHieght * 0.05,
+    fontFamily: 'Fredoka-Medium',
   },
 });
 

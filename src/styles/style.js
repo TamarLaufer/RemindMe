@@ -202,7 +202,7 @@ export const styles = StyleSheet.create({
     shadowOffset: {width: 2, height: 5},
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    height: sizes.PageHieght * 0.17,
+    height: sizes.PageHieght * 0.2,
   },
   dropdown: {
     width: sizes.PageWidth * 0.8,

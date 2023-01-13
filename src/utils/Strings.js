@@ -37,6 +37,9 @@ export const strings = {
   tooLongLastName: 'שם פרטי יכול להכיל עד 15 תווים',
   insertFirstName: 'יש להכניס שם פרטי',
   insertLastName: 'יש להכניס שם משפחה',
+  tooShortGroupName: 'שם קבוצה חייב להכיל לפחות 2 תווים',
+  tooLongGroupName: 'שם קבוצה יכול להכיל עד 15 תווים',
+  insertGroupName: 'יש להכניס שם קבוצה',
   validationPhone: 'יש להכניס מספר טלפון נייד תקין',
   phoneMissing: 'יש להכניס מספר טלפון נייד אחד לפחות',
   groupMissing: 'יש לבחור קבוצה',
@@ -44,6 +47,7 @@ export const strings = {
   popUpDeleteGroupWarning:
     'שימו לב! בעת מחיקת הקבוצה ימחקו כל הילדים המשוייכים אליה. יש לדאוג שכל הילדים ישוייכו מבעוד מועד לקבוצה אחרת',
   arrived: 'הגיע/ה',
+  groupUpdatedSeccesfully: 'הקבוצה עודכנה בהצלחה',
 };
 
 export const screenNames = {

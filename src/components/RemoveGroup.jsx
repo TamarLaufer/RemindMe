@@ -10,11 +10,12 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
-
+import Dialog, {DialogContent} from 'react-native-popup-dialog';
 
 const RemoveGroup = () => {
   const {removeGroup, getAllGroups, popUp, groups} = useContextData();
   const [toDelete, setToDelete] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     getAllGroups();
@@ -25,12 +26,13 @@ const RemoveGroup = () => {
       key={id}
       style={styles.bigButton}
       onPress={() => {
-        popUp(
-          strings.popUpDeleteGroupWarning,
-          setToDelete(true),
-          setToDelete(false),
-        );
+        // popUp(
+        //   strings.popUpDeleteGroupWarning,
+        //   setToDelete(true),
+        //   setToDelete(false),
+        // );
         toDelete && removeGroup(id);
+        setVisible(false);
       }}>
       <Text style={styles.bigName}>{groupName}</Text>
     </TouchableOpacity>
@@ -44,6 +46,13 @@ const RemoveGroup = () => {
 
   return (
     <>
+      <Dialog
+        visible={visible}
+        onTouchOutside={() => {
+          setVisible(false);
+        }}
+      />
+      <DialogContent></DialogContent>
       <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
       <View style={styles.modalContainer}>{renderGroupForRemove}</View>
     </>

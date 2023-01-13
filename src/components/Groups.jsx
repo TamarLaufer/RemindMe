@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   bigName: {
-    fontSize: RFValue(28, sizes.PageWidth),
+    fontSize: RFValue(25, sizes.PageWidth),
     textAlign: 'center',
     color: '#EAEAEA',
     fontFamily: 'Fredoka-Medium',
