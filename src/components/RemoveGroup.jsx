@@ -17,9 +17,9 @@ const RemoveGroup = () => {
   const [toDelete, setToDelete] = useState(false);
   const [visible, setVisible] = useState(true);
 
-  useEffect(() => {
-    getAllGroups();
-  }, []);
+  // useEffect(() => {
+  //   getAllGroups();
+  // }, []);
 
   const GroupRenderd = ({groupName, id}) => (
     <TouchableOpacity

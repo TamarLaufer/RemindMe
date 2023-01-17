@@ -18,6 +18,8 @@ import {strings, screenNames} from '../utils/Strings';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import sizes from '../utils/sizes';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {styles} from '../styles/style';
+
 
 const DrawerContent = props => {
   const screens = {
@@ -63,47 +65,3 @@ const DrawerContent = props => {
 };
 
 export default DrawerContent;
-
-const styles = StyleSheet.create({
-  drawerContent: {
-    flex: 1,
-    width: '100%',
-    height: sizes.PageHieght * 1,
-  },
-  title: {
-    fontSize: 16,
-    marginTop: 1,
-    fontWeight: 'bold',
-  },
-  // caption: {
-  //   fontSize: 5,
-  //   lineHeight: 5,
-  // },
-  // row: {
-  //   marginTop: 20,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
-  // section: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   marginRight: 15,
-  // },
-  paragraph: {
-    fontWeight: 'bold',
-    marginRight: 3,
-  },
-  drawerSection: {
-    marginTop: 15,
-  },
-  // preference: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   paddingVertical: 12,
-  //   paddingHorizontal: 16,
-  // },
-  labelStyle: {
-    fontSize: RFValue(10, sizes.PageHieght),
-    fontFamily: 'Montserrat-Light',
-  },
-});

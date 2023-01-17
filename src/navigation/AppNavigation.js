@@ -5,8 +5,6 @@ import Add from '../components/Add';
 import AllChildrenList from '../components/AllChildrenList';
 import ChildrenListForEdit from '../components/ChildrenListForEdit';
 import DrawerContent from '../components/DrawerContent';
-import EditChild from '../components/EditChild';
-import EditGroup from '../components/EditGroup';
 import Groups from '../components/Groups';
 import Header from '../components/Header';
 import Logo from '../components/Logo';
@@ -42,11 +40,6 @@ const AppNavigation = props => {
     {
       name: screenNames.addChild,
       component: Add,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.editChild,
-      component: EditChild,
       options: {headerTitle: false},
     },
     {

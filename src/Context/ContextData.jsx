@@ -1,19 +1,17 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import RemoveChild from '../components/RemoveChild';
 import AddGroup from '../components/AddGroup';
 import {childrenData, groups} from '../data/tempData';
 import AllChildrenList from '../components/AllChildrenList';
 import {useNavigation} from '@react-navigation/native';
 import {screenNames, strings} from '../utils/Strings';
-// import EditChild from '../components/EditChild';
 import ChildrenListForEdit from '../components/ChildrenListForEdit';
 import GroupListForEdit from '../components/GroupListForEdit';
 import Add from '../components/Add';
-import EditGroup from '../components/EditGroup';
 import RemoveGroup from '../components/RemoveGroup';
-import EditChild from '../components/EditChild';
 import {Alert} from 'react-native';
 import {URLS} from '../Api/urls';
+import Groups from '../components/Groups';
 
 const ContextData = React.createContext();
 
@@ -33,10 +31,6 @@ export const DataProvider = ({children}) => {
   const [groupByPress, setGroupByPress] = useState([]);
   const [listIsEmpty, setListIsEmpty] = useState(true);
 
-  const updateGroupsList = (groupList = []) => {
-    setAllGroups(groupList);
-  };
-
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);
     setIsEditMode(isEditFlag);
@@ -49,12 +43,11 @@ export const DataProvider = ({children}) => {
   const switchScreens = {
     ADD_CHILD: <Add />,
     EDIT_CHILD_LIST: <ChildrenListForEdit />,
-    EDIT_CHILD: <EditChild />,
     REMOVE_CHILD: <RemoveChild />,
     ADD_GROUP: <AddGroup />,
     EDIT_GROUP_LIST: <GroupListForEdit />,
-    EDIT_GROUP: <EditGroup />,
     REMOVE_GROUP: <RemoveGroup />,
+    GROUPS: <Groups />,
   };
 
   const isGroupListEmpty = () => {
@@ -86,9 +79,9 @@ export const DataProvider = ({children}) => {
       },
     ]);
 
-  const getAllChildren = async () => {
+  const getAllChildren = () => {
     setLoader(true);
-    await fetch(URLS.getAllChildren())
+    fetch(URLS.getAllChildren())
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
@@ -195,13 +188,13 @@ export const DataProvider = ({children}) => {
       });
   };
 
-  const getAllGroups = async () => {
+  const getAllGroups = () => {
     setLoader(true);
-    await fetch(URLS.getAllGroups())
+    fetch(URLS.getAllGroupsFetch())
       .then(response => response.json())
       .then(data => {
-        // console.log('getAllGroups', data);
-        updateGroupsList(data);
+        setAllGroups(data);
+        console.log('data was added to group list');
       })
       .catch(err => {
         console.log('getAllGroupsError', err);
@@ -220,7 +213,7 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         // console.log('the post performed', resJson);
         const newList = [...groups, resJson];
-        updateGroupsList(newList);
+        setAllGroups(newList);
       })
       .catch(err => {
         console.log(err, 'the post failed');
@@ -238,7 +231,7 @@ export const DataProvider = ({children}) => {
         // console.log('resJson', resJson);
         const listWithoutGroup = groups.filter(group => group._id !== id);
         const newList = [...listWithoutGroup, resJson];
-        updateGroupsList(newList);
+        setAllGroups(newList);
       })
       .catch(err => {
         console.log(err);
@@ -253,7 +246,7 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         // console.log('resJson', resJson);
         const newList = groups.filter(group => group._id !== id);
-        updateGroupsList(newList);
+        setAllGroups(newList);
         const newChildrenList = childrenList.filter(
           child => resJson.childrenList.include(child._id) === false,
         );

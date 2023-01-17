@@ -15,15 +15,8 @@ import {strings, screenNames} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const GroupListForEdit = () => {
-  const navigation = useNavigation();
-  const {
-    groups,
-    popUp,
-    updateCurrentScreen,
-    switchScreens,
-    updateChosenGroup,
-    getAllGroups,
-  } = useContextData();
+  const {groups, updateCurrentScreen, switchScreens, updateChosenGroup} =
+    useContextData();
 
   const OneButtonForEdit = ({group}) => (
     <TouchableOpacity
