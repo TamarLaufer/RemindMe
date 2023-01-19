@@ -11,11 +11,21 @@ import {useContextData} from '../Context/ContextData';
 import {screenNames, strings} from '../utils/Strings';
 import ScreensModal from './ScreensModal';
 import {styles} from '../styles/style';
+import Loader from './Loader';
 
 const Groups = () => {
   const navigation = useNavigation();
-  const {groups, image, getAllGroups, showModal, getAllChildrenByGroup} =
-    useContextData();
+  const {
+    groups,
+    image,
+    getAllGroups,
+    showModal,
+    setShowModal,
+    getAllChildrenByGroup,
+    updateCurrentScreen,
+    switchScreens,
+    loader,
+  } = useContextData();
 
   useEffect(() => {
     getAllGroups();
@@ -39,7 +49,20 @@ const Groups = () => {
 
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      {/* {listIsEmpty ? (
+      {groups.length > 0 ? (
+        <View style={styles.container}>
+          <View style={styles.containerButtons}>
+            <FlatList
+              numColumns={2}
+              data={groups}
+              renderItem={renderGroup}
+              keyExtractor={item => item._id}
+              scrollToItem={{animated: true, viewPosition: 0.5}}
+            />
+          </View>
+          {loader ? <Loader /> : null}
+        </View>
+      ) : (
         <View style={styles.container}>
           <Text style={styles.header}>{strings.noGroups}</Text>
           <TouchableOpacity
@@ -50,19 +73,9 @@ const Groups = () => {
             }}>
             <Text style={styles.bigName}>{strings.addGroup}</Text>
           </TouchableOpacity>
+          {loader ? <Loader /> : null}
         </View>
-      ) : ( */}
-      <View style={styles.container}>
-        <View style={styles.containerButtons}>
-          <FlatList
-            numColumns={2}
-            data={groups}
-            renderItem={renderGroup}
-            keyExtractor={item => item._id}
-            scrollToItem={{animated: true, viewPosition: 0.5}}
-          />
-        </View>
-      </View>
+      )}
       {showModal && <ScreensModal />}
     </ImageBackground>
   );

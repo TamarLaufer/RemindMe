@@ -52,6 +52,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: '#83A3C2',
+    opacity: 0.8,
     margin: '1.2%',
     padding: '1.2%',
     shadowOpacity: 0.8,
@@ -113,7 +114,7 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     width: sizes.PageWidth,
-    backgroundColor: 'white',
+    backgroundColor: '#EEEEEE',
     borderRadius: 20,
     padding: 5,
     alignItems: 'center',
@@ -170,6 +171,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 80,
     backgroundColor: '#83A3C2',
+    opacity: 0.8,
     margin: '1%',
     shadowRadius: 20,
     shadowOpacity: 0.8,
@@ -177,7 +179,6 @@ export const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: {width: 2, height: -4},
     borderColor: '#83A3C2',
-    color: 'black',
   },
   bigName: {
     fontSize: sizes.PageWidth * 0.03,
@@ -186,8 +187,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Fredoka-Medium',
   },
   placeholderStyle: {
-    fontSize: sizes.PageWidth * 0.2,
-
+    fontSize: sizes.PageWidth * 0.022,
     color: 'black',
   },
   selectedTextStyle: {
@@ -197,7 +197,6 @@ export const styles = StyleSheet.create({
   validation_error: {
     color: 'red',
     fontSize: sizes.PageWidth * 0.017,
-
     paddingRight: sizes.PageWidth * 0.01,
   },
   addContainer: {
@@ -208,7 +207,7 @@ export const styles = StyleSheet.create({
   inputSearchStyle: {
     width: sizes.PageWidth * 0.01,
     height: sizes.PageHieght * 0.03,
-    fontSize: RFValue(8, sizes.PageHieght),
+    fontSize: sizes.PageWidth * 0.022,
     color: 'black',
   },
   iconStyle: {
@@ -223,7 +222,7 @@ export const styles = StyleSheet.create({
     paddingLeft: sizes.PageWidth * 0.02,
     paddingRight: sizes.PageWidth * 0.02,
     borderRadius: 30,
-    fontSize: sizes.PageHieght * 0.04,
+    fontSize: sizes.PageHieght * 0.038,
     shadowOffset: {
       width: 0,
       height: 1,
@@ -244,7 +243,14 @@ export const styles = StyleSheet.create({
   },
   header: {
     paddingTop: sizes.PageWidth * 0.02,
-    fontSize: sizes.PageWidth * 0.022,
+    fontSize: sizes.PageWidth * 0.025,
+    color: '#3F4E4F',
+    paddingBottom: sizes.PageHieght * 0.02,
+    fontFamily: 'Fredoka-Medium',
+  },
+  smallHeader: {
+    paddingTop: sizes.PageWidth * 0.02,
+    fontSize: sizes.PageWidth * 0.02,
     color: '#3F4E4F',
     paddingBottom: sizes.PageHieght * 0.02,
     fontFamily: 'Fredoka-Medium',

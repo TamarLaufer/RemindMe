@@ -10,10 +10,11 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
-import Dialog, {DialogContent} from 'react-native-popup-dialog';
+import Loader from './Loader';
+// import Dialog, {DialogContent} from 'react-native-popup-dialog';
 
 const RemoveGroup = () => {
-  const {removeGroup, getAllGroups, popUp, groups} = useContextData();
+  const {removeGroup, getAllGroups, popUp, groups, loader} = useContextData();
   const [toDelete, setToDelete] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -31,7 +32,7 @@ const RemoveGroup = () => {
         //   setToDelete(true),
         //   setToDelete(false),
         // );
-        toDelete && removeGroup(id);
+        removeGroup(id);
         setVisible(false);
       }}>
       <Text style={styles.bigName}>{groupName}</Text>
@@ -46,15 +47,9 @@ const RemoveGroup = () => {
 
   return (
     <>
-      <Dialog
-        visible={visible}
-        onTouchOutside={() => {
-          setVisible(false);
-        }}
-      />
-      <DialogContent></DialogContent>
       <Text style={styles.header}>{strings.chooseGroupToRemove}</Text>
       <View style={styles.modalContainer}>{renderGroupForRemove}</View>
+      {loader ? <Loader /> : null}
     </>
   );
 };

@@ -7,8 +7,7 @@ import {useContextData} from '../Context/ContextData';
 import {formikValues, strings} from '../utils/Strings';
 import SubmitBtn from './btn/SubmitBtn';
 import {styles} from '../styles/style';
-import sizes from '../utils/sizes';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
+import Loader from './Loader';
 
 const Add = () => {
   const {
@@ -20,6 +19,7 @@ const Add = () => {
     isEditMode,
     groups,
     updateChild,
+    loader,
   } = useContextData();
 
   const initValues = {
@@ -59,7 +59,7 @@ const Add = () => {
         strings.validationPhone,
       )
       .required(strings.phoneMissing),
-    group: Yup.object().required(strings.groupMissing),
+    group: Yup.object().shape({}).required(strings.groupMissing),
   });
 
   const inputDataArray = [
@@ -99,6 +99,7 @@ const Add = () => {
     return inputData?.map((input, index) => (
       <View key={index}>
         <TextInput
+          onBlur={formikProps.handleBlur(input.value)}
           style={input.style}
           placeholder={input.placeholder}
           onChangeText={formikProps.handleChange(input.value)}
@@ -107,9 +108,7 @@ const Add = () => {
         />
         {
           <Text style={styles.validation_error}>
-            {formikProps.touched &&
-              formikProps.errors[input.value] &&
-              formikProps.errors[input.value]}
+            {formikProps.touched && formikProps.errors[input.value]}
           </Text>
         }
       </View>
@@ -167,11 +166,15 @@ const Add = () => {
           )}
           {renderInputsAndErrors(inputDataArray, formikProps)}
           <Dropdown {...params.dropDown(formikProps)} />
+          <Text style={styles.validation_error}>
+            {formikProps.errors.group && formikProps.errors.group}
+          </Text>
           <SubmitBtn
             title={isEditMode ? strings.editChild : strings.addChild}
             onPress={formikProps.handleSubmit}
             disabled={!formikProps.isValid}
           />
+          {loader ? <Loader /> : null}
         </View>
       )}
     </Formik>

@@ -17,11 +17,11 @@ import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
 
 const AllChildrenList = ({onPress}) => {
-  const {childrenList, loader} = useContextData();
+  const {childrenList, loader, image} = useContextData();
 
-  const image = {
-    uri: '../src/images/photo1.jpg',
-  };
+  const sortByStrAsc = [...childrenList].sort((a, b) =>
+    a.lastName > b.lastName ? 1 : -1,
+  );
 
   const numColumns = () => {
     if (sizes.PageWidth < 400) {
@@ -49,7 +49,7 @@ const AllChildrenList = ({onPress}) => {
         <FlatList
           numColumns={numColumns()}
           key={numColumns()}
-          data={childrenList}
+          data={sortByStrAsc}
           renderItem={renderChildren}
           keyExtractor={item => item._id}
         />

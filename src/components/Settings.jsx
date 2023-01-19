@@ -18,7 +18,9 @@ const Settings = () => {
     setShowModal,
     updateCurrentScreen,
     currentScreen,
+    allModesForModal,
     image,
+    updateModeForModal,
   } = useContextData();
 
   const btnDataArr = [
@@ -40,7 +42,8 @@ const Settings = () => {
       text: strings.editChild,
       onPress: () => {
         setShowModal(true);
-        updateCurrentScreen(switchScreens.GROUPS); //'ChildrenListForEdit' Component
+        updateCurrentScreen(switchScreens.GROUP_FOR_EDIT_CHILD, true); //'ChildrenListForEdit' Component
+        updateModeForModal(allModesForModal.EDIT_CHILD);
       },
     },
     {
@@ -54,8 +57,8 @@ const Settings = () => {
       text: strings.removeChild,
       onPress: () => {
         setShowModal(true);
-        console.log('text: strings.removeChild');
-        updateCurrentScreen(switchScreens.REMOVE_CHILD); //'RemoveChild' Component
+        updateCurrentScreen(switchScreens.GROUP_FOR_EDIT_CHILD); //'RemoveChild' Component
+        updateModeForModal(allModesForModal.REMOVE_CHILD);
       },
     },
     {

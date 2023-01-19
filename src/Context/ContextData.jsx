@@ -12,6 +12,7 @@ import RemoveGroup from '../components/RemoveGroup';
 import {Alert} from 'react-native';
 import {URLS} from '../Api/urls';
 import Groups from '../components/Groups';
+import GroupsForEditOrRemoveChild from '../components/GroupsForEditOrRemoveChild';
 
 const ContextData = React.createContext();
 
@@ -20,6 +21,11 @@ export function useContextData() {
 }
 
 export const DataProvider = ({children}) => {
+  const allModesForModal = {
+    EDIT_CHILD: 'edit',
+    REMOVE_CHILD: 'remove',
+  };
+
   const [childrenList, setChildrenList] = useState([]);
   const [child, setChild] = useState([]);
   const [group, setGroup] = useState([]);
@@ -29,16 +35,18 @@ export const DataProvider = ({children}) => {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
   const [groupByPress, setGroupByPress] = useState([]);
-  const [listIsEmpty, setListIsEmpty] = useState(true);
+  const [mode, setMode] = useState('');
 
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);
     setIsEditMode(isEditFlag);
   };
 
-  const image = {
-    uri: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80',
+  const updateModeForModal = mode => {
+    setMode(mode);
   };
+
+  const image = require('../images/photo1.jpg');
 
   const switchScreens = {
     ADD_CHILD: <Add />,
@@ -48,11 +56,7 @@ export const DataProvider = ({children}) => {
     EDIT_GROUP_LIST: <GroupListForEdit />,
     REMOVE_GROUP: <RemoveGroup />,
     GROUPS: <Groups />,
-  };
-
-  const isGroupListEmpty = () => {
-    console.log(groups.length);
-    groups.length > 0 ? setListIsEmpty(false) : setListIsEmpty(true);
+    GROUP_FOR_EDIT_CHILD: <GroupsForEditOrRemoveChild />,
   };
 
   const updateChosenChild = childData => {
@@ -93,6 +97,7 @@ export const DataProvider = ({children}) => {
   };
 
   const getAllChildrenByGroup = groupId => {
+    setLoader(true);
     fetch(URLS.getAllChildrenInGroup(groupId))
       .then(response => response.json())
       .then(data => {
@@ -101,9 +106,12 @@ export const DataProvider = ({children}) => {
       .catch(err => {
         console.log('getAllChildrenError', err);
       });
+    setLoader(false);
   };
 
   const addChild = values => {
+    setLoader(true);
+
     console.log(values);
     const childWithGroupValue = {
       ...values,
@@ -123,9 +131,11 @@ export const DataProvider = ({children}) => {
       .catch(err => {
         console.log(err, 'the post failed');
       });
+    setLoader(false);
   };
 
   const removeChild = id => {
+    setLoader(true);
     fetch(URLS.removeChild(id), {
       method: 'DELETE',
     })
@@ -137,6 +147,7 @@ export const DataProvider = ({children}) => {
       .catch(err => {
         console.log('removeChildError', err);
       });
+    setLoader(false);
   };
 
   const getChildById = id => {
@@ -200,7 +211,6 @@ export const DataProvider = ({children}) => {
         console.log('getAllGroupsError', err);
       });
     setLoader(false);
-    isGroupListEmpty();
   };
 
   const addGroup = values => {
@@ -289,10 +299,11 @@ export const DataProvider = ({children}) => {
         groupByPress,
         isEditMode,
         setGroupByPress,
-        isGroupListEmpty,
-        listIsEmpty,
         getAllChildrenByGroup,
         updateChildIfArrived,
+        mode,
+        updateModeForModal,
+        allModesForModal,
       }}>
       {children}
     </ContextData.Provider>

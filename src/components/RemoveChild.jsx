@@ -12,11 +12,7 @@ import {strings} from '../utils/Strings';
 import {styles} from '../styles/style';
 
 const RemoveChild = () => {
-  const {childrenList, removeChild, getAllChildren, popUp} = useContextData();
-
-  useEffect(() => {
-    getAllChildren();
-  }, []);
+  const {childrenList, removeChild} = useContextData();
 
   const ChildrenRenderd = ({firstName, lastName, id}) => {
     return (
@@ -32,7 +28,6 @@ const RemoveChild = () => {
       </TouchableOpacity>
     );
   };
-    
 
   const renderChildren = childrenList.map((child, index) => {
     return (
@@ -47,7 +42,8 @@ const RemoveChild = () => {
 
   return (
     <>
-      <Text style={styles.header}>{strings.chooseChildToRemove}</Text>
+      <Text style={styles.header}>{strings.removeChild}</Text>
+      <Text style={styles.smallHeader}>{strings.chooseChildToRemove}</Text>
       <View style={styles.modalContainer}>{renderChildren}</View>
     </>
   );

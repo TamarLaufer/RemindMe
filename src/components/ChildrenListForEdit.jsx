@@ -22,13 +22,7 @@ const ChildrenListForEdit = () => {
     updateChosenChild,
     updateCurrentScreen,
     switchScreens,
-    image,
-    getAllChildren,
   } = useContextData();
-
-  useEffect(() => {
-    getAllChildren();
-  }, []);
 
   const OneButton = ({child}) => (
     <TouchableOpacity
