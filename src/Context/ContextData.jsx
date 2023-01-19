@@ -115,6 +115,8 @@ export const DataProvider = ({children}) => {
     console.log(values);
     const childWithGroupValue = {
       ...values,
+      parentPhone: '+972' + values.parentPhone,
+      parent2Phone: '+972' + values.parent2Phone,
       group: values.group.value,
     };
     fetch(URLS.addChild(), {

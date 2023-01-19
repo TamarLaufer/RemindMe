@@ -1,6 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Modal, Text, Pressable, Alert, ImageBackground} from 'react-native';
+import {
+  Modal,
+  Text,
+  Pressable,
+  Alert,
+  ImageBackground,
+  View,
+} from 'react-native';
 import {useContextData} from '../Context/ContextData';
 import {strings, screenNames} from '../utils/Strings';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -11,31 +18,33 @@ const ScreensModal = () => {
 
   // const {addChild, removeChild, editChild, getChildById} = useContextData();
   const [setModalVisible] = useState(false);
-  const imageModal = require('../images/photo_modal.jpg');
+  const imageModal = require('../images/photo2.jpg');
 
   return (
-    <ImageBackground
-      source={imageModal}
-      resizeMode="cover"
-      style={styles.image}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => {
-          Alert.alert(strings.windowNotClosed);
-          setModalVisible(!showModal);
-        }}>
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={showModal}
+      onRequestClose={() => {
+        Alert.alert(strings.windowNotClosed);
+        setModalVisible(!showModal);
+      }}>
+      <View style={styles.centeredView}>
         <KeyboardAwareScrollView contentContainerStyle={styles.modalView}>
-          <Pressable
-            style={styles.modalButton}
-            onPress={() => setShowModal(false)}>
-            <Text style={styles.close}>X</Text>
-          </Pressable>
-          {currentScreen}
+          <ImageBackground
+            source={imageModal}
+            resizeMode="cover"
+            style={styles.image}>
+            <Pressable
+              style={styles.modalButton}
+              onPress={() => setShowModal(false)}>
+              <Text style={styles.close}>X</Text>
+            </Pressable>
+            {currentScreen}
+          </ImageBackground>
         </KeyboardAwareScrollView>
-      </Modal>
-    </ImageBackground>
+      </View>
+    </Modal>
   );
 };
 
