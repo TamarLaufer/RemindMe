@@ -125,7 +125,7 @@ const Add = () => {
           updateChild(childParams._id, values);
           actions.resetForm();
           setShowModal(!showModal);
-          popUp(strings.groupUpdatedSeccesfully);
+          popUp(strings.childEditedSeccesfully);
         } else {
           addChild(values);
           actions.resetForm();
