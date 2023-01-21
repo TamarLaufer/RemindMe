@@ -147,8 +147,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: sizes.PageWidth * 0.98,
-    margin: '1%',
+    width: sizes.PageWidth,
     borderRadius: 20,
   },
   bigButton: {
@@ -277,6 +276,7 @@ export const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: sizes.PageHieght * 0.04,
     paddingRight: '2%',
+    paddingTop: '2%',
   },
   modalButton: {
     borderRadius: 20,
