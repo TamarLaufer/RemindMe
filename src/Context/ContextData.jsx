@@ -35,7 +35,7 @@ export const DataProvider = ({children}) => {
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
   const [groupByPress, setGroupByPress] = useState([]);
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState(null);
 
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);

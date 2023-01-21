@@ -18,7 +18,7 @@ const ScreensModal = () => {
 
   // const {addChild, removeChild, editChild, getChildById} = useContextData();
   const [setModalVisible] = useState(false);
-  const imageModal = require('../images/photo2.jpg');
+  const imageModal = require('../images/photo1.jpg');
 
   return (
     <Modal

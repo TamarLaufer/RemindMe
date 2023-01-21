@@ -98,9 +98,9 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     width: sizes.PageWidth,
-    backgroundColor: '#EEEEEE',
+    backgroundColor: '#ffff',
     borderRadius: 20,
-    padding: 5,
+    justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -147,6 +147,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width: sizes.PageWidth * 0.98,
+    margin: '1%',
+    borderRadius: 20,
   },
   bigButton: {
     width: sizes.PageWidth * 0.4,
@@ -199,6 +202,7 @@ export const styles = StyleSheet.create({
     height: sizes.PageHieght * 0.03,
   },
   input: {
+    backgroundColor: 'white',
     width: sizes.PageWidth * 0.8,
     height: sizes.PageHieght * 0.12,
     borderWidth: 1,
@@ -224,6 +228,7 @@ export const styles = StyleSheet.create({
     borderRadius: 26,
     paddingHorizontal: sizes.PageWidth * 0.02,
     color: 'black',
+    backgroundColor: 'white',
   },
   header: {
     paddingTop: sizes.PageWidth * 0.02,
@@ -271,10 +276,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'right',
     fontSize: sizes.PageHieght * 0.04,
+    paddingRight: '2%',
   },
   modalButton: {
     borderRadius: 20,
-    width: sizes.PageWidth * 0.97,
+    width: sizes.PageWidth * 0.95,
     height: sizes.PageHieght * 0.1,
   },
   bigButtonFormik: {
