@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: sizes.PageWidth * 0.9,
-    height: sizes.PageHieght * 0.9,
   },
   settingsContainer: {
     flex: 1,
@@ -98,8 +97,10 @@ export const styles = StyleSheet.create({
   },
   modalView: {
     width: sizes.PageWidth,
-    backgroundColor: '#ffff',
+    minHeight: 600,
+    backgroundColor: '#EEEEEE',
     borderRadius: 20,
+    padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: '#000',
@@ -110,6 +111,12 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  imageModal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: sizes.PageWidth * 0.98,
   },
   logoSize: {
     maxWidth: sizes.PageWidth * 0.2,
@@ -274,14 +281,14 @@ export const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     textAlign: 'right',
-    fontSize: sizes.PageHieght * 0.04,
-    paddingRight: '2%',
-    paddingTop: '2%',
+    backgroundColor: '#ffff',
   },
   modalButton: {
     borderRadius: 20,
     width: sizes.PageWidth * 0.95,
     height: sizes.PageHieght * 0.1,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   bigButtonFormik: {
     width: sizes.PageWidth * 0.8,
