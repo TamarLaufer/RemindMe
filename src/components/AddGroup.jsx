@@ -31,6 +31,7 @@ const AddGroup = () => {
     groupName: '',
     assistantName: '',
     childrenList: [],
+    user: '',
   };
 
   const groupParams = group;

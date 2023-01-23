@@ -12,4 +12,6 @@ export const URLS = {
   getAllChildrenInGroup: groupId => `${mainURL}/child/${groupId}`,
   updateArrived: (id, isArrived) =>
     `${mainURL}/child/arrived/${id}?isChildArrived=${isArrived}`,
+  addUser: () => `${mainURL}/user/add-user`,
+  updateUser: id => `${mainURL}/user/update-user/${id}`,
 };

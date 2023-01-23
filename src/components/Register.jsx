@@ -15,6 +15,7 @@ import SubmitBtn from './btn/SubmitBtn';
 import {RFValue} from 'react-native-responsive-fontsize';
 import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
+import {Avatar, Button, Card} from 'react-native-paper';
 
 const Register = () => {
   const {
@@ -24,7 +25,10 @@ const Register = () => {
     setShowModal,
     popUp,
     isEditMode,
+    isEditUserMode,
     group,
+    addUser,
+    updateCreatedUser,
   } = useContextData();
 
   const initValues = {
@@ -35,36 +39,48 @@ const Register = () => {
     groupsList: [],
   };
 
-  const groupParams = group;
-
   const SignupSchema = Yup.object().shape({
     userName: Yup.string()
       .min(2, strings.tooShortGroupName)
       .max(15, strings.tooLongGroupName)
       .required(strings.insertGroupName),
     password: Yup.string()
-      .min(2, strings.tooShortLastName)
-      .max(15, strings.tooLongLastName),
-    password: Yup.string()
-      .min(2, strings.tooShortLastName)
-      .max(15, strings.tooLongLastName),
-    password: Yup.string()
-      .min(2, strings.tooShortLastName)
-      .max(15, strings.tooLongLastName),
+      .required(strings.noPasswordEntered)
+      .min(8, 'Password is too short - should be 8 chars minimum.')
+      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    phoneNumber: Yup.string()
+      .matches(
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        strings.validationPhone,
+      )
+      .required(strings.phoneMissing),
+    email: Yup.string().email().required(),
   });
 
   const inputArr = [
     {
-      style: styles.input,
-      placeholder: strings.groupName,
-      value: formikValues.groupName,
+      style: styles.input_Register,
+      placeholder: strings.userName,
+      value: formikValues.userName,
       keyboardType: 'default',
     },
     {
-      style: styles.input,
-      placeholder: strings.assistantName,
-      value: formikValues.assistantName,
+      style: styles.input_Register,
+      placeholder: strings.password,
+      value: formikValues.password,
       keyboardType: 'default',
+    },
+    {
+      style: styles.input_Register,
+      placeholder: strings.email,
+      value: formikValues.email,
+      keyboardType: 'default',
+    },
+    {
+      style: styles.input_Register,
+      placeholder: strings.phoneNumber,
+      value: formikValues.phoneNumber,
+      keyboardType: 'phone-pad',
     },
   ];
 
@@ -72,6 +88,7 @@ const Register = () => {
     return inputArray?.map((input, index) => (
       <View key={index}>
         <TextInput
+          secureTextEntry={true}
           style={input.style}
           placeholder={input.placeholder}
           onChangeText={formikProps.handleChange(input.value)}
@@ -110,21 +127,39 @@ const Register = () => {
     },
   };
 
+  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
+
   return (
     <Formik {...params.formik}>
       {formikProps => (
-        <View style={styles.addContainer}>
-          {isEditMode ? (
-            <Text style={styles.header}>{strings.editGroup}</Text>
-          ) : (
-            <Text style={styles.header}>{strings.addGroup}</Text>
-          )}
-          {renderInputsAndErrors(inputArr, formikProps)}
-          <SubmitBtn
-            title={isEditMode ? strings.editGroup : strings.addGroup}
-            onPress={formikProps.handleSubmit}
-            disabled={!formikProps.isValid}
-          />
+        <View style={styles.registerContainer}>
+          {/* {isEditUserMode ? (
+              <Text style={styles.header}>{strings.editGroup}</Text>
+            ) : (
+              <Text style={styles.header}>{strings.addUser}</Text>
+            )} */}
+          {/* {renderInputsAndErrors(inputArr, formikProps)} */}
+          <Card style={styles.card}>
+            <Card.Title
+              title="Card Title"
+              subtitle="Card Subtitle"
+              left={LeftContent}
+            />
+            <Card.Content>
+              <Text variant="titleLarge">Card title</Text>
+              <Text variant="bodyMedium">Card content</Text>
+            </Card.Content>
+            <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
+            <Card.Actions>
+              <Button>Cancel</Button>
+              <Button>Ok</Button>
+            </Card.Actions>
+          </Card>
+          {/* <SubmitBtn
+              title={isEditMode ? strings.editGroup : strings.addGroup}
+              onPress={formikProps.handleSubmit}
+              disabled={!formikProps.isValid}
+            /> */}
         </View>
       )}
     </Formik>

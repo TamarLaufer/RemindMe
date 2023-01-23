@@ -1,5 +1,5 @@
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Add from '../components/Add';
 import AllChildrenList from '../components/AllChildrenList';
@@ -16,12 +16,19 @@ import AddGroup from '../../src/components/AddGroup';
 import {styles} from '../styles/style';
 import GroupListForEdit from '../components/GroupListForEdit';
 import sizes from '../utils/sizes';
+import Register from '../components/Register';
 
 const Drawer = createDrawerNavigator();
 
 const AppNavigation = props => {
+  const [inRegister, setInRegister] = useState(true);
   // list of all screen
   const screens = [
+    {
+      name: screenNames.register,
+      component: Register,
+      options: {headerShown: false},
+    },
     {
       name: screenNames.groups,
       component: Groups,
@@ -76,9 +83,11 @@ const AppNavigation = props => {
   };
   // Drawer params
   const drawerParams = {
-    initialRouteName: screenNames.groups,
+    initialRouteName: screenNames.register,
+
     drawerContent: props => <DrawerContent {...props} />,
     screenOptions: {
+      headerShown: inRegister === true && false,
       headerTitle: '',
       drawerType: 'front',
       headerRight: () => <Header />,

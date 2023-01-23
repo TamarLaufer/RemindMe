@@ -41,13 +41,19 @@ export const strings = {
   tooLongGroupName: 'שם קבוצה יכול להכיל עד 15 תווים',
   insertGroupName: 'יש להכניס שם קבוצה',
   validationPhone: 'יש להכניס מספר טלפון נייד תקין',
-  phoneMissing: 'יש להכניס מספר טלפון נייד אחד לפחות',
+  phoneMissing: 'יש להכניס מספר טלפון נייד',
   groupMissing: 'יש לבחור קבוצה',
   noGroups: 'אין קבוצות, לחץ על מנת להוסיף',
   popUpDeleteGroupWarning:
     'שימו לב! בעת מחיקת הקבוצה ימחקו כל הילדים המשוייכים אליה. יש לדאוג שכל הילדים ישוייכו מבעוד מועד לקבוצה אחרת',
   arrived: 'הגיע/ה',
   groupUpdatedSeccesfully: 'הקבוצה עודכנה בהצלחה',
+  noPasswordEntered: 'יש להכניס סיסמה',
+  userName: 'שם הגן/הגננת:',
+  password: 'סיסמה:',
+  phoneNumber: 'טלפון:',
+  email: 'כתובת דוא"ל:',
+  addUser: 'הוספת גן',
 };
 
 export const screenNames = {
@@ -75,4 +81,8 @@ export const formikValues = {
   groupName: 'groupName',
   assistantName: 'assistantName',
   group: 'group',
+  userName: 'userName',
+  password: 'password',
+  email: 'email',
+  phoneNumber: 'phoneNumber',
 };
