@@ -59,6 +59,12 @@ const Add = () => {
         strings.validationPhone,
       )
       .required(strings.phoneMissing),
+    parent2Phone: Yup.string()
+      .matches(
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        strings.validationPhone,
+      )
+      .required(strings.phoneMissing),
     group: Yup.object().shape({}).required(strings.groupMissing),
   });
 
@@ -82,13 +88,13 @@ const Add = () => {
       keyboardType: 'default',
     },
     {
-      style: styles.input,
+      style: styles.input_phone,
       placeholder: strings.parentPhone,
       value: formikValues.parentPhone,
       keyboardType: 'phone-pad',
     },
     {
-      style: styles.input,
+      style: styles.input_phone,
       placeholder: strings.parent2Phone,
       value: formikValues.parent2Phone,
       keyboardType: 'phone-pad',

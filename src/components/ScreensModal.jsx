@@ -40,12 +40,7 @@ const ScreensModal = () => {
             <Pressable
               style={styles.modalButton}
               onPress={() => setShowModal(false)}>
-              {/* <Text style={styles.close}>X</Text> */}
-              <Avatar.Icon
-                size={36}
-                icon="close-outline"
-                style={styles.close}
-              />
+              <Avatar.Icon size={36} icon="close-thick" style={styles.close} />
             </Pressable>
             {currentScreen}
           </ImageBackground>

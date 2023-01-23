@@ -20,7 +20,6 @@ import sizes from '../utils/sizes';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
 
-
 const DrawerContent = props => {
   const screens = {
     GROUPS: 'groups',
@@ -35,6 +34,14 @@ const DrawerContent = props => {
           <Logo />
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
+              icon={() => (
+                <Avatar.Icon
+                  size={46}
+                  icon="account-multiple"
+                  style={styles.close}
+                  backgroundColor={'none'}
+                />
+              )}
               label={strings.childrenGroups}
               onPress={() => {
                 navigation.navigate(screenNames.groups);
@@ -47,6 +54,9 @@ const DrawerContent = props => {
               labelStyle={styles.labelStyle}
             />
             <DrawerItem
+              icon={() => (
+                <Avatar.Icon size={36} icon="cog" style={styles.close} />
+              )}
               label={strings.settings}
               onPress={() => {
                 navigation.navigate(screenNames.settings);

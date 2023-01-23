@@ -32,6 +32,7 @@ const Register = () => {
     password: '',
     phoneNumber: '',
     email: '',
+    groupsList: [],
   };
 
   const groupParams = group;
