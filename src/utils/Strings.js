@@ -1,4 +1,6 @@
 export const strings = {
+  welcome: 'ברוכים הבאים',
+  enter: 'כניסה',
   registerToSystem: 'הרשמה למערכת',
   login: 'התחברות',
   register: 'הרשמה',
@@ -52,14 +54,15 @@ export const strings = {
   arrived: 'הגיע/ה',
   groupUpdatedSeccesfully: 'הקבוצה עודכנה בהצלחה',
   noPasswordEntered: 'יש להכניס סיסמה',
-  userName: 'שם הגן/הגננת:',
-  password: 'סיסמה:',
-  phoneNumber: 'טלפון:',
-  email: 'כתובת דוא"ל:',
+  userName: 'שם הגן/הגננת',
+  password: 'סיסמה',
+  phoneNumber: 'טלפון',
+  email: 'כתובת דוא"ל',
   addUser: 'הוספת גן',
 };
 
 export const screenNames = {
+  homeScreen: 'HOME_SCREEN',
   register: 'REGISTER',
   login: 'LOGIN',
   groups: 'GROUPS',

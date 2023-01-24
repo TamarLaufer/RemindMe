@@ -150,11 +150,7 @@ const Register = () => {
                 {renderInputsAndErrors(inputArr, formikProps)}
               </View>
               <TouchableOpacity
-                style={
-                  !formikProps.isValid
-                    ? styles.RegisterButton
-                    : styles.RegisterButton
-                }
+                style={styles.registerButton}
                 onPress={formikProps.handleSubmit}
                 disabled={!formikProps.isValid}>
                 <Text style={styles.nameRegister}>

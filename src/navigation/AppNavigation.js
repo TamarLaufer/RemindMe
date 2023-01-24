@@ -18,6 +18,7 @@ import GroupListForEdit from '../components/GroupListForEdit';
 import sizes from '../utils/sizes';
 import Register from '../components/Register';
 import Login from '../components/Login';
+import HomeSrcreen from '../components/HomeScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +26,11 @@ const AppNavigation = props => {
   const [inRegister, setInRegister] = useState(true);
   // list of all screen
   const screens = [
+    {
+      name: screenNames.homeScreen,
+      component: HomeSrcreen,
+      options: {headerShown: false},
+    },
     {
       name: screenNames.register,
       component: Register,
@@ -89,8 +95,7 @@ const AppNavigation = props => {
   };
   // Drawer params
   const drawerParams = {
-    initialRouteName: screenNames.register,
-
+    initialRouteName: screenNames.homeScreen,
     drawerContent: props => <DrawerContent {...props} />,
     screenOptions: {
       headerShown: inRegister === true && false,

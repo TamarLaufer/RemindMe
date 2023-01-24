@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     width: sizes.PageWidth,
     height: sizes.PageHieght,
     justifyContent: 'flex-start',
-    backgroundColor: '#ADA2FF',
     alignItems: 'center',
   },
   cardContent: {
@@ -16,6 +15,7 @@ export const styles = StyleSheet.create({
     height: sizes.PageHieght * 0.7,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#ECECEC',
   },
   card: {
     margin: sizes.PageHieght * 0.04,
@@ -134,6 +134,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     zIndex: 1,
   },
+  centeredViewLoaderHome: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  lottieHome: {
+    width: sizes.PageWidth * 0.35,
+    height: sizes.PageHieght * 0.35,
+  },
   modalView: {
     width: sizes.PageWidth,
     minHeight: 600,
@@ -182,6 +192,10 @@ export const styles = StyleSheet.create({
     maxHeight: sizes.PageHieght * 0.2,
     marginLeft: '10%',
     marginBottom: '7%',
+  },
+  logoSizeHome: {
+    maxWidth: sizes.PageWidth * 0.25,
+    maxHeight: sizes.PageHieght * 0.25,
   },
   logoAndHeadeRegister: {
     marginRight: '40%',
@@ -273,7 +287,7 @@ export const styles = StyleSheet.create({
     color: '#EAEAEA',
     fontFamily: 'Fredoka-Medium',
   },
-  RegisterButton: {
+  registerButton: {
     marginTop: sizes.PageHieght * 0.02,
     marginBottom: sizes.PageHieght * 0.02,
     width: sizes.PageWidth * 0.25,
