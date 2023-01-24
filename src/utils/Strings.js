@@ -1,4 +1,7 @@
 export const strings = {
+  registerToSystem: 'הרשמה למערכת',
+  login: 'התחברות',
+  register: 'הרשמה',
   addChild: 'הוספת ילד',
   editChild: 'עריכת ילד',
   removeChild: 'הסרת ילד',

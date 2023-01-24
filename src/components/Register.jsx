@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   Alert,
+  Image,
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
@@ -16,6 +17,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
+import Logo from './Logo';
 
 const Register = () => {
   const {
@@ -88,7 +90,7 @@ const Register = () => {
     return inputArray?.map((input, index) => (
       <View key={index}>
         <TextInput
-          secureTextEntry={true}
+          secureTextEntry={input.value === formikValues.password && true}
           style={input.style}
           placeholder={input.placeholder}
           onChangeText={formikProps.handleChange(input.value)}
@@ -127,39 +129,40 @@ const Register = () => {
     },
   };
 
-  const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
+  // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
 
   return (
     <Formik {...params.formik}>
       {formikProps => (
         <View style={styles.registerContainer}>
-          {/* {isEditUserMode ? (
-              <Text style={styles.header}>{strings.editGroup}</Text>
-            ) : (
-              <Text style={styles.header}>{strings.addUser}</Text>
-            )} */}
-          {/* {renderInputsAndErrors(inputArr, formikProps)} */}
           <Card style={styles.card}>
-            <Card.Title
-              title="Card Title"
-              subtitle="Card Subtitle"
-              left={LeftContent}
-            />
-            <Card.Content>
-              <Text variant="titleLarge">Card title</Text>
-              <Text variant="bodyMedium">Card content</Text>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.logoAndHeadeRegister}>
+                <Image
+                  style={styles.logoSizeRegister}
+                  source={require('../images/remindMe1.png')}
+                />
+                <Text variant="titleLarge" style={styles.header}>
+                  {strings.registerToSystem}
+                </Text>
+              </View>
+              <View style={styles.inputRegisterContainer}>
+                {renderInputsAndErrors(inputArr, formikProps)}
+              </View>
+              <TouchableOpacity
+                style={
+                  !formikProps.isValid
+                    ? styles.RegisterButton
+                    : styles.RegisterButton
+                }
+                onPress={formikProps.handleSubmit}
+                disabled={!formikProps.isValid}>
+                <Text style={styles.nameRegister}>
+                  {isEditMode ? strings.editUser : strings.register}
+                </Text>
+              </TouchableOpacity>
             </Card.Content>
-            <Card.Cover source={{uri: 'https://picsum.photos/700'}} />
-            <Card.Actions>
-              <Button>Cancel</Button>
-              <Button>Ok</Button>
-            </Card.Actions>
           </Card>
-          {/* <SubmitBtn
-              title={isEditMode ? strings.editGroup : strings.addGroup}
-              onPress={formikProps.handleSubmit}
-              disabled={!formikProps.isValid}
-            /> */}
         </View>
       )}
     </Formik>

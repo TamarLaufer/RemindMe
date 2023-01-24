@@ -17,6 +17,7 @@ import {styles} from '../styles/style';
 import GroupListForEdit from '../components/GroupListForEdit';
 import sizes from '../utils/sizes';
 import Register from '../components/Register';
+import Login from '../components/Login';
 
 const Drawer = createDrawerNavigator();
 
@@ -27,6 +28,11 @@ const AppNavigation = props => {
     {
       name: screenNames.register,
       component: Register,
+      options: {headerShown: false},
+    },
+    {
+      name: screenNames.login,
+      component: Login,
       options: {headerShown: false},
     },
     {
