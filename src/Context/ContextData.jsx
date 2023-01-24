@@ -37,8 +37,7 @@ const [currentScreen, setCurrentScreen] = useState(null);
 const [loader, setLoader] = useState(false);
 const [groupByPress, setGroupByPress] = useState([]);
 const [mode, setMode] = useState(null);
-const [user, setUser] = useState({});
-
+const [userDetails, setUserDetails] = useState({});
 
 const updateCurrentScreen = (screen, isEditFlag) => {
   setCurrentScreen(screen);
@@ -48,6 +47,8 @@ const updateCurrentScreen = (screen, isEditFlag) => {
 const updateModeForModal = mode => {
   setMode(mode);
 };
+
+const userId = userDetails._id;
 
 const image = require('../images/photo1.jpg');
 
@@ -71,7 +72,7 @@ const updateChosenGroup = groupData => {
 };
 
 const updateCreatedUser = userData => {
-  setUser(userData);
+  setUserDetails(userData);
 };
 
 const popUp = (textToDisplay, setStateOk, setStateCancel) =>
@@ -223,10 +224,14 @@ const getAllGroups = () => {
 };
 
 const addGroup = values => {
+  const groupWithUserId = {
+    ...values,
+    user: userId,
+  };
   fetch(URLS.addGroup(), {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(values),
+    body: JSON.stringify(groupWithUserId),
   })
     .then(data => data.json())
     .then(resJson => {
@@ -291,6 +296,7 @@ const addUser = values => {
   })
     .then(data => data.json())
     .then(resJson => {
+      updateCreatedUser(resJson);
       console.log('User post performed', resJson);
     })
     .catch(err => {
@@ -337,6 +343,7 @@ return (
       allModesForModal,
       addUser,
       updateCreatedUser,
+      // user,
     }}>
     {children}
   </ContextData.Provider>

@@ -31,6 +31,7 @@ const Register = () => {
     group,
     addUser,
     updateCreatedUser,
+    user,
   } = useContextData();
 
   const initValues = {
@@ -115,21 +116,16 @@ const Register = () => {
       validateOnBlur: false,
       onSubmit: (values, actions) => {
         if (isEditMode) {
-          updateGroup(groupParams._id, values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.groupUpdatedSeccesfully);
+          // updateUser(groupParams._id, values);
+          // popUp(strings.groupUserUpdatedSeccesfully);
+          console.log('in edit mode');
         } else {
-          addGroup(values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.groupAddedSeccesfully);
+          addUser(values);
+          popUp(strings.userAddedSeccesfully);
         }
       },
     },
   };
-
-  // const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
 
   return (
     <Formik {...params.formik}>

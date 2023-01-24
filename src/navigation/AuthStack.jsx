@@ -22,49 +22,24 @@ import HomeSrcreen from '../components/HomeScreen';
 
 const Drawer = createDrawerNavigator();
 
-const AppNavigation = props => {
+const AuthStack = props => {
   const [inRegister, setInRegister] = useState(true);
   // list of all screen
   const screens = [
     {
-      name: screenNames.groups,
-      component: Groups,
-      options: {headerTitle: false},
+      name: screenNames.homeScreen,
+      component: HomeSrcreen,
+      options: {headerShown: false},
     },
     {
-      name: screenNames.settings,
-      component: Settings,
-      options: {headerTitle: false},
+      name: screenNames.register,
+      component: Register,
+      options: {headerShown: false},
     },
     {
-      name: screenNames.allChildrenList,
-      component: AllChildrenList,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.addChild,
-      component: Add,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.removeChild,
-      component: RemoveChild,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.addGroup,
-      component: AddGroup,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.childrenListForEdit,
-      component: ChildrenListForEdit,
-      options: {headerTitle: false},
-    },
-    {
-      name: screenNames.groupListForEdit,
-      component: GroupListForEdit,
-      options: {headerTitle: false},
+      name: screenNames.login,
+      component: Login,
+      options: {headerShown: false},
     },
   ];
 
@@ -83,7 +58,7 @@ const AppNavigation = props => {
     initialRouteName: screenNames.homeScreen,
     drawerContent: props => <DrawerContent {...props} />,
     screenOptions: {
-      headerShown: true,
+      headerShown: false,
       headerTitle: '',
       drawerType: 'front',
       headerRight: () => <Header />,
@@ -99,5 +74,4 @@ const AppNavigation = props => {
     </Drawer.Navigator>
   );
 };
-export default AppNavigation;
-
+export default AuthStack;

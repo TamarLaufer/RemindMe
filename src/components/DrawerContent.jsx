@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   useTheme,
   Avatar,
@@ -19,6 +19,7 @@ import {DrawerActions, useNavigation} from '@react-navigation/native';
 import sizes from '../utils/sizes';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
+import {useContextAuth} from '../Context/AuthContext';
 
 const DrawerContent = props => {
   const screens = {
@@ -27,6 +28,8 @@ const DrawerContent = props => {
   };
   const [active, setActive] = useState(screens.GROUPS);
   const navigation = useNavigation();
+  const {logout} = useContextAuth();
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -68,6 +71,13 @@ const DrawerContent = props => {
               labelStyle={styles.labelStyle}
             />
           </Drawer.Section>
+          <TouchableOpacity
+            // style={styles.registerrButton}
+            onPress={() => {
+              logout;
+            }}>
+            <Text style={styles.nameRegister}>{strings.logout}</Text>
+          </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
     </View>

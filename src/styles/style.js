@@ -15,13 +15,13 @@ export const styles = StyleSheet.create({
     height: sizes.PageHieght * 0.7,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ECECEC',
   },
   card: {
     margin: sizes.PageHieght * 0.04,
     width: sizes.PageWidth * 0.7,
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    backgroundColor: '#ECECEC',
   },
   input_Register: {
     textAlign: 'right',
