@@ -37,7 +37,9 @@ const [currentScreen, setCurrentScreen] = useState(null);
 const [loader, setLoader] = useState(false);
 const [groupByPress, setGroupByPress] = useState([]);
 const [mode, setMode] = useState(null);
+const [error, setError] = useState(null);
 const [userDetails, setUserDetails] = useState({});
+const [loggedUser, setLoggedUser] = useState({});
 
 const updateCurrentScreen = (screen, isEditFlag) => {
   setCurrentScreen(screen);
@@ -46,6 +48,10 @@ const updateCurrentScreen = (screen, isEditFlag) => {
 
 const updateModeForModal = mode => {
   setMode(mode);
+};
+
+const updateLoggedUser = user => {
+  setLoggedUser(user);
 };
 
 const userId = userDetails._id;
@@ -119,7 +125,6 @@ const getAllChildrenByGroup = groupId => {
 
 const addChild = values => {
   setLoader(true);
-
   console.log(values);
   const childWithGroupValue = {
     ...values,
@@ -289,14 +294,21 @@ const addUser = values => {
     ...values,
     phoneNumber: '+972' + values.phoneNumber,
   };
-  fetch(URLS.addUser(), {
+  fetch(URLS.register(), {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(userWithPhone972),
   })
-    .then(data => data.json())
+    .then(resData => {
+      if (!resData.ok) {
+        setError('The user cannot create');
+        setLoader(false);
+      }
+      return resData.json();
+    })
     .then(resJson => {
       updateCreatedUser(resJson);
+      setError(null);
       console.log('User post performed', resJson);
     })
     .catch(err => {
@@ -305,9 +317,31 @@ const addUser = values => {
   setLoader(false);
 };
 
+const login = () => {
+  setLoader(true);
+  console.log(values);
+  fetch(URLS.login(), {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(values),
+  })
+    .then(data => data.json())
+    .then(resJson => {
+      updateLoggedUser(resJson);
+      console.log('User login performed', resJson);
+    })
+    .catch(err => {
+      console.log(err, 'User login failed');
+    });
+  setLoader(false);
+};
+
 return (
   <ContextData.Provider
     value={{
+      userId,
+      login,
+      error,
       getAllChildren,
       getAllGroups,
       childrenList,

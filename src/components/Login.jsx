@@ -19,18 +19,7 @@ import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 
 const Login = () => {
-  const {
-    addGroup,
-    updateGroup,
-    showModal,
-    setShowModal,
-    popUp,
-    isEditMode,
-    isEditUserMode,
-    group,
-    addUser,
-    updateCreatedUser,
-  } = useContextData();
+  const {popUp, isEditMode, login} = useContextData();
 
   const initValues = {
     userName: '',
@@ -94,17 +83,8 @@ const Login = () => {
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
-        if (isEditMode) {
-          updateGroup(groupParams._id, values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.groupUpdatedSeccesfully);
-        } else {
-          addGroup(values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.groupAddedSeccesfully);
-        }
+        login(values);
+        popUp(strings.loginSuccess);
       },
     },
   };

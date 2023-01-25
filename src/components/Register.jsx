@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
-import {formikValues, strings} from '../utils/Strings';
+import {formikValues, screenNames, strings} from '../utils/Strings';
 import * as Yup from 'yup';
 import SubmitBtn from './btn/SubmitBtn';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -18,8 +18,11 @@ import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 import Logo from './Logo';
+import {URLS} from '../Api/urls';
+import {useNavigation} from '@react-navigation/native';
 
 const Register = () => {
+  const navigation = useNavigation();
   const {
     addGroup,
     updateGroup,
@@ -32,6 +35,7 @@ const Register = () => {
     addUser,
     updateCreatedUser,
     user,
+    error,
   } = useContextData();
 
   const initValues = {
@@ -117,11 +121,16 @@ const Register = () => {
       onSubmit: (values, actions) => {
         if (isEditMode) {
           // updateUser(groupParams._id, values);
-          // popUp(strings.groupUserUpdatedSeccesfully);
+          popUp(strings.userUpdatedSuccessfully);
           console.log('in edit mode');
         } else {
           addUser(values);
-          popUp(strings.userAddedSeccesfully);
+          // if (error !== null) {
+          //   popUp(strings.userNameAlreadyExist);
+          // } else {
+          //   popUp(strings.userAddedSuccessfully);
+          //   navigation.navigate(screenNames.groups, userId);
+          // }
         }
       },
     },
@@ -153,6 +162,7 @@ const Register = () => {
                   {isEditMode ? strings.editUser : strings.register}
                 </Text>
               </TouchableOpacity>
+              {error && <Text>{error}</Text>}
             </Card.Content>
           </Card>
         </View>

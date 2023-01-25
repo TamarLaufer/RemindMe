@@ -131,12 +131,12 @@ const Add = () => {
           updateChild(childParams._id, values);
           actions.resetForm();
           setShowModal(!showModal);
-          popUp(strings.childEditedSeccesfully);
+          popUp(strings.childEditedSuccessfully);
         } else {
           addChild(values);
           actions.resetForm();
           setShowModal(!showModal);
-          popUp(strings.childAddedSeccesfully);
+          popUp(strings.childAddedSuccessfully);
         }
       },
     },

@@ -94,12 +94,12 @@ const AddGroup = () => {
           updateGroup(groupParams._id, values);
           actions.resetForm();
           setShowModal(!showModal);
-          popUp(strings.groupUpdatedSeccesfully);
+          popUp(strings.groupUpdatedSuccessfully);
         } else {
           addGroup(values);
           actions.resetForm();
           setShowModal(!showModal);
-          popUp(strings.groupAddedSeccesfully);
+          popUp(strings.groupAddedSuccessfully);
         }
       },
     },
