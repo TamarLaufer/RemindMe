@@ -10,16 +10,18 @@ import {
 } from 'react-native';
 import {Formik} from 'formik';
 import {useContextData} from '../Context/ContextData';
-import {formikValues, strings} from '../utils/Strings';
+import {formikValues, screenNames, strings} from '../utils/Strings';
 import * as Yup from 'yup';
 import SubmitBtn from './btn/SubmitBtn';
 import {RFValue} from 'react-native-responsive-fontsize';
 import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
-  const {popUp, isEditMode, login} = useContextData();
+  const {popUp, isEditMode, login, loggedUser} = useContextData();
+  const navigation = useNavigation();
 
   const initValues = {
     userName: '',
@@ -85,6 +87,7 @@ const Login = () => {
       onSubmit: (values, actions) => {
         login(values);
         popUp(strings.loginSuccess);
+        navigation.navigate(screenNames.groups, navigation);
       },
     },
   };
@@ -114,6 +117,12 @@ const Login = () => {
                 onPress={formikProps.handleSubmit}
                 disabled={!formikProps.isValid}>
                 <Text style={styles.nameRegister}>{strings.login}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(screenNames.register);
+                }}>
+                <Text style={styles.link}>{strings.dontHaveAnAccountYet}</Text>
               </TouchableOpacity>
             </Card.Content>
           </Card>

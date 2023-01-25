@@ -317,7 +317,7 @@ const addUser = values => {
   setLoader(false);
 };
 
-const login = () => {
+const login = values => {
   setLoader(true);
   console.log(values);
   fetch(URLS.login(), {
@@ -325,9 +325,16 @@ const login = () => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(values),
   })
-    .then(data => data.json())
+    .then(data => {
+      if (!data.ok) {
+        setError('The user cannot login');
+        setLoader(false);
+      }
+      data.json();
+    })
     .then(resJson => {
       updateLoggedUser(resJson);
+      setError(null);
       console.log('User login performed', resJson);
     })
     .catch(err => {
@@ -339,6 +346,7 @@ const login = () => {
 return (
   <ContextData.Provider
     value={{
+      loggedUser,
       userId,
       login,
       error,

@@ -125,12 +125,11 @@ const Register = () => {
           console.log('in edit mode');
         } else {
           addUser(values);
-          // if (error !== null) {
-          //   popUp(strings.userNameAlreadyExist);
-          // } else {
-          //   popUp(strings.userAddedSuccessfully);
-          //   navigation.navigate(screenNames.groups, userId);
-          // }
+          if (error) {
+            popUp(strings.userNameAlreadyExist);
+          } else {
+            navigation.navigate(screenNames.login);
+          }
         }
       },
     },
@@ -161,6 +160,12 @@ const Register = () => {
                 <Text style={styles.nameRegister}>
                   {isEditMode ? strings.editUser : strings.register}
                 </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(screenNames.login);
+                }}>
+                <Text style={styles.link}>{strings.iAlreadyHaveAnAccount}</Text>
               </TouchableOpacity>
               {error && <Text>{error}</Text>}
             </Card.Content>

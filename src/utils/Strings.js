@@ -65,6 +65,8 @@ export const strings = {
   email: 'כתובת דוא"ל',
   addUser: 'הוספת גן',
   userNameAlreadyExist: 'שם המשתמש הזה כבר תפוס',
+  iAlreadyHaveAnAccount: 'כבר יש לי חשבון, קחו אותי למסך ההתחברות',
+  dontHaveAnAccountYet: 'עדיין אין לי חשבון, קחו אותי להרשמה',
 };
 
 export const screenNames = {

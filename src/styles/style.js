@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   cardContent: {
     marginBottom: '6%',
     width: sizes.PageWidth * 0.7,
-    height: sizes.PageHieght * 0.7,
+    height: sizes.PageHieght * 0.72,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -67,6 +67,11 @@ export const styles = StyleSheet.create({
   elevation: {
     elevation: 20,
     shadowColor: 'black',
+  },
+  link: {
+    fontSize: sizes.PageWidth * 0.015,
+    color: '#3F4E4F',
+    fontFamily: 'Fredoka-Medium',
   },
   buttonHover: {
     marginTop: 10,
