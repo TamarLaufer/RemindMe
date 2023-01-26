@@ -68,6 +68,11 @@ export const styles = StyleSheet.create({
     elevation: 20,
     shadowColor: 'black',
   },
+  logoutButton: {
+    marginTop: sizes.PageHieght * 0.19,
+    fontSize: sizes.PageWidth * 0.02,
+    fontFamily: 'Montserrat-Light',
+  },
   link: {
     fontSize: sizes.PageWidth * 0.015,
     color: '#3F4E4F',

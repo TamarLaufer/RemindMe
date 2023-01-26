@@ -18,9 +18,11 @@ import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import {useContextAuth} from '../Context/AuthContext';
 
 const Login = () => {
-  const {popUp, isEditMode, login, loggedUser} = useContextData();
+  const {popUp, isEditMode, loginFetch, loggedUser} = useContextData();
+  const {login} = useContextAuth();
   const navigation = useNavigation();
 
   const initValues = {
@@ -85,9 +87,9 @@ const Login = () => {
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
-        login(values);
+        loginFetch(values);
+        login();
         popUp(strings.loginSuccess);
-        navigation.navigate(screenNames.groups, navigation);
       },
     },
   };

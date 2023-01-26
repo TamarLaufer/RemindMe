@@ -71,13 +71,20 @@ const DrawerContent = props => {
               labelStyle={styles.labelStyle}
             />
           </Drawer.Section>
-          <TouchableOpacity
-            // style={styles.registerrButton}
-            onPress={() => {
-              logout;
-            }}>
-            <Text style={styles.nameRegister}>{strings.logout}</Text>
-          </TouchableOpacity>
+          <Drawer.Section style={styles.drawerSection}>
+            <DrawerItem
+              icon={() => (
+                <Avatar.Icon size={40} icon="logout" style={styles.close} />
+              )}
+              label={strings.logout}
+              onPress={() => {
+                logout();
+                navigation.dispatch(DrawerActions.closeDrawer());
+              }}
+              style={styles.logoutButton}
+              labelStyle={styles.labelStyle}
+            />
+          </Drawer.Section>
         </View>
       </DrawerContentScrollView>
     </View>

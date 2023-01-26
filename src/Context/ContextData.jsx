@@ -317,7 +317,7 @@ const addUser = values => {
   setLoader(false);
 };
 
-const login = values => {
+const loginFetch = values => {
   setLoader(true);
   console.log(values);
   fetch(URLS.login(), {
@@ -348,7 +348,7 @@ return (
     value={{
       loggedUser,
       userId,
-      login,
+      loginFetch,
       error,
       getAllChildren,
       getAllGroups,
