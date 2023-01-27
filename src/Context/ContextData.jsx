@@ -61,18 +61,19 @@ export const DataProvider = ({children}) => {
 
   const logout = () => {
     setUserToken(null);
-    AsyncStorage.removeItem(userToken);
-    AsyncStorage.removeItem(userInfo);
+    AsyncStorage.removeItem('userToken');
+    AsyncStorage.removeItem('userInfo');
   };
 
-  const isLoggedIn = () => {
+  const isLoggedIn = async () => {
     try {
-      const userInfo = JSON.parse(AsyncStorage.getItem('userInfo'));
-      const userToken = AsyncStorage.getItem('userToken');
+      let userInfo = await AsyncStorage.getItem('userInfo');
+      let userToken = await AsyncStorage.getItem('userToken');
+      userInfo = JSON.parse(userInfo);
 
       if (userInfo) {
         setUserToken(userToken);
-        setUserToken(userInfo);
+        setUserInfo(userInfo);
       }
     } catch (e) {
       console.log(`isLoggedIn error in ${e}`);
