@@ -20,7 +20,7 @@ import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
-  const {popUp, isEditMode, loggedUser, login, loginFetch} = useContextData();
+  const {popUp, isEditMode, loginFetch} = useContextData();
   const navigation = useNavigation();
 
   const initValues = {

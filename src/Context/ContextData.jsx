@@ -44,6 +44,7 @@ export const DataProvider = ({children}) => {
   const [isLoading, setIsLoding] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [loggedUser, setLoggedUser] = useState({});
+  const [userInfo, setUserInfo] = useState(null);
 
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);
@@ -59,16 +60,20 @@ export const DataProvider = ({children}) => {
   // };
 
   const logout = () => {
-    AsyncStorage.removeItem(userToken);
     setUserToken(null);
+    AsyncStorage.removeItem(userToken);
+    AsyncStorage.removeItem(userInfo);
   };
 
-  const isLoggedIn = async () => {
+  const isLoggedIn = () => {
     try {
-      setIsLoding(true);
-      const userToken = await AsyncStorage.getItem('userToken');
-      setUserToken(userToken);
-      setIsLoding(false);
+      const userInfo = JSON.parse(AsyncStorage.getItem('userInfo'));
+      const userToken = AsyncStorage.getItem('userToken');
+
+      if (userInfo) {
+        setUserToken(userToken);
+        setUserToken(userInfo);
+      }
     } catch (e) {
       console.log(`isLoggedIn error in ${e}`);
     }
@@ -78,7 +83,9 @@ export const DataProvider = ({children}) => {
     setMode(mode);
   };
 
-  const userId = userDetails._id;
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
   const image = require('../images/photo1.jpg');
 
@@ -120,10 +127,6 @@ export const DataProvider = ({children}) => {
         },
       },
     ]);
-
-  useEffect(() => {
-    isLoggedIn();
-  }, []);
 
   const getAllChildren = () => {
     setLoader(true);
@@ -248,7 +251,7 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setAllGroups(data);
-        console.log('data was added to group list');
+        console.log('groups added to the group list');
       })
       .catch(err => {
         console.log('getAllGroupsError', err);
@@ -257,18 +260,14 @@ export const DataProvider = ({children}) => {
   };
 
   const addGroup = values => {
-    const groupWithUserId = {
-      ...values,
-      user: userId,
-    };
     fetch(URLS.addGroup(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(groupWithUserId),
+      body: JSON.stringify(values),
     })
       .then(data => data.json())
       .then(resJson => {
-        // console.log('the post performed', resJson);
+        console.log('the post performed', resJson);
         const newList = [...groups, resJson];
         setAllGroups(newList);
       })
@@ -362,11 +361,11 @@ export const DataProvider = ({children}) => {
       })
       .then(resJson => {
         console.log('resJson login: ', resJson);
-        setUserToken(resJson.data);
-        AsyncStorage.setItem('userToken', resJson.data);
-        updateLoggedUser(resJson);
+        setUserInfo(resJson);
+        setUserToken(resJson.data.token);
+        AsyncStorage.setItem('userInfo', JSON.stringify(resJson));
+        AsyncStorage.setItem('userToken', resJson.data.token);
         setError(null);
-        console.log('User login performed', resJson);
       })
       .catch(err => {
         console.log(err, 'User login failed');
@@ -377,7 +376,6 @@ export const DataProvider = ({children}) => {
   return (
     <ContextData.Provider
       value={{
-        userId,
         error,
         getAllChildren,
         getAllGroups,
@@ -421,6 +419,9 @@ export const DataProvider = ({children}) => {
         isLoading,
         addUser,
         loginFetch,
+        userInfo,
+        updateLoggedUser,
+        isLoggedIn,
       }}>
       {children}
     </ContextData.Provider>

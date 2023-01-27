@@ -7,15 +7,17 @@ import {
   TouchableWithoutFeedback,
   Button,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import LottieView from 'lottie-react-native';
 import {styles} from '../styles/style';
 import {screenNames, strings} from '../utils/Strings';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
+import {useContextData} from '../Context/ContextData';
 
 const HomeSrcreen = () => {
   const navigation = useNavigation();
+  const {isLoggedIn} = useContextData();
   const AnimationRef = useRef(null);
   const _onPress = () => {
     if (AnimationRef) {

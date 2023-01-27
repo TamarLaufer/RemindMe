@@ -25,14 +25,14 @@ const AddGroup = () => {
     popUp,
     isEditMode,
     group,
-    user,
+    userInfo,
   } = useContextData();
 
   const initValues = {
     groupName: '',
     assistantName: '',
     childrenList: [],
-    user: '',
+    user: userInfo._id,
   };
   
 
