@@ -32,17 +32,17 @@ const Register = () => {
     isEditMode,
     isEditUserMode,
     group,
-    addUser,
     updateCreatedUser,
     user,
     error,
+    addUser,
   } = useContextData();
 
   const initValues = {
-    userName: '',
-    password: '',
-    phoneNumber: '',
-    email: '',
+    userName: 'מיכל',
+    password: 'hjhjhjhjhjh',
+    phoneNumber: '0526240776',
+    email: 'kjk@hjh.com',
     groupsList: [],
   };
 
@@ -115,7 +115,8 @@ const Register = () => {
 
   const params = {
     formik: {
-      initialValues: isEditMode ? groupParams : initValues,
+      // initialValues: isEditMode ? groupParams : initValues,
+      initialValues: initValues,
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
@@ -125,11 +126,6 @@ const Register = () => {
           console.log('in edit mode');
         } else {
           addUser(values);
-          if (error) {
-            popUp(strings.userNameAlreadyExist);
-          } else {
-            navigation.navigate(screenNames.login);
-          }
         }
       },
     },

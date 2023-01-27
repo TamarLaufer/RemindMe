@@ -19,7 +19,7 @@ import {DrawerActions, useNavigation} from '@react-navigation/native';
 import sizes from '../utils/sizes';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
-import {useContextAuth} from '../Context/AuthContext';
+import {useContextData} from '../Context/ContextData';
 
 const DrawerContent = props => {
   const screens = {
@@ -28,7 +28,7 @@ const DrawerContent = props => {
   };
   const [active, setActive] = useState(screens.GROUPS);
   const navigation = useNavigation();
-  const {logout} = useContextAuth();
+  const {logout} = useContextData();
 
   return (
     <View style={{flex: 1}}>

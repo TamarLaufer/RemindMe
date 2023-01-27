@@ -18,11 +18,9 @@ import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import {useContextAuth} from '../Context/AuthContext';
 
 const Login = () => {
-  const {popUp, isEditMode, loginFetch, loggedUser} = useContextData();
-  const {login} = useContextAuth();
+  const {popUp, isEditMode, loggedUser, login, loginFetch} = useContextData();
   const navigation = useNavigation();
 
   const initValues = {
@@ -40,8 +38,7 @@ const Login = () => {
       .required(strings.insertGroupName),
     password: Yup.string()
       .required(strings.noPasswordEntered)
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+      .min(6, strings.passwordTooShort),
   });
 
   const inputArr = [
@@ -88,7 +85,6 @@ const Login = () => {
       validateOnBlur: false,
       onSubmit: (values, actions) => {
         loginFetch(values);
-        login();
         popUp(strings.loginSuccess);
       },
     },

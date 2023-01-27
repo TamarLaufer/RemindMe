@@ -12,8 +12,8 @@ export const URLS = {
   getAllChildrenInGroup: groupId => `${mainURL}/child/${groupId}`,
   updateArrived: (id, isArrived) =>
     `${mainURL}/child/arrived/${id}?isChildArrived=${isArrived}`,
-  register: () => `${mainURL}/register/`,
+  register: () => `${mainURL}/register`,
   updateUser: userId => `${mainURL}/user/update-user/${userId}`,
-  login: () => `${mainURL}/login/`,
+  login: () => `${mainURL}/login`,
   getAllUsers: () => `${mainURL}/user`,
 };

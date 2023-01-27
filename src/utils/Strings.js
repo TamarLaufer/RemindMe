@@ -7,6 +7,7 @@ export const strings = {
   login: 'התחברות',
   loginSuccess: 'ההתחברות בוצעה בהצלחה',
   register: 'הרשמה',
+  passwordTooShort: 'סיסמה קצרה מדי, יש להכניס 6 תווים לפחות',
   addChild: 'הוספת ילד',
   editChild: 'עריכת ילד',
   removeChild: 'הסרת ילד',
@@ -67,6 +68,8 @@ export const strings = {
   userNameAlreadyExist: 'שם המשתמש הזה כבר תפוס',
   iAlreadyHaveAnAccount: 'כבר יש לי חשבון, קחו אותי למסך ההתחברות',
   dontHaveAnAccountYet: 'עדיין אין לי חשבון, קחו אותי להרשמה',
+  userAlreadyExist: 'שם המשתמש קיים כבר במערכת, נסה שם אחר',
+  userCannotLogin: 'לא ניתן להתחבר',
 };
 
 export const screenNames = {
