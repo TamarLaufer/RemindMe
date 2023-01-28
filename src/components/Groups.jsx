@@ -12,24 +12,29 @@ import {screenNames, strings} from '../utils/Strings';
 import ScreensModal from './ScreensModal';
 import {styles} from '../styles/style';
 import Loader from './Loader';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Groups = () => {
   const navigation = useNavigation();
   const {
     groups,
     image,
-    getAllGroups,
+    user,
+    getAllGroupsByUserId,
     showModal,
     setShowModal,
     getAllChildrenByGroup,
     updateCurrentScreen,
     switchScreens,
     loader,
+    userInfo,
   } = useContextData();
 
   useEffect(() => {
-    getAllGroups();
-  }, []);
+    if (userInfo) {
+      getAllGroupsByUserId(userInfo?._id);
+    }
+  }, [userInfo]);
 
   const OneButton = ({name, id}) => (
     <TouchableOpacity
@@ -51,6 +56,7 @@ const Groups = () => {
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       {groups.length > 0 ? (
         <View style={styles.container}>
+          <Text>{`${userInfo._id} שלום`}</Text>
           <View style={styles.containerButtons}>
             <FlatList
               numColumns={2}

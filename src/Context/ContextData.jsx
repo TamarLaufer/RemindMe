@@ -33,60 +33,31 @@ export const DataProvider = ({children}) => {
   const [group, setGroup] = useState([]);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isEditUserMode, setIsEditUserMode] = useState(false);
-  const [groups, setAllGroups] = useState([]);
+  const [groups, setGroups] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(null);
   const [loader, setLoader] = useState(false);
   const [groupByPress, setGroupByPress] = useState([]);
   const [mode, setMode] = useState(null);
   const [error, setError] = useState(null);
-  const [userDetails, setUserDetails] = useState({});
   const [isLoading, setIsLoding] = useState(false);
   const [userToken, setUserToken] = useState(null);
-  const [loggedUser, setLoggedUser] = useState({});
   const [userInfo, setUserInfo] = useState(null);
 
   const updateCurrentScreen = (screen, isEditFlag) => {
     setCurrentScreen(screen);
     setIsEditMode(isEditFlag);
   };
-  const updateLoggedUser = user => {
-    setLoggedUser(user);
-  };
-
-  // const login = () => {
-  //   setUserToken('1245656asdefd98');
-  //   AsyncStorage.setItem('userToken', '1245656asdefd98');
-  // };
 
   const logout = () => {
+    setUserInfo(null);
     setUserToken(null);
-    AsyncStorage.removeItem('userToken');
     AsyncStorage.removeItem('userInfo');
-  };
-
-  const isLoggedIn = async () => {
-    try {
-      let userInfo = await AsyncStorage.getItem('userInfo');
-      let userToken = await AsyncStorage.getItem('userToken');
-      userInfo = JSON.parse(userInfo);
-
-      if (userInfo) {
-        setUserToken(userToken);
-        setUserInfo(userInfo);
-      }
-    } catch (e) {
-      console.log(`isLoggedIn error in ${e}`);
-    }
   };
 
   const updateModeForModal = mode => {
     setMode(mode);
   };
-
-  useEffect(() => {
-    isLoggedIn();
-  }, []);
 
   const image = require('../images/photo1.jpg');
 
@@ -109,8 +80,11 @@ export const DataProvider = ({children}) => {
     setGroup(groupData);
   };
 
-  const updateCreatedUser = userData => {
-    setUserDetails(userData);
+  const insertUserData = userData => {
+    const newUser = {...userInfo, ...userData};
+    AsyncStorage.setItem('userInfo', JSON.stringify(newUser));
+    setUserInfo(newUser);
+    setUserToken(newUser.data.token);
   };
 
   const popUp = (textToDisplay, setStateOk, setStateCancel) =>
@@ -171,7 +145,6 @@ export const DataProvider = ({children}) => {
     })
       .then(data => data.json())
       .then(resJson => {
-        // console.log('the post performed', resJson);
         const newList = [...childrenList, resJson];
         setChildrenList(newList);
       })
@@ -202,7 +175,7 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => setChild(data))
       .catch(err => {
-        // console.log(err);
+        console.log(err);
       });
   };
 
@@ -246,12 +219,12 @@ export const DataProvider = ({children}) => {
       });
   };
 
-  const getAllGroups = () => {
+  const getAllGroupsByUserId = userId => {
     setLoader(true);
-    fetch(URLS.getAllGroupsFetch())
+    fetch(URLS.getAllGroupsByUserId(userId))
       .then(response => response.json())
       .then(data => {
-        setAllGroups(data);
+        setGroups(data);
         console.log('groups added to the group list');
       })
       .catch(err => {
@@ -270,7 +243,7 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         console.log('the post performed', resJson);
         const newList = [...groups, resJson];
-        setAllGroups(newList);
+        setGroups(newList);
       })
       .catch(err => {
         console.log(err, 'the post failed');
@@ -288,7 +261,7 @@ export const DataProvider = ({children}) => {
         // console.log('resJson', resJson);
         const listWithoutGroup = groups.filter(group => group._id !== id);
         const newList = [...listWithoutGroup, resJson];
-        setAllGroups(newList);
+        setGroups(newList);
       })
       .catch(err => {
         console.log(err);
@@ -303,7 +276,7 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         // console.log('resJson', resJson);
         const newList = groups.filter(group => group._id !== id);
-        setAllGroups(newList);
+        setGroups(newList);
         const newChildrenList = childrenList.filter(
           child => resJson.childrenList.include(child._id) === false,
         );
@@ -339,7 +312,6 @@ export const DataProvider = ({children}) => {
           setLoader(false);
           return;
         }
-        updateCreatedUser(resJson);
         setError(null);
         navigate(screenNames.login);
         console.log('User post performed', resJson);
@@ -362,10 +334,7 @@ export const DataProvider = ({children}) => {
       })
       .then(resJson => {
         console.log('resJson login: ', resJson);
-        setUserInfo(resJson);
-        setUserToken(resJson.data.token);
-        AsyncStorage.setItem('userInfo', JSON.stringify(resJson));
-        AsyncStorage.setItem('userToken', resJson.data.token);
+        insertUserData(resJson);
         setError(null);
       })
       .catch(err => {
@@ -379,7 +348,8 @@ export const DataProvider = ({children}) => {
       value={{
         error,
         getAllChildren,
-        getAllGroups,
+        // getAllGroups,
+        getAllGroupsByUserId,
         childrenList,
         setChildrenList,
         addChild,
@@ -411,7 +381,6 @@ export const DataProvider = ({children}) => {
         mode,
         updateModeForModal,
         allModesForModal,
-        updateCreatedUser,
         setLoader,
         error,
         setError,
@@ -421,8 +390,8 @@ export const DataProvider = ({children}) => {
         addUser,
         loginFetch,
         userInfo,
-        updateLoggedUser,
-        isLoggedIn,
+        setUserInfo,
+        setUserToken,
       }}>
       {children}
     </ContextData.Provider>

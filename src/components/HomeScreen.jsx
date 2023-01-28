@@ -14,10 +14,10 @@ import {screenNames, strings} from '../utils/Strings';
 import {useNavigation} from '@react-navigation/native';
 import * as Animatable from 'react-native-animatable';
 import {useContextData} from '../Context/ContextData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeSrcreen = () => {
   const navigation = useNavigation();
-  const {isLoggedIn} = useContextData();
   const AnimationRef = useRef(null);
   const _onPress = () => {
     if (AnimationRef) {

@@ -32,7 +32,6 @@ const Register = () => {
     isEditMode,
     isEditUserMode,
     group,
-    updateCreatedUser,
     user,
     error,
     addUser,

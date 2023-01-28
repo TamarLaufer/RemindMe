@@ -80,7 +80,7 @@ const AppNavigation = props => {
   };
   // Drawer params
   const drawerParams = {
-    initialRouteName: screenNames.homeScreen,
+    initialRouteName: screenNames.groups,
     drawerContent: props => <DrawerContent {...props} />,
     screenOptions: {
       headerShown: true,
