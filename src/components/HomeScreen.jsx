@@ -27,7 +27,6 @@ const HomeSrcreen = () => {
 
   return (
     <>
-      {/* <Text style={styles.header}>{strings.welcome}</Text> */}
       <View
         style={[StyleSheet.absoluteFillObject, styles.centeredViewLoaderHome]}>
         <Image
@@ -46,7 +45,7 @@ const HomeSrcreen = () => {
           }}>
           <Animatable.View
             animation="slideInDown"
-            iterationCount={3}
+            iterationCount={1}
             direction="alternate"
             style={styles.registerButton}>
             <Text style={styles.nameRegister}>{strings.enter}</Text>

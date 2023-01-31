@@ -32,6 +32,7 @@ const Groups = () => {
 
   useEffect(() => {
     if (userInfo) {
+      console.log('123123', userInfo);
       getAllGroupsByUserId(userInfo?._id);
     }
   }, [userInfo]);
@@ -56,7 +57,7 @@ const Groups = () => {
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       {groups.length > 0 ? (
         <View style={styles.container}>
-          <Text>{`${userInfo._id} שלום`}</Text>
+          <Text>{`שלום ${userInfo.userName}`}</Text>
           <View style={styles.containerButtons}>
             <FlatList
               numColumns={2}

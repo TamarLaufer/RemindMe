@@ -26,6 +26,7 @@ const AppNav = () => {
   };
 
   useEffect(() => {
+    console.log('userToken', userToken);
     isUserLoggedIn();
   }, []);
 

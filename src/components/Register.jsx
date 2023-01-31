@@ -52,8 +52,10 @@ const Register = () => {
       .required(strings.insertGroupName),
     password: Yup.string()
       .required(strings.noPasswordEntered)
-      .min(8, 'Password is too short - should be 8 chars minimum.')
-      .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+      .min(5, strings.passwordTooShort),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], strings.passwordMustMatch)
+      .required(strings.pleaseConfirmPassword),
     phoneNumber: Yup.string()
       .matches(
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
@@ -78,6 +80,12 @@ const Register = () => {
     },
     {
       style: styles.input_Register,
+      placeholder: strings.confirmPassword,
+      value: formikValues.confirmPassword,
+      keyboardType: 'default',
+    },
+    {
+      style: styles.input_Register,
       placeholder: strings.email,
       value: formikValues.email,
       keyboardType: 'default',
@@ -94,7 +102,10 @@ const Register = () => {
     return inputArray?.map((input, index) => (
       <View key={index}>
         <TextInput
-          secureTextEntry={input.value === formikValues.password && true}
+          secureTextEntry={
+            input.value === formikValues.password ||
+            (input.value === formikValues.confirmPassword && true)
+          }
           style={input.style}
           placeholder={input.placeholder}
           onChangeText={formikProps.handleChange(input.value)}

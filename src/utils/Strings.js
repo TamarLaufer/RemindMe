@@ -7,7 +7,7 @@ export const strings = {
   login: 'התחברות',
   loginSuccess: 'ההתחברות בוצעה בהצלחה',
   register: 'הרשמה',
-  passwordTooShort: 'סיסמה קצרה מדי, יש להכניס 6 תווים לפחות',
+  passwordTooShort: 'סיסמה קצרה מדי, יש להכניס 5 תווים לפחות',
   addChild: 'הוספת ילד',
   editChild: 'עריכת ילד',
   removeChild: 'הסרת ילד',
@@ -70,6 +70,9 @@ export const strings = {
   dontHaveAnAccountYet: 'עדיין אין לי חשבון, קחו אותי להרשמה',
   userAlreadyExist: 'שם המשתמש קיים כבר במערכת, נסה שם אחר',
   userCannotLogin: 'לא ניתן להתחבר',
+  passwordMustMatch: 'הסיסמה חייבת להתאים',
+  confirmPassword: 'אימות סיסמה',
+  pleaseConfirmPassword: 'נא לאמת סיסמה',
 };
 
 export const screenNames = {
@@ -102,4 +105,5 @@ export const formikValues = {
   password: 'password',
   email: 'email',
   phoneNumber: 'phoneNumber',
+  confirmPassword: 'confirmPassword',
 };
