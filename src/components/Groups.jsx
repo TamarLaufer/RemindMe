@@ -11,23 +11,22 @@ import {useContextData} from '../Context/ContextData';
 import {screenNames, strings} from '../utils/Strings';
 import ScreensModal from './ScreensModal';
 import {styles} from '../styles/style';
-import Loader from './Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Loader from './Loader';
 
 const Groups = () => {
   const navigation = useNavigation();
   const {
     groups,
     image,
-    user,
     getAllGroupsByUserId,
     showModal,
     setShowModal,
     getAllChildrenByGroup,
     updateCurrentScreen,
     switchScreens,
-    loader,
     userInfo,
+    setLoader,
   } = useContextData();
 
   useEffect(() => {
@@ -66,7 +65,6 @@ const Groups = () => {
               scrollToItem={{animated: true, viewPosition: 0.5}}
             />
           </View>
-          {loader ? <Loader /> : null}
         </View>
       ) : (
         <View style={styles.container}>
@@ -79,7 +77,6 @@ const Groups = () => {
             }}>
             <Text style={styles.bigName}>{strings.addGroup}</Text>
           </TouchableOpacity>
-          {loader ? <Loader /> : null}
         </View>
       )}
       {showModal && <ScreensModal />}

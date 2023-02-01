@@ -18,10 +18,9 @@ import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import Loader from './Loader';
 
 const Login = () => {
-  const {popUp, isEditMode, loginFetch, loader} = useContextData();
+  const {popUp, isEditMode, loginFetch} = useContextData();
   const navigation = useNavigation();
 
   const initValues = {
@@ -34,8 +33,8 @@ const Login = () => {
 
   const SignupSchema = Yup.object().shape({
     userName: Yup.string()
-      .min(2, strings.tooShortGroupName)
-      .max(15, strings.tooLongGroupName)
+      .min(2, strings.tooShortName)
+      .max(15, strings.tooLongName)
       .required(strings.insertGroupName),
     password: Yup.string()
       .required(strings.noPasswordEntered)
@@ -125,7 +124,6 @@ const Login = () => {
               </TouchableOpacity>
             </Card.Content>
           </Card>
-          {loader ? <Loader /> : null}
         </View>
       )}
     </Formik>

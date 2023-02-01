@@ -120,7 +120,7 @@ export const styles = StyleSheet.create({
     shadowColor: 'black',
   },
   logoutButton: {
-    marginTop: sizes.PageHieght * 0.19,
+    marginTop: sizes.PageHieght * 0.15,
     fontSize: sizes.PageWidth * 0.02,
     fontFamily: 'Montserrat-Light',
   },
@@ -194,6 +194,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+    backgroundColor: 'white',
   },
   centeredViewLoaderHome: {
     flex: 1,
@@ -375,7 +376,7 @@ export const styles = StyleSheet.create({
     borderColor: '#83A3C2',
   },
   placeholderStyle: {
-    fontSize: sizes.PageWidth * 0.015,
+    fontSize: sizes.PageWidth * 0.022,
     color: 'black',
   },
   selectedTextStyle: {

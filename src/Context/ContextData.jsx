@@ -40,7 +40,6 @@ export const DataProvider = ({children}) => {
   const [groupByPress, setGroupByPress] = useState([]);
   const [mode, setMode] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoding] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -50,9 +49,11 @@ export const DataProvider = ({children}) => {
   };
 
   const logout = () => {
+    setLoader(true);
     setUserInfo(null);
     setUserToken(null);
     AsyncStorage.removeItem('userInfo');
+    setLoader(false);
   };
 
   const updateModeForModal = mode => {
@@ -95,12 +96,12 @@ export const DataProvider = ({children}) => {
           setStateOk;
         },
       },
-      {
-        text: strings.cancel,
-        onPress: () => {
-          setStateCancel;
-        },
-      },
+      // {
+      //   text: strings.cancel,
+      //   onPress: () => {
+      //     setStateCancel;
+      //   },
+      // },
     ]);
 
   const getAllChildren = () => {
@@ -109,11 +110,12 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
+        setLoader(false);
       })
       .catch(err => {
         console.log('getAllChildrenError', err);
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   const getAllChildrenByGroup = groupId => {
@@ -122,11 +124,12 @@ export const DataProvider = ({children}) => {
       .then(response => response.json())
       .then(data => {
         setChildrenList(data);
+        setLoader(false);
       })
       .catch(err => {
         console.log('getAllChildrenError', err);
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   const addChild = values => {
@@ -147,11 +150,12 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         const newList = [...childrenList, resJson];
         setChildrenList(newList);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err, 'the post failed');
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   const removeChild = id => {
@@ -163,23 +167,30 @@ export const DataProvider = ({children}) => {
       .then(resJson => {
         const newList = childrenList.filter(child => child._id !== id);
         setChildrenList(newList);
+        setLoader(false);
       })
       .catch(err => {
         console.log('removeChildError', err);
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   const getChildById = id => {
+    setLoader(true);
     fetch(URLS.getChildById(id))
       .then(response => response.json())
-      .then(data => setChild(data))
+      .then(data => {
+        setChild(data);
+        setLoader(false);
+      })
       .catch(err => {
         console.log(err);
+        setLoader(false);
       });
   };
 
   const updateChildIfArrived = (id, isArrived) => {
+    setLoader(true);
     fetch(URLS.updateArrived(id, isArrived), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -191,15 +202,20 @@ export const DataProvider = ({children}) => {
         const child = childrenList.find(child => child._id === id);
         child.isArrived = isArrived;
         setChildrenList([...newList, child]);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err);
+        setLoader(false);
       });
   };
 
   const updateChild = (id, values) => {
+    setLoader(true);
     const childWithGroupValue = {
       ...values,
+      parentPhone: '+972' + values.parentPhone,
+      parent2Phone: '+972' + values.parent2Phone,
       group: values.group.value,
     };
     fetch(URLS.updateChild(id), {
@@ -213,9 +229,11 @@ export const DataProvider = ({children}) => {
         const listWithoutId = childrenList.filter(child => child._id !== id);
         const newList = [...listWithoutId, resJson];
         setChildrenList(newList);
+        setLoader(false);
       })
       .catch(err => {
         console.log('the update failed', err);
+        setLoader(false);
       });
   };
 
@@ -226,14 +244,16 @@ export const DataProvider = ({children}) => {
       .then(data => {
         setGroups(data);
         console.log('groups added to the group list');
+        setLoader(false);
       })
       .catch(err => {
         console.log('getAllGroupsError', err);
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   const addGroup = values => {
+    setLoader(true);
     fetch(URLS.addGroup(), {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -244,13 +264,16 @@ export const DataProvider = ({children}) => {
         console.log('the post performed', resJson);
         const newList = [...groups, resJson];
         setGroups(newList);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err, 'the post failed');
+        setLoader(false);
       });
   };
 
   const updateGroup = (id, values) => {
+    setLoader(true);
     fetch(URLS.updateGroup(id), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -262,13 +285,16 @@ export const DataProvider = ({children}) => {
         const listWithoutGroup = groups.filter(group => group._id !== id);
         const newList = [...listWithoutGroup, resJson];
         setGroups(newList);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err);
+        setLoader(false);
       });
   };
 
   const removeGroup = id => {
+    setLoader(true);
     fetch(URLS.removeGroup(id), {
       method: 'DELETE',
     })
@@ -282,9 +308,11 @@ export const DataProvider = ({children}) => {
         );
         setChildrenList(newChildrenList);
         console.log(newChildrenList);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err);
+        setLoader(false);
       });
   };
 
@@ -314,12 +342,13 @@ export const DataProvider = ({children}) => {
         }
         setError(null);
         navigate(screenNames.login);
+        setLoader(false);
         console.log('User post performed', resJson);
       })
       .catch(err => {
+        setLoader(false);
         console.log('err addUser: ', err);
       });
-    setLoader(false);
   };
 
   const loginFetch = values => {
@@ -336,11 +365,12 @@ export const DataProvider = ({children}) => {
         console.log('resJson login: ', resJson);
         insertUserData(resJson);
         setError(null);
+        setLoader(false);
       })
       .catch(err => {
         console.log('User login failed', err);
+        setLoader(false);
       });
-    setLoader(false);
   };
 
   return (
@@ -386,7 +416,6 @@ export const DataProvider = ({children}) => {
         setError,
         logout,
         userToken,
-        isLoading,
         addUser,
         loginFetch,
         userInfo,

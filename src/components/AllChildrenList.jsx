@@ -12,7 +12,6 @@ import {
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
 import OneChild from './OneChild';
-import Loader from './Loader';
 import sizes from '../utils/sizes';
 import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
@@ -20,7 +19,6 @@ import {styles} from '../styles/style';
 const AllChildrenList = ({onPress}) => {
   const {
     childrenList,
-    loader,
     image,
     setShowModal,
     updateCurrentScreen,
@@ -64,7 +62,6 @@ const AllChildrenList = ({onPress}) => {
               keyExtractor={item => item._id}
             />
           </View>
-          {loader ? <Loader /> : null}
         </View>
       ) : (
         <View style={styles.container}>
@@ -77,7 +74,6 @@ const AllChildrenList = ({onPress}) => {
             }}>
             <Text style={styles.bigName}>{strings.addChild}</Text>
           </TouchableOpacity>
-          {loader ? <Loader /> : null}
         </View>
       )}
     </ImageBackground>

@@ -40,12 +40,12 @@ const AddGroup = () => {
 
   const SignupSchema = Yup.object().shape({
     groupName: Yup.string()
-      .min(2, strings.tooShortGroupName)
-      .max(15, strings.tooLongGroupName)
+      .min(2, strings.tooShortName)
+      .max(15, strings.tooLongName)
       .required(strings.insertGroupName),
     assistantName: Yup.string()
-      .min(2, strings.tooShortLastName)
-      .max(15, strings.tooLongLastName),
+      .min(2, strings.tooShortName)
+      .max(15, strings.tooLongName),
   });
 
   const inputArr = [

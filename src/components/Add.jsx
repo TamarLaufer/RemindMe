@@ -7,7 +7,6 @@ import {useContextData} from '../Context/ContextData';
 import {formikValues, strings} from '../utils/Strings';
 import SubmitBtn from './btn/SubmitBtn';
 import {styles} from '../styles/style';
-import Loader from './Loader';
 
 const Add = () => {
   const {
@@ -19,7 +18,6 @@ const Add = () => {
     isEditMode,
     groups,
     updateChild,
-    loader,
   } = useContextData();
 
   const initValues = {
@@ -49,8 +47,8 @@ const Add = () => {
       .max(15, strings.tooLongName)
       .required(strings.insertFirstName),
     lastName: Yup.string()
-      .min(2, strings.tooShortLastName)
-      .max(15, strings.tooLongLastName)
+      .min(2, strings.tooShortName)
+      .max(15, strings.tooLongName)
       .required(strings.insertLastName),
     address: Yup.string(),
     parentPhone: Yup.string()
@@ -127,19 +125,17 @@ const Add = () => {
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
-          if (isEditMode) {
-            updateChild(childParams._id, values);
-            actions.resetForm();
-            setShowModal(!showModal);
-            popUp(strings.childEditedSuccessfully);
-          } else {
-            addChild(values);
-            actions.resetForm();
-            setShowModal(!showModal);
-            popUp(strings.childAddedSuccessfully);
-          }
-        
-        
+        if (isEditMode) {
+          updateChild(childParams._id, values);
+          actions.resetForm();
+          setShowModal(!showModal);
+          popUp(strings.childEditedSuccessfully);
+        } else {
+          addChild(values);
+          actions.resetForm();
+          setShowModal(!showModal);
+          popUp(strings.childAddedSuccessfully);
+        }
       },
     },
     dropDown: formikProps => ({
@@ -182,7 +178,6 @@ const Add = () => {
             onPress={formikProps.handleSubmit}
             disabled={!formikProps.isValid}
           />
-          {loader ? <Loader /> : null}
         </View>
       )}
     </Formik>
