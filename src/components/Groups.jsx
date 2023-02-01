@@ -57,7 +57,6 @@ const Groups = () => {
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       {groups.length > 0 ? (
         <View style={styles.container}>
-          <Text>{`שלום ${userInfo.userName}`}</Text>
           <View style={styles.containerButtons}>
             <FlatList
               numColumns={2}

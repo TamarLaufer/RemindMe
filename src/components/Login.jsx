@@ -18,9 +18,10 @@ import sizes from '../utils/sizes';
 import {styles} from '../styles/style';
 import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import Loader from './Loader';
 
 const Login = () => {
-  const {popUp, isEditMode, loginFetch} = useContextData();
+  const {popUp, isEditMode, loginFetch, loader} = useContextData();
   const navigation = useNavigation();
 
   const initValues = {
@@ -38,18 +39,18 @@ const Login = () => {
       .required(strings.insertGroupName),
     password: Yup.string()
       .required(strings.noPasswordEntered)
-      .min(6, strings.passwordTooShort),
+      .min(5, strings.passwordTooShort),
   });
 
   const inputArr = [
     {
-      style: styles.input_Register,
+      style: styles.input_Login,
       placeholder: strings.userName,
       value: formikValues.userName,
       keyboardType: 'default',
     },
     {
-      style: styles.input_Register,
+      style: styles.input_Login,
       placeholder: strings.password,
       value: formikValues.password,
       keyboardType: 'default',
@@ -107,7 +108,7 @@ const Login = () => {
                   {strings.login}
                 </Text>
               </View>
-              <View style={styles.inputRegisterContainer}>
+              <View style={styles.inputLoginContainer}>
                 {renderInputsAndErrors(inputArr, formikProps)}
               </View>
               <TouchableOpacity
@@ -124,6 +125,7 @@ const Login = () => {
               </TouchableOpacity>
             </Card.Content>
           </Card>
+          {loader ? <Loader /> : null}
         </View>
       )}
     </Formik>

@@ -7,6 +7,7 @@ import {
   Text,
   ImageBackground,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {useContextData} from '../Context/ContextData';
 import {strings} from '../utils/Strings';
@@ -17,7 +18,14 @@ import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
 import {styles} from '../styles/style';
 
 const AllChildrenList = ({onPress}) => {
-  const {childrenList, loader, image} = useContextData();
+  const {
+    childrenList,
+    loader,
+    image,
+    setShowModal,
+    updateCurrentScreen,
+    switchScreens,
+  } = useContextData();
 
   const sortByStrAsc = [...childrenList].sort((a, b) =>
     a.lastName > b.lastName ? 1 : -1,
@@ -44,17 +52,34 @@ const AllChildrenList = ({onPress}) => {
 
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-      <View style={styles.container}>
-        <Text style={styles.header}>{strings.chooseChild}</Text>
-        <FlatList
-          numColumns={numColumns()}
-          key={numColumns()}
-          data={sortByStrAsc}
-          renderItem={renderChildren}
-          keyExtractor={item => item._id}
-        />
-        {loader ? <Loader /> : null}
-      </View>
+      {childrenList.length > 0 ? (
+        <View style={styles.container}>
+          <Text style={styles.header}>{strings.chooseChild}</Text>
+          <View>
+            <FlatList
+              numColumns={numColumns()}
+              key={numColumns()}
+              data={sortByStrAsc}
+              renderItem={renderChildren}
+              keyExtractor={item => item._id}
+            />
+          </View>
+          {loader ? <Loader /> : null}
+        </View>
+      ) : (
+        <View style={styles.container}>
+          <Text style={styles.header}>{strings.noChildrenInGroup}</Text>
+          <TouchableOpacity
+            style={styles.bigButton}
+            onPress={() => {
+              setShowModal(true);
+              updateCurrentScreen(switchScreens.ADD_CHILD);
+            }}>
+            <Text style={styles.bigName}>{strings.addChild}</Text>
+          </TouchableOpacity>
+          {loader ? <Loader /> : null}
+        </View>
+      )}
     </ImageBackground>
   );
 };

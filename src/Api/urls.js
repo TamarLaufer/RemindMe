@@ -1,4 +1,4 @@
-const mainURL = `http://10.100.102.12:3000`;
+const mainURL = `https://tamarlaufer-remindme-backend.onrender.com`;
 
 export const URLS = {
   getAllChildren: () => `${mainURL}/child`,

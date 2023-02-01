@@ -73,6 +73,8 @@ export const strings = {
   passwordMustMatch: 'הסיסמה חייבת להתאים',
   confirmPassword: 'אימות סיסמה',
   pleaseConfirmPassword: 'נא לאמת סיסמה',
+  AddGroupFirst: 'יש להוסיף קבוצה קודם',
+  noChildrenInGroup: 'אין ילדים בקבוצה',
 };
 
 export const screenNames = {

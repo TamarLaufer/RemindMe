@@ -338,7 +338,7 @@ export const DataProvider = ({children}) => {
         setError(null);
       })
       .catch(err => {
-        console.log(err, 'User login failed');
+        console.log('User login failed', err);
       });
     setLoader(false);
   };

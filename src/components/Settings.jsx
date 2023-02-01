@@ -21,14 +21,20 @@ const Settings = () => {
     allModesForModal,
     image,
     updateModeForModal,
+    groups,
+    popUp,
   } = useContextData();
 
   const btnDataArr = [
     {
       text: strings.addChild,
       onPress: () => {
-        setShowModal(true);
-        updateCurrentScreen(switchScreens.ADD_CHILD, false); //'Add' Component
+        if (groups.length > 0) {
+          setShowModal(true);
+          updateCurrentScreen(switchScreens.ADD_CHILD, false); //'Add' Component
+        } else {
+          popUp(strings.AddGroupFirst);
+        }
       },
     },
     {

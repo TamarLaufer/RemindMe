@@ -38,10 +38,10 @@ const Register = () => {
   } = useContextData();
 
   const initValues = {
-    userName: 'מיכל',
-    password: 'hjhjhjhjhjh',
-    phoneNumber: '0526240776',
-    email: 'kjk@hjh.com',
+    userName: '',
+    password: '',
+    phoneNumber: '',
+    email: '',
     groupsList: [],
   };
 
@@ -67,15 +67,9 @@ const Register = () => {
 
   const inputArr = [
     {
-      style: styles.input_Register,
+      style: styles.input_Register_Name,
       placeholder: strings.userName,
       value: formikValues.userName,
-      keyboardType: 'default',
-    },
-    {
-      style: styles.input_Register,
-      placeholder: strings.password,
-      value: formikValues.password,
       keyboardType: 'default',
     },
     {
@@ -84,6 +78,13 @@ const Register = () => {
       value: formikValues.confirmPassword,
       keyboardType: 'default',
     },
+    {
+      style: styles.input_Register,
+      placeholder: strings.password,
+      value: formikValues.password,
+      keyboardType: 'default',
+    },
+
     {
       style: styles.input_Register,
       placeholder: strings.email,
@@ -147,7 +148,7 @@ const Register = () => {
         <View style={styles.registerContainer}>
           <Card style={styles.card}>
             <Card.Content style={styles.cardContent}>
-              <View style={styles.logoAndHeadeRegister}>
+              <View style={styles.logoAndHeaderRegister}>
                 <Image
                   style={styles.logoSizeRegister}
                   source={require('../images/remindMe1.png')}

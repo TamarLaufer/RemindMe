@@ -127,17 +127,19 @@ const Add = () => {
       validationSchema: SignupSchema,
       validateOnBlur: false,
       onSubmit: (values, actions) => {
-        if (isEditMode) {
-          updateChild(childParams._id, values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.childEditedSuccessfully);
-        } else {
-          addChild(values);
-          actions.resetForm();
-          setShowModal(!showModal);
-          popUp(strings.childAddedSuccessfully);
-        }
+          if (isEditMode) {
+            updateChild(childParams._id, values);
+            actions.resetForm();
+            setShowModal(!showModal);
+            popUp(strings.childEditedSuccessfully);
+          } else {
+            addChild(values);
+            actions.resetForm();
+            setShowModal(!showModal);
+            popUp(strings.childAddedSuccessfully);
+          }
+        
+        
       },
     },
     dropDown: formikProps => ({
