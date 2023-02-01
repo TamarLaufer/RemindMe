@@ -47,31 +47,47 @@ const Settings = () => {
     {
       text: strings.editChild,
       onPress: () => {
-        setShowModal(true);
-        updateCurrentScreen(switchScreens.GROUP_FOR_EDIT_CHILD, true); //'ChildrenListForEdit' Component
-        updateModeForModal(allModesForModal.EDIT_CHILD);
+        if (groups.length > 0) {
+          setShowModal(true);
+          updateCurrentScreen(switchScreens.GROUP_FOR_EDIT_CHILD, true); //'ChildrenListForEdit' Component
+          updateModeForModal(allModesForModal.EDIT_CHILD);
+        } else {
+          popUp(strings.AddGroupFirst);
+        }
       },
     },
     {
       text: strings.editGroup,
       onPress: () => {
+        if (groups.length > 0) {
         setShowModal(true);
         updateCurrentScreen(switchScreens.EDIT_GROUP_LIST, true); //'GroupListForEdit' Component
+        } else {
+          popUp(strings.AddGroupFirst);
+        }
       },
     },
     {
       text: strings.removeChild,
       onPress: () => {
+        if (groups.length > 0) {
         setShowModal(true);
         updateCurrentScreen(switchScreens.GROUP_FOR_EDIT_CHILD); //'RemoveChild' Component
         updateModeForModal(allModesForModal.REMOVE_CHILD);
+        } else {
+          popUp(strings.AddGroupFirst);
+        }
       },
     },
     {
       text: strings.removeGroup,
       onPress: () => {
+        if (groups.length > 0) {
         setShowModal(true);
         updateCurrentScreen(switchScreens.REMOVE_GROUP); //'RemoveGroup' Component
+        } else {
+          popUp(strings.AddGroupFirst);
+        }
       },
     },
   ];
