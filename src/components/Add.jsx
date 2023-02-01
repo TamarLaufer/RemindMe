@@ -106,6 +106,7 @@ const Add = () => {
           onBlur={formikProps.handleBlur(input.value)}
           style={input.style}
           placeholder={input.placeholder}
+          placeholderTextColor={'#73777B'}
           onChangeText={formikProps.handleChange(input.value)}
           value={formikProps.values[input.value]}
           keyboardType={input.keyboardType}

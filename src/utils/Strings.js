@@ -6,6 +6,7 @@ export const strings = {
   registerToSystem: 'הרשמה למערכת',
   login: 'התחברות',
   loginSuccess: 'ההתחברות בוצעה בהצלחה',
+  loginFailed: 'ההתחברות נכשלה, בדוק את פרטי המשתמש',
   register: 'הרשמה',
   passwordTooShort: 'סיסמה קצרה מדי, יש להכניס 5 תווים לפחות',
   addChild: 'הוספת ילד',
@@ -71,6 +72,7 @@ export const strings = {
   pleaseConfirmPassword: 'נא לאמת סיסמה',
   AddGroupFirst: 'יש להוסיף קבוצה קודם',
   noChildrenInGroup: 'אין ילדים בקבוצה',
+  userNotExist: 'המשתמש לא קיים במערכת, נסה שוב',
 };
 
 export const screenNames = {

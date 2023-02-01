@@ -20,7 +20,7 @@ import {Avatar, Button, Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
-  const {popUp, isEditMode, loginFetch} = useContextData();
+  const {popUp, isEditMode, loginFetch, error} = useContextData();
   const navigation = useNavigation();
 
   const initValues = {
@@ -63,6 +63,7 @@ const Login = () => {
           secureTextEntry={input.value === formikValues.password && true}
           style={input.style}
           placeholder={input.placeholder}
+          placeholderTextColor={'#73777B'}
           onChangeText={formikProps.handleChange(input.value)}
           value={formikProps.values[input.value]}
           keyboardType={input.keyboardType}
@@ -85,7 +86,6 @@ const Login = () => {
       validateOnBlur: false,
       onSubmit: (values, actions) => {
         loginFetch(values);
-        popUp(strings.loginSuccess);
       },
     },
   };

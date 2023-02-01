@@ -467,7 +467,7 @@ export const styles = StyleSheet.create({
     marginRight: 3,
   },
   drawerSection: {
-    marginTop: sizes.PageHieght * 0.05,
+    marginTop: '1%',
   },
   drawerContent: {
     flex: 1,

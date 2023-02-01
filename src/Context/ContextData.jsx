@@ -190,7 +190,6 @@ export const DataProvider = ({children}) => {
   };
 
   const updateChildIfArrived = (id, isArrived) => {
-    setLoader(true);
     fetch(URLS.updateArrived(id, isArrived), {
       method: 'PATCH',
       headers: {'Content-Type': 'application/json'},
@@ -206,7 +205,6 @@ export const DataProvider = ({children}) => {
       })
       .catch(err => {
         console.log(err);
-        setLoader(false);
       });
   };
 
@@ -366,8 +364,11 @@ export const DataProvider = ({children}) => {
         insertUserData(resJson);
         setError(null);
         setLoader(false);
+        popUp(strings.loginSuccess);
       })
       .catch(err => {
+        setError(strings.userNotExist);
+        popUp(strings.loginFailed);
         console.log('User login failed', err);
         setLoader(false);
       });

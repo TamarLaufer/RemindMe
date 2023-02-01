@@ -109,6 +109,7 @@ const Register = () => {
           }
           style={input.style}
           placeholder={input.placeholder}
+          placeholderTextColor={'#73777B'}
           onChangeText={formikProps.handleChange(input.value)}
           value={formikProps.values[input.value]}
           keyboardType={input.keyboardType}
@@ -174,7 +175,7 @@ const Register = () => {
                 }}>
                 <Text style={styles.link}>{strings.iAlreadyHaveAnAccount}</Text>
               </TouchableOpacity>
-              {error && <Text>{error}</Text>}
+              {error && <Text style={{color: 'red'}}>{error}</Text>}
             </Card.Content>
           </Card>
         </View>
