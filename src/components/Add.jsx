@@ -56,12 +56,16 @@ const Add = () => {
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
         strings.validationPhone,
       )
+      .min(10, strings.validationPhone)
+      .max(10, strings.validationPhone)
       .required(strings.phoneMissing),
     parent2Phone: Yup.string()
       .matches(
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
         strings.validationPhone,
       )
+      .min(10, strings.validationPhone)
+      .max(10, strings.validationPhone)
       .required(strings.phoneMissing),
     group: Yup.object().shape({}).required(strings.groupMissing),
   });
@@ -170,7 +174,10 @@ const Add = () => {
             <Text style={styles.header}>{strings.addChild}</Text>
           )}
           {renderInputsAndErrors(inputDataArray, formikProps)}
-          <Dropdown {...params.dropDown(formikProps)} />
+          <Dropdown
+            {...params.dropDown(formikProps)}
+            itemTextStyle={{backgroundColor: 'white', color: '#73777B'}}
+          />
           <Text style={styles.validation_error}>
             {formikProps.errors.group && formikProps.errors.group}
           </Text>

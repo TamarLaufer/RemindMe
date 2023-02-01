@@ -61,8 +61,12 @@ const Register = () => {
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
         strings.validationPhone,
       )
+      .min(10, strings.validationPhone)
+      .max(10, strings.validationPhone)
       .required(strings.phoneMissing),
-    email: Yup.string().email().required(),
+    email: Yup.string()
+      .email(strings.insertValidEmail)
+      .required(strings.insertEmail),
   });
 
   const inputArr = [

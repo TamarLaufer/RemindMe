@@ -397,7 +397,7 @@ export const styles = StyleSheet.create({
     width: sizes.PageWidth * 0.01,
     height: sizes.PageHieght * 0.03,
     fontSize: sizes.PageWidth * 0.022,
-    color: 'black',
+    color: '#000',
   },
   iconStyle: {
     width: sizes.PageWidth * 0.02,

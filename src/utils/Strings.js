@@ -69,10 +69,12 @@ export const strings = {
   userCannotLogin: 'לא ניתן להתחבר',
   passwordMustMatch: 'הסיסמה חייבת להתאים',
   confirmPassword: 'אימות סיסמה',
-  pleaseConfirmPassword: 'נא לאמת סיסמה',
+  pleaseConfirmPassword: 'יש לאמת סיסמה',
   AddGroupFirst: 'יש להוסיף קבוצה קודם',
   noChildrenInGroup: 'אין ילדים בקבוצה',
   userNotExist: 'המשתמש לא קיים במערכת, נסה שוב',
+  insertEmail: 'יש להכניס כתובת דוא"ל',
+  insertValidEmail: 'יש להכניס כתובת דוא"ל תקינה',
 };
 
 export const screenNames = {
