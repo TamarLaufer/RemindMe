@@ -32,7 +32,14 @@ const Add = () => {
     },
     isArrived: false,
   };
-  const childParams = child;
+
+  const childParams = isEditMode && {
+    ...child,
+    parentPhone: child.parentPhone.slice(4),
+    parent2Phone: child.parentPhone.slice(4),
+  };
+
+  // const childParams = child;
 
   const [isFocus, setIsFocus] = useState(false);
 
